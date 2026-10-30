@@ -1,6 +1,7 @@
 import Sidebar from "./components/layout/Sidebar";
 import TopNavbar from "./components/layout/TopNavbar";
 import Hero from "./components/home/Hero";
+import BrowseByCategory from "./components/home/BrowseByCategory";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <TopNavbar />
         <main className="flex-1 overflow-y-auto p-8 sm:p-12">
           <Hero />
+          <BrowseByCategory />
         </main>
       </div>
     </div>
