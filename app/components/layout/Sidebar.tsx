@@ -288,7 +288,7 @@ function NavItem({ name, active }: NavItem) {
 
 export default function Sidebar() {
   return (
-    <aside className="min-h-screen w-[230px] flex flex-col border-r border-slate-200 bg-white shrink-0">
+    <aside className="fixed inset-y-0 left-0 z-50 w-[230px] flex flex-col border-r border-slate-200 bg-white shrink-0">
       <div className="px-[28px] pt-[28px] pb-[32px]">
         <h2 className="text-[24px] font-semibold text-slate-900">Spero</h2>
       </div>
