@@ -1,8 +1,7 @@
-import Sidebar from "../components/layout/Sidebar";
-import TopNavbar from "../components/layout/TopNavbar";
-import CatalogHero from "../components/catalog/catalog-hero";
-import CategoryFilter from "../components/catalog/category-filter";
-import CatalogGrid from "../components/catalog/catalog-grid";
+import Sidebar from "@/app/components/layout/Sidebar"
+import TopNavbar from "@/app/components/layout/TopNavbar"
+import CatalogHero from "@/components/catalog/CatalogHero"
+import ProductGrid from "@/components/catalog/ProductGrid"
 
 export default function CatalogPage() {
   return (
@@ -10,12 +9,11 @@ export default function CatalogPage() {
       <Sidebar />
       <div className="ml-[230px] flex-1 flex flex-col min-h-0">
         <TopNavbar />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto px-[30px]">
           <CatalogHero />
-          <CategoryFilter />
-          <CatalogGrid />
+          <ProductGrid />
         </main>
       </div>
     </div>
-  );
+  )
 }
