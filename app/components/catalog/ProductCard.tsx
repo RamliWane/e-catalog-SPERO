@@ -23,7 +23,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <article
-      className="group relative flex flex-col bg-white border border-slate-200 shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+      className="group relative flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
     >
       <div className="relative w-full h-[130px] rounded-t-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
         {image ? (
@@ -38,36 +38,24 @@ export default function ProductCard({
             <span className="mt-2 text-xs">Gambar belum tersedia</span>
           </div>
         )}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault()
-            onToggleSave(id)
-          }}
-          aria-label={`Save ${name}`}
-          aria-pressed={isSaved}
-          className={`absolute top-[16px] right-[16px] w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
-            isSaved ? "text-slate-900" : "text-slate-500"
-          }`}
-        >
-          <Bookmark size={18} fill={isSaved ? "currentColor" : "none"} />
-        </button>
       </div>
 
-      <div className="p-5 flex flex-col gap-3">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-blue-50 text-blue-600 uppercase">
-          {category}
-        </span>
+      <div className="p-4 flex flex-col">
+        <div className="flex items-center w-30 justify-center bg-blue-100 rounded-full text-blue-600">
+          <span className="inline-flex items-center py-1 rounded-full text-[10px] font-medium uppercase">
+            {category}
+          </span>
+        </div>
         <h3 className="mt-[12px] text-lg font-semibold text-slate-900 leading-tight">
           {name}
         </h3>
-        <p className="mt-[6px] text-sm text-slate-500 leading-relaxed line-clamp-2">
+        <p className="mt-[6px] text-[13px] text-slate-500 leading-relaxed line-clamp-2">
           {description}
         </p>
-        <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-200/50">
+        <div className="mt-auto flex items-center justify-between pt-4">
           <a
             href="#"
-            className="text-sm font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-150 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            className="text-[13px] font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-150 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
           >
             View Details
             <ArrowRight

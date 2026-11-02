@@ -4,15 +4,15 @@ import { Code2, ArrowRight } from "lucide-react"
 
 export default function CatalogHero() {
   return (
-    <section className="relative overflow-hidden bg-white py-[60px] pb-[24px] px-[30px]">
-      <div className="max-w-[620px]">
-        <span className="uppercase text-sm font-medium tracking-[0.2em] text-slate-500">
+    <section className="relative overflow-hidden bg-white py-[50px] pb-[24px] px-[30px]">
+      <div className="max-w-xl">
+        <span className="inline-block text-[11px] font-medium text-slate-500 uppercase tracking-widest">
           CATALOG
         </span>
-        <h1 className="text-[56px] font-bold leading-tight text-slate-900 mt-[8px] tracking-tight">
+        <h1 className="text-[40px] font-bold leading-tight text-slate-900 mt-[8px] tracking-tight">
           Explore Our Catalog
         </h1>
-        <p className="text-lg text-slate-600 leading-relaxed max-w-[600px] mt-[16px]">
+        <p className="text-md text-slate-600 leading-relaxed max-w-[600px] mt-[10px]">
           Discover a curated collection of software, technologies, and solutions
           from our trusted partners and in-house products.
         </p>

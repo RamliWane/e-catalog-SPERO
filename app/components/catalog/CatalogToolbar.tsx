@@ -47,7 +47,7 @@ export default function CatalogToolbar({
   >[]
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mt-[24px]">
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mt-[17px]">
       <div className="flex flex-wrap gap-3">
         <button
           onClick={() => setActiveCategory("All")}
