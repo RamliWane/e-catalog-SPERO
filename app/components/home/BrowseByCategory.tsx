@@ -46,7 +46,14 @@ const CATEGORIES = [
 
 type IconComponent = (props: { className?: string; size?: number }) => ReactElement;
 
-function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
+function CategoryCard({
+  icon: Icon,
+  title,
+  desc,
+  count,
+  accent,
+  accentText,
+}: {
   icon: IconComponent;
   title: string;
   desc: string;
@@ -55,28 +62,35 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
   accentText: string;
 }) {
   const accentColorClass =
-    accentText === "#2563EB" ? "text-blue-600" :
-    accentText === "#10B981" ? "text-emerald-600" :
-    accentText === "#EF4444" ? "text-rose-600" :
-    "text-purple-600";
+    accentText === "#2563EB"
+      ? "text-blue-600"
+      : accentText === "#10B981"
+        ? "text-emerald-600"
+        : accentText === "#EF4444"
+          ? "text-rose-600"
+          : "text-purple-600";
 
   return (
     <a
       href="#"
-      className="flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-full shrink-0 min-w-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
+      className="group flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-full min-w-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
     >
-      <div className="flex items-center justify-center w-8 h-8 rounded-lg mb-[10px]" style={{ backgroundColor: accent }}>
+      <div
+        className="flex items-center justify-center w-8 h-8 rounded-lg mb-[10px]"
+        style={{ backgroundColor: accent }}
+      >
         <Icon size={12} className={accentColorClass} />
       </div>
       <h3 className="text-[11px] font-semibold text-slate-900 mb-[6px] leading-tight group-hover:text-[#183B56] transition-colors duration-200">
         {title}
       </h3>
-      <p className="text-[9px] text-slate-500 mb-auto leading-[1.5]">
-        {desc}
-      </p>
+      <p className="text-[9px] text-slate-500 mb-auto leading-[1.5]">{desc}</p>
       <div className="flex items-center gap-1.5 mt-[4px]">
         <span className="text-[9px] font-medium text-slate-400">{count}</span>
-        <ArrowRightIcon size={10} className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5" />
+        <ArrowRightIcon
+          size={10}
+          className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5"
+        />
       </div>
     </a>
   );
@@ -85,8 +99,9 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
 export default function BrowseByCategory() {
   return (
     <section className="bg-white py-[40px] px-[32px]">
-      <div className="grid grid-cols-1 gap-[20px] lg:grid-cols-[260px_repeat(4,minmax(130px,1fr))_300px] lg:gap-[16px] min-w-0">
-        <div className="min-w-0">
+      <div className="grid grid-cols-1 gap-[20px] sm:grid-cols-2 xl:grid-cols-[280px_repeat(4,minmax(130px,1fr))_250px] xl:gap-[16px] min-w-0">
+        {/* Kolom teks kiri */}
+        <div className="flex flex-col justify-center items-start min-w-0 sm:col-span-2 xl:col-span-1">
           <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
             BROWSE BY CATEGORY
           </span>
@@ -94,23 +109,26 @@ export default function BrowseByCategory() {
             Find the Right Solution for Your Business
           </h2>
           <p className="text-[12px] text-slate-600 leading-[1.6] mb-[16px]">
-            Explore our catalog by category and discover the right expertise for your project.
+            Explore our catalog by category and discover the right expertise for
+            your project.
           </p>
           <a
             href="#"
-            className="text-[12px] font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+            className="text-[12px] underline font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
           >
             View All Services
             <ArrowRightIcon size={10} />
           </a>
         </div>
 
+        {/* Card kategori */}
         {CATEGORIES.map((category) => (
           <CategoryCard key={category.title} {...category} />
         ))}
 
-        <div className="min-w-0">
-          <div className="relative bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
+        {/* Card Featured */}
+        <div className="min-w-0 sm:col-span-2 xl:col-span-1">
+          <div className="relative overflow-hidden bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
             <div className="relative z-10">
               <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
                 Featured Solution

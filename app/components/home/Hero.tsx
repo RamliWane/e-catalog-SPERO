@@ -68,7 +68,7 @@ export default function Hero() {
         <span className="inline-block mb-[16px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
           SOFTWARE HOUSE & IT CONSULTANT
         </span>
-        <h1 className="text-[48px] lg:text-[52px] font-semibold text-slate-900 leading-tight mb-[20px] max-w-[520px]">
+        <h1 className="text-[48px] lg:text-[48px] font-semibold text-slate-900 leading-tight mb-[20px] max-w-[520px]">
           Your Trusted Partner for Digital Solutions
         </h1>
         <p className="text-[14px] text-slate-600 leading-relaxed mb-[28px] max-w-[460px]">
@@ -91,15 +91,15 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="mt-[28px] flex flex-wrap gap-3">
-          <span className="text-[11px] font-medium text-slate-500 uppercase tracking-widest whitespace-nowrap">
+        <div className="mt-[20px] items-center flex flex-wrap gap-3">
+          <span className="text-[13px] font-medium text-slate-500  whitespace-nowrap">
             Popular search:
           </span>
           {POPULAR_TAGS.map((tag) => (
             <button
               key={tag}
               type="button"
-              className="text-[12px] font-medium text-slate-700 px-3 py-1.5 rounded-full border border-[#E5EAF0] bg-white hover:bg-[#F5F7FA] hover:text-slate-900 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] whitespace-nowrap shrink-0"
+              className="text-[11px] font-medium text-slate-700 px-3 py-1 rounded-full border border-[#E5EAF0] bg-white hover:bg-[#F5F7FA] hover:text-slate-900 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] whitespace-nowrap shrink-0"
             >
               {tag}
             </button>
