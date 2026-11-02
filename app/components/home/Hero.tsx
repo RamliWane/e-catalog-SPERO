@@ -65,7 +65,7 @@ export default function Hero() {
   return (
     <section className="bg-white py-[60px] px-[32px] min-h-[520px] flex flex-col lg:flex-row gap-[60px] items-start">
       <div className="flex-1 min-w-0 max-w-[560px]">
-        <span className="inline-block mb-[16px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
+        <span className="inline-block mb-[13px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
           SOFTWARE HOUSE & IT CONSULTANT
         </span>
         <h1 className="text-[48px] lg:text-[48px] font-semibold text-slate-900 leading-tight mb-[20px] max-w-[520px]">
