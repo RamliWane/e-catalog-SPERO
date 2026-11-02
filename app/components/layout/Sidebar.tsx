@@ -1,4 +1,7 @@
-import type { ReactElement } from "react";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   HouseIcon,
   LayoutGridIcon,
@@ -15,34 +18,34 @@ import {
 
 interface NavItem {
   name: string;
-  active?: boolean;
+  href: string;
 }
 
 const PRIMARY_NAV: NavItem[] = [
-  { name: "Home", active: true },
-  { name: "Catalog" },
-  { name: "Services" },
-  { name: "Technologies" },
-  { name: "Solutions" },
-  { name: "About" },
+  { name: "Home", href: "/" },
+  { name: "Catalog", href: "/catalog" },
+  { name: "Services", href: "/services" },
+  { name: "Technologies", href: "/technologies" },
+  { name: "Solutions", href: "/solutions" },
+  { name: "About", href: "/about" },
 ];
 
 const QUICK_ACCESS: NavItem[] = [
-  { name: "Popular" },
-  { name: "New Releases" },
-  { name: "Saved" },
+  { name: "Popular", href: "/catalog?filter=popular" },
+  { name: "New Releases", href: "/catalog?filter=new" },
+  { name: "Saved", href: "/saved" },
 ];
 
-const ICONS: Record<string, ReactElement> = {
-  House: <HouseIcon size={14} />,
-  LayoutGrid: <LayoutGridIcon size={14} />,
-  Layers3: <Layers3Icon size={14} />,
-  Code2: <Code2Icon size={14} />,
-  Lightbulb: <LightbulbIcon size={14} />,
-  UserRound: <UserRoundIcon size={14} />,
-  Star: <StarIcon size={14} />,
-  Zap: <ZapIcon size={14} />,
-  Bookmark: <BookmarkIcon size={14} />,
+const ICONS: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  House: HouseIcon,
+  LayoutGrid: LayoutGridIcon,
+  Layers3: Layers3Icon,
+  Code2: Code2Icon,
+  Lightbulb: LightbulbIcon,
+  UserRound: UserRoundIcon,
+  Star: StarIcon,
+  Zap: ZapIcon,
+  Bookmark: BookmarkIcon,
 };
 
 const ICON_FOR_ITEM: Record<string, string> = {
@@ -57,25 +60,27 @@ const ICON_FOR_ITEM: Record<string, string> = {
   Saved: "Bookmark",
 };
 
-function NavItem({ name, active }: NavItem) {
-  const Icon = ICONS[ICON_FOR_ITEM[name]];
+function NavItem({ item, pathname }: { item: NavItem; pathname: string }) {
+  const Icon = ICONS[ICON_FOR_ITEM[item.name]];
+  const isActive = pathname === item.href;
   return (
-    <a
-      href="#"
+    <Link
+      href={item.href}
       className={`
         flex w-full items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium
         transition-colors duration-150
-        ${active ? "bg-[#F0F3F7] text-slate-900" : "text-slate-600 hover:bg-slate-100"}
+        ${isActive ? "bg-[#F0F3F7] text-slate-900" : "text-slate-600 hover:bg-slate-100"}
       `}
-      aria-current={active ? "page" : undefined}
+      aria-current={isActive ? "page" : undefined}
     >
-      {Icon}
-      <span>{name}</span>
-    </a>
+      <Icon size={14} />
+      <span>{item.name}</span>
+    </Link>
   );
 }
 
 export default function Sidebar() {
+  const pathname = usePathname();
   return (
     <aside className="fixed inset-y-0 left-0 z-50 w-[230px] flex flex-col border-r border-slate-200 bg-white shrink-0">
       <div className="px-[28px] pt-[28px] pb-[32px]">
@@ -84,7 +89,7 @@ export default function Sidebar() {
 
       <nav className="flex-1 px-5 space-y-2" aria-label="Primary navigation">
         {PRIMARY_NAV.map((item) => (
-          <NavItem key={item.name} {...item} />
+          <NavItem key={item.name} item={item} pathname={pathname} />
         ))}
       </nav>
 
@@ -95,7 +100,7 @@ export default function Sidebar() {
         </h3>
         <nav className="space-y-2" aria-label="Quick access">
           {QUICK_ACCESS.map((item) => (
-            <NavItem key={item.name} {...item} />
+            <NavItem key={item.name} item={item} pathname={pathname} />
           ))}
         </nav>
       </div>

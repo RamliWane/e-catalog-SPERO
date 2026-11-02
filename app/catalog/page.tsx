@@ -1,8 +1,8 @@
-import Sidebar from "@/app/components/layout/Sidebar";
-import TopNavbar from "@/app/components/layout/TopNavbar";
-import CatalogHero from "@/app/components/catalog/catalog-hero";
-import CategoryFilter from "@/app/components/catalog/category-filter";
-import CatalogGrid from "@/app/components/catalog/catalog-grid";
+import Sidebar from "../components/layout/Sidebar";
+import TopNavbar from "../components/layout/TopNavbar";
+import CatalogHero from "../components/catalog/catalog-hero";
+import CategoryFilter from "../components/catalog/category-filter";
+import CatalogGrid from "../components/catalog/catalog-grid";
 
 export default function CatalogPage() {
   return (
