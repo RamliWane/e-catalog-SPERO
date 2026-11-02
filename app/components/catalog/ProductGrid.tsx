@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react"
 import type { Category } from "@/lib/catalog-data"
 import { PRODUCTS } from "@/lib/catalog-data"
-import CatalogToolbar from "@/components/catalog/CatalogToolbar"
-import ProductCard from "@/components/catalog/ProductCard"
+import CatalogToolbar from "@/app/components/catalog/CatalogToolbar"
+import ProductCard from "@/app/components/catalog/ProductCard"
 
 type SortValue = "Featured" | "Newest" | "Name (A-Z)"
 

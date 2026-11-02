@@ -52,7 +52,7 @@ export default function CatalogToolbar({
         <button
           onClick={() => setActiveCategory("All")}
           aria-pressed={activeCategory === "All"}
-          className={`rounded-full h-10 px-5 text-sm font-medium border transition-colors duration-150 ${
+          className={`rounded-full h-8 px-5 text-[12px] font-medium border transition-colors duration-150 ${
             activeCategory === "All"
               ? "bg-slate-900 text-white border-slate-900"
               : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
@@ -67,7 +67,7 @@ export default function CatalogToolbar({
               key={cat}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={activeCategory === cat}
-              className={`flex items-center gap-2 rounded-full h-10 px-4 text-sm font-medium border transition-colors duration-150 ${
+              className={`flex items-center gap-2 rounded-full h-8 px-4 text-[12px] font-medium border transition-colors duration-150 ${
                 activeCategory === cat
                   ? "bg-slate-900 text-white border-slate-900"
                   : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"

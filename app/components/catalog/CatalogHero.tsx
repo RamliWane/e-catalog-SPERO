@@ -20,11 +20,11 @@ export default function CatalogHero() {
           <input
             type="text"
             placeholder="Search catalog..."
-            className="flex-1 h-[56px] bg-white border border-slate-200 rounded-full px-6 pr-[56px] text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:border-transparent"
+            className="flex-1 h-[40px] bg-white border border-slate-200 rounded-full px-6 pr-[56px] text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:border-transparent"
           />
           <button
             type="button"
-            className="w-[56px] h-[56px] rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-blue-600 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+            className="w-[56px] h-[40px] rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-blue-600 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
             aria-label="Search"
           >
             <ArrowRight size={16} />

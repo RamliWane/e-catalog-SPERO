@@ -1,7 +1,7 @@
 import Sidebar from "@/app/components/layout/Sidebar"
 import TopNavbar from "@/app/components/layout/TopNavbar"
-import CatalogHero from "@/components/catalog/CatalogHero"
-import ProductGrid from "@/components/catalog/ProductGrid"
+import CatalogHero from "@/app/components/catalog/CatalogHero"
+import ProductGrid from "@/app/components/catalog/ProductGrid"
 
 export default function CatalogPage() {
   return (
