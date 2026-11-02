@@ -95,7 +95,7 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
   return (
     <a
       href="#"
-      className="flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-[145px] h-[178px] shrink-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
+      className="flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-full shrink-0 min-w-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
     >
       <div className="flex items-center justify-center w-8 h-8 rounded-lg mb-[10px]" style={{ backgroundColor: accent }}>
         <Icon className={`w-4 h-4 ${accentColorClass}`} />
@@ -120,62 +120,58 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
 export default function BrowseByCategory() {
   return (
     <section className="bg-white py-[40px] px-[32px]">
-      <div className="max-w-full">
-        <div className="flex flex-wrap gap-[24px] items-start">
-          <div className="w-full lg:w-[280px] shrink-0 min-w-0">
-            <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
-              BROWSE BY CATEGORY
-            </span>
-            <h2 className="text-[26px] font-semibold text-slate-900 leading-[1.15] mb-[12px] max-w-[270px]">
-              Find the Right Solution for Your Business
-            </h2>
-            <p className="text-[12px] text-slate-600 leading-[1.6] mb-[16px] max-w-[260px]">
-              Explore our catalog by category and discover the right expertise for your project.
-            </p>
-            <a
-              href="#"
-              className="text-[12px] font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
-            >
-              View All Services
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
-          </div>
+      <div className="grid grid-cols-1 gap-[20px] lg:grid-cols-[260px_repeat(4,minmax(130px,1fr))_300px] lg:gap-[16px] min-w-0">
+        <div className="min-w-0">
+          <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
+            BROWSE BY CATEGORY
+          </span>
+          <h2 className="text-[26px] font-semibold text-slate-900 leading-[1.15] mb-[12px]">
+            Find the Right Solution for Your Business
+          </h2>
+          <p className="text-[12px] text-slate-600 leading-[1.6] mb-[16px]">
+            Explore our catalog by category and discover the right expertise for your project.
+          </p>
+          <a
+            href="#"
+            className="text-[12px] font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+          >
+            View All Services
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
 
-          <div className="w-full lg:auto flex flex-wrap gap-[10px] shrink-0 min-w-0">
-            {CATEGORIES.map((category) => (
-              <CategoryCard key={category.title} {...category} />
-            ))}
-          </div>
+        {CATEGORIES.map((category) => (
+          <CategoryCard key={category.title} {...category} />
+        ))}
 
-          <div className="w-full lg:w-[310px] shrink-0 flex flex-col justify-between h-full min-h-[178px]">
-            <div className="relative bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
-              <div className="relative z-10">
-                <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
-                  Featured Solution
-                </span>
-                <h3 className="text-[16px] font-semibold leading-[1.2] mb-[10px]">
-                  Modern Web Platform for Growing Business
-                </h3>
-                <p className="text-[11px] text-[#CBD5E1] leading-[1.6] mb-[14px]">
-                  Scalable, secure, and built for long-term success.
-                </p>
-                <a
-                  href="#"
-                  className="text-[11px] font-medium text-white flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
-                >
-                  Explore Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </a>
-              </div>
-              <div className="absolute right-[-8px] bottom-[-8px] opacity-40 pointer-events-none">
-                <Cube3D className="w-[80px] h-[80px]" />
-              </div>
+        <div className="min-w-0">
+          <div className="relative bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
+            <div className="relative z-10">
+              <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
+                Featured Solution
+              </span>
+              <h3 className="text-[16px] font-semibold leading-[1.2] mb-[10px]">
+                Modern Web Platform for Growing Business
+              </h3>
+              <p className="text-[11px] text-[#CBD5E1] leading-[1.6] mb-[14px]">
+                Scalable, secure, and built for long-term success.
+              </p>
+              <a
+                href="#"
+                className="text-[11px] font-medium text-white flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+              >
+                Explore Project
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            </div>
+            <div className="absolute right-[-6px] bottom-[-6px] opacity-40 pointer-events-none">
+              <Cube3D className="w-[72px] h-[72px]" />
             </div>
           </div>
         </div>
