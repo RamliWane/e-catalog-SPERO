@@ -7,6 +7,42 @@ import CloudIcon from "@/app/components/icons/Cloud";
 
 type IconComponent = (props: { className?: string }) => ReactElement;
 
+function Cube3D({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="110"
+      height="110"
+      viewBox="0 0 110 110"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C7D2FE" />
+          <stop offset="100%" stopColor="#6366F1" />
+        </linearGradient>
+      </defs>
+      <polygon
+        points="55,10 95,40 55,70 15,40"
+        fill="url(#cubeGrad)"
+        opacity="0.85"
+      />
+      <polygon
+        points="95,40 95,80 55,70"
+        fill="#93C5FD"
+        opacity="0.9"
+      />
+      <polygon
+        points="15,40 15,80 55,70"
+        fill="#A5B4FC"
+        opacity="0.9"
+      />
+      <line x1="55" y1="10" x2="55" y2="70" stroke="#4F46E5" strokeWidth="1" opacity="0.6" />
+    </svg>
+  );
+}
+
 const CATEGORIES = [
   {
     title: "Web Development",
@@ -50,23 +86,29 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
   accent: string;
   accentText: string;
 }) {
+  const accentColorClass =
+    accentText === "#2563EB" ? "text-blue-600" :
+    accentText === "#10B981" ? "text-emerald-600" :
+    accentText === "#EF4444" ? "text-rose-600" :
+    "text-purple-600";
+
   return (
     <a
       href="#"
-      className="group flex flex-col bg-white border border-[#E5EAF0] rounded-xl p-4 min-h-[240px] transition-all duration-200 hover:border-slate-900 hover:-translate-y-[3px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
+      className="flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-[145px] h-[178px] shrink-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
     >
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg mb-3" style={{ backgroundColor: accent }}>
-        <Icon className={`w-5 h-5 text-${accentText === "#2563EB" ? "blue-600" : accentText === "#10B981" ? "emerald-600" : accentText === "#EF4444" ? "rose-600" : "purple-600"}`} />
+      <div className="flex items-center justify-center w-8 h-8 rounded-lg mb-[10px]" style={{ backgroundColor: accent }}>
+        <Icon className={`w-4 h-4 ${accentColorClass}`} />
       </div>
-      <h3 className="text-[15px] font-semibold text-slate-900 mb-2 leading-tight group-hover:text-[#183B56] transition-colors duration-200">
+      <h3 className="text-[11px] font-semibold text-slate-900 mb-[6px] leading-tight group-hover:text-[#183B56] transition-colors duration-200">
         {title}
       </h3>
-      <p className="text-[13px] text-slate-600 mb-4 leading-relaxed flex-1">
+      <p className="text-[9px] text-slate-500 mb-auto leading-[1.5]">
         {desc}
       </p>
-      <div className="mt-auto flex items-center gap-2">
-        <span className="text-[11px] font-medium text-slate-500">{count}</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5">
+      <div className="flex items-center gap-1.5 mt-[4px]">
+        <span className="text-[9px] font-medium text-slate-400">{count}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5">
           <line x1="5" y1="12" x2="19" y2="12" />
           <polyline points="12 5 19 12 12 19" />
         </svg>
@@ -77,60 +119,63 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
 
 export default function BrowseByCategory() {
   return (
-    <section className="bg-white py-[60px] px-[32px]">
+    <section className="bg-white py-[40px] px-[32px]">
       <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[60px]">
-          <div className="lg:col-span-3 min-w-0">
-            <span className="inline-block mb-[16px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
+        <div className="flex flex-col lg:flex-row gap-[24px] items-start">
+          <div className="lg:w-[280px] shrink-0 min-w-0">
+            <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
               BROWSE BY CATEGORY
             </span>
-            <h2 className="text-[28px] font-semibold text-slate-900 leading-tight mb-[16px]">
+            <h2 className="text-[26px] font-semibold text-slate-900 leading-[1.15] mb-[12px] max-w-[270px]">
               Find the Right Solution for Your Business
             </h2>
-            <p className="text-[14px] text-slate-600 leading-relaxed mb-[24px]">
+            <p className="text-[12px] text-slate-600 leading-[1.6] mb-[16px] max-w-[260px]">
               Explore our catalog by category and discover the right expertise for your project.
             </p>
             <a
               href="#"
-              className="text-[13px] font-medium text-[#183B56] flex items-center gap-1.5 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+              className="text-[12px] font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
             >
               View All Services
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
           </div>
 
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-[20px]">
+          <div className="flex flex-row gap-[10px] shrink-0">
             {CATEGORIES.map((category) => (
               <CategoryCard key={category.title} {...category} />
             ))}
           </div>
 
-          <div className="lg:col-span-3">
-            <div className="bg-[#183B56] text-white rounded-xl p-[24px] min-h-[320px] flex flex-col justify-between">
-              <div>
-                <span className="inline-block mb-[12px] text-[11px] font-medium text-[#93C5FD] uppercase tracking-widest">
-                  FEATURED SOLUTION
+          <div className="lg:w-[310px] shrink-0 flex flex-col justify-between h-full min-h-[178px]">
+            <div className="relative bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
+              <div className="relative z-10">
+                <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
+                  Featured Solution
                 </span>
-                <h3 className="text-[20px] font-semibold leading-tight mb-[16px]">
+                <h3 className="text-[16px] font-semibold leading-[1.2] mb-[10px]">
                   Modern Web Platform for Growing Business
                 </h3>
-                <p className="text-[13px] text-[#CBD5E1] leading-relaxed mb-[24px]">
+                <p className="text-[11px] text-[#CBD5E1] leading-[1.6] mb-[14px]">
                   Scalable, secure, and built for long-term success.
                 </p>
+                <a
+                  href="#"
+                  className="text-[11px] font-medium text-white flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+                >
+                  Explore Project
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
               </div>
-              <a
-                href="#"
-                className="text-[13px] font-medium text-white flex items-center gap-1.5 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
-              >
-                Explore Project
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
+              <div className="absolute right-[-10px] bottom-[-10px] opacity-40 pointer-events-none">
+                <Cube3D className="w-[90px] h-[90px]" />
+              </div>
             </div>
           </div>
         </div>
