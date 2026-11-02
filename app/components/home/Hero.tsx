@@ -1,10 +1,13 @@
 import type { ReactElement } from "react";
 
-import SearchIcon from "@/app/components/icons/Search";
-import Code2Icon from "@/app/components/icons/Code2";
-import SmartphoneIcon from "@/app/components/icons/Smartphone";
-import ShapesIcon from "@/app/components/icons/Shapes";
-import CloudIcon from "@/app/components/icons/Cloud";
+import {
+  SearchIcon,
+  Code2Icon,
+  SmartphoneIcon,
+  ShapesIcon,
+  CloudIcon,
+  ArrowRightIcon,
+} from "@/lib/icons";
 
 const POPULAR_TAGS = [
   "Web Development",
@@ -26,7 +29,7 @@ const SERVICE_CARDS = [
   { icon: CloudIcon, title: "Cloud & DevOps", desc: "Build, deploy, and scale with confidence.", bottom: "8%", right: "12%", delay: "0.6s" },
 ];
 
-type IconComponent = (props: { className?: string }) => ReactElement;
+type IconComponent = (props: { className?: string; size?: number }) => ReactElement;
 
 function FloatingCard({ icon: Icon, title, desc, ...position }: {
   icon: IconComponent;
@@ -47,15 +50,12 @@ function FloatingCard({ icon: Icon, title, desc, ...position }: {
       }}
     >
       <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#DBEAFE] text-[#2563EB] mb-1">
-        <Icon className="w-4 h-4" />
+        <Icon size={12} />
       </div>
       <h4 className="text-[12px] font-medium text-slate-900 leading-tight">{title}</h4>
       <p className="text-[10px] text-slate-500 leading-tight">{desc}</p>
       <div className="mt-auto w-full h-[1px] bg-[#E5EAF0] mt-2 flex items-end">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 ml-auto">
-          <line x1="5" y1="12" x2="19" y2="12" />
-          <polyline points="12 5 19 12 12 19" />
-        </svg>
+        <ArrowRightIcon size={10} className="text-slate-400 ml-auto" />
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ export default function Hero() {
         </p>
 
         <div className="flex items-center gap-3 bg-white border border-[#E5EAF0] rounded-full h-[52px] max-w-[540px] shrink-0">
-          <SearchIcon className="w-[18px] h-[18px] text-slate-400 ml-3 shrink-0" />
+          <SearchIcon size={14} className="text-slate-400 ml-3 shrink-0" />
           <input
             type="text"
             placeholder="Search services, technologies, or company..."
@@ -87,10 +87,7 @@ export default function Hero() {
             className="w-[40px] h-[40px] rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#0f2a3e] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 mr-1"
             aria-label="Search"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+            <ArrowRightIcon size={12} />
           </button>
         </div>
 

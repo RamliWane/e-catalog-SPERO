@@ -37,9 +37,9 @@ export default function CategoryFilter() {
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 px-3 py-[10px] rounded-full border border-[#E5EAF2] bg-white text-slate-600 text-[12px] font-medium hover:bg-slate-50 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:border-transparent">
-              <FilterIcon size={14} className="text-slate-400" />
+              <FilterIcon size={12} className="text-slate-400" />
               Sort by: Featured
-              <ChevronDownIcon size={14} className="text-slate-400 ml-1" />
+              <ChevronDownIcon size={12} className="text-slate-400 ml-1" />
             </div>
           </div>
         </div>

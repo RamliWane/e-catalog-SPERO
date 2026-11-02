@@ -1,47 +1,13 @@
 import type { ReactElement } from "react";
 
-import MonitorIcon from "@/app/components/icons/Monitor";
-import SmartphoneIcon from "@/app/components/icons/Smartphone";
-import WorkflowIcon from "@/app/components/icons/Workflow";
-import CloudIcon from "@/app/components/icons/Cloud";
-
-type IconComponent = (props: { className?: string }) => ReactElement;
-
-function Cube3D({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="110"
-      height="110"
-      viewBox="0 0 110 110"
-      fill="none"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#C7D2FE" />
-          <stop offset="100%" stopColor="#6366F1" />
-        </linearGradient>
-      </defs>
-      <polygon
-        points="55,10 95,40 55,70 15,40"
-        fill="url(#cubeGrad)"
-        opacity="0.85"
-      />
-      <polygon
-        points="95,40 95,80 55,70"
-        fill="#93C5FD"
-        opacity="0.9"
-      />
-      <polygon
-        points="15,40 15,80 55,70"
-        fill="#A5B4FC"
-        opacity="0.9"
-      />
-      <line x1="55" y1="10" x2="55" y2="70" stroke="#4F46E5" strokeWidth="1" opacity="0.6" />
-    </svg>
-  );
-}
+import {
+  MonitorIcon,
+  SmartphoneIcon,
+  WorkflowIcon,
+  CloudIcon,
+  ArrowRightIcon,
+  Cube3DIcon,
+} from "@/lib/icons";
 
 const CATEGORIES = [
   {
@@ -78,6 +44,8 @@ const CATEGORIES = [
   },
 ];
 
+type IconComponent = (props: { className?: string; size?: number }) => ReactElement;
+
 function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
   icon: IconComponent;
   title: string;
@@ -98,7 +66,7 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
       className="flex flex-col bg-white border border-[#E5EAF0] rounded-[11px] p-[14px] w-full shrink-0 min-w-0 transition-all duration-200 hover:border-slate-900 hover:-translate-y-[2px] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-2"
     >
       <div className="flex items-center justify-center w-8 h-8 rounded-lg mb-[10px]" style={{ backgroundColor: accent }}>
-        <Icon className={`w-4 h-4 ${accentColorClass}`} />
+        <Icon size={12} className={accentColorClass} />
       </div>
       <h3 className="text-[11px] font-semibold text-slate-900 mb-[6px] leading-tight group-hover:text-[#183B56] transition-colors duration-200">
         {title}
@@ -108,10 +76,7 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
       </p>
       <div className="flex items-center gap-1.5 mt-[4px]">
         <span className="text-[9px] font-medium text-slate-400">{count}</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5">
-          <line x1="5" y1="12" x2="19" y2="12" />
-          <polyline points="12 5 19 12 12 19" />
-        </svg>
+        <ArrowRightIcon size={10} className="text-slate-400 group-hover:text-slate-900 transition-all duration-200 group-hover:translate-x-0.5" />
       </div>
     </a>
   );
@@ -136,10 +101,7 @@ export default function BrowseByCategory() {
             className="text-[12px] font-medium text-[#183B56] flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
           >
             View All Services
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+            <ArrowRightIcon size={10} />
           </a>
         </div>
 
@@ -164,14 +126,11 @@ export default function BrowseByCategory() {
                 className="text-[11px] font-medium text-white flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
               >
                 Explore Project
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
+                <ArrowRightIcon size={10} />
               </a>
             </div>
             <div className="absolute right-[-6px] bottom-[-6px] opacity-40 pointer-events-none">
-              <Cube3D className="w-[72px] h-[72px]" />
+              <Cube3DIcon className="w-[56px] h-[56px]" />
             </div>
           </div>
         </div>

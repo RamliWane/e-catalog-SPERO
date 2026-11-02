@@ -14,7 +14,7 @@ function AbstractVisual({ className }: { className?: string }) {
       <div className="absolute bottom-1/4 right-1/4 w-[240px] h-[240px] rounded-full bg-blue-100/40 blur-[50px]" />
       <div className="relative z-10 flex flex-col items-center gap-4 p-8">
         <div className="w-16 h-16 rounded-[12px] bg-white border border-[#E5EAF2] shadow-sm flex items-center justify-center">
-          <SearchIcon size={24} className="text-blue-600" />
+          <SearchIcon size={16} className="text-blue-600" />
         </div>
         <div className="flex gap-3">
           {[1, 2, 3, 4].map((i) => (
@@ -57,7 +57,7 @@ export default function CatalogHero() {
               className="w-[44px] h-[44px] rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#0f2a3e] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-1"
               aria-label="Search"
             >
-              <ArrowRightIcon size={16} />
+              <ArrowRightIcon size={14} />
             </button>
           </div>
         </div>

@@ -3,21 +3,18 @@ type IconProps = {
   size?: number;
 };
 
-function applySize(size?: number): string {
-  if (!size) return "";
-  return `w-[${size}px] h-[${size}px]`;
-}
-
-export function HouseIcon({ className, size }: IconProps) {
+export function HouseIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -26,16 +23,18 @@ export function HouseIcon({ className, size }: IconProps) {
   );
 }
 
-export function LayoutGridIcon({ className, size }: IconProps) {
+export function LayoutGridIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
@@ -45,16 +44,18 @@ export function LayoutGridIcon({ className, size }: IconProps) {
   );
 }
 
-export function Layers3Icon({ className, size }: IconProps) {
+export function Layers3Icon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -64,16 +65,18 @@ export function Layers3Icon({ className, size }: IconProps) {
   );
 }
 
-export function Code2Icon({ className, size }: IconProps) {
+export function Code2Icon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polyline points="16 18 22 12 16 6" />
@@ -82,16 +85,18 @@ export function Code2Icon({ className, size }: IconProps) {
   );
 }
 
-export function LightbulbIcon({ className, size }: IconProps) {
+export function LightbulbIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M9 12h6a3 3 0 0 1 3 3v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 1 3-3z" />
@@ -100,16 +105,18 @@ export function LightbulbIcon({ className, size }: IconProps) {
   );
 }
 
-export function UserRoundIcon({ className, size }: IconProps) {
+export function UserRoundIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -120,16 +127,18 @@ export function UserRoundIcon({ className, size }: IconProps) {
   );
 }
 
-export function StarIcon({ className, size }: IconProps) {
+export function StarIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -137,16 +146,18 @@ export function StarIcon({ className, size }: IconProps) {
   );
 }
 
-export function ZapIcon({ className, size }: IconProps) {
+export function ZapIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polyline points="18 6 12 12 6 18" />
@@ -155,16 +166,18 @@ export function ZapIcon({ className, size }: IconProps) {
   );
 }
 
-export function BookmarkIcon({ className, size }: IconProps) {
+export function BookmarkIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
@@ -172,16 +185,18 @@ export function BookmarkIcon({ className, size }: IconProps) {
   );
 }
 
-export function ArrowRightIcon({ className, size }: IconProps) {
+export function ArrowRightIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <line x1="5" y1="12" x2="19" y2="12" />
@@ -190,12 +205,14 @@ export function ArrowRightIcon({ className, size }: IconProps) {
   );
 }
 
-export function CubeIcon({ className, size }: IconProps) {
+export function CubeIcon({ className, size = 48 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 96 96"
       fill="none"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polygon
@@ -221,16 +238,18 @@ export function CubeIcon({ className, size }: IconProps) {
   );
 }
 
-export function SearchIcon({ className, size }: IconProps) {
+export function SearchIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <circle cx="11" cy="11" r="8" />
@@ -239,16 +258,18 @@ export function SearchIcon({ className, size }: IconProps) {
   );
 }
 
-export function SunIcon({ className, size }: IconProps) {
+export function SunIcon({ className, size = 18 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <circle cx="12" cy="12" r="5" />
@@ -257,16 +278,18 @@ export function SunIcon({ className, size }: IconProps) {
   );
 }
 
-export function SmartphoneIcon({ className, size }: IconProps) {
+export function SmartphoneIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <rect width="7" height="12" x="8.5" y="2" rx="1" ry="1" />
@@ -275,16 +298,18 @@ export function SmartphoneIcon({ className, size }: IconProps) {
   );
 }
 
-export function ShapesIcon({ className, size }: IconProps) {
+export function ShapesIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 0 0 8.49m8.48-8.49a6 6 0 0 0 0 8.49m0-8.49a6 6 0 0 1 0 8.49" />
@@ -293,16 +318,18 @@ export function ShapesIcon({ className, size }: IconProps) {
   );
 }
 
-export function CloudIcon({ className, size }: IconProps) {
+export function CloudIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M18.2 16c.8-1.1 1.2-2.5 1-3.9 -.2-1.4-1-2.6-2.2-3.3C15.2 7.2 13 7 11 7c-1.3 0-2.5.4-3.5 1.2l-.1.1C6.5 8.7 5 9.9 5 11.5c0 1.6 1.3 2.9 2.9 2.9h2.2c1.3 0 2.5-.8 3-2 .8-1.7 2.8-2.7 4.7-2.7z" />
@@ -310,16 +337,18 @@ export function CloudIcon({ className, size }: IconProps) {
   );
 }
 
-export function MonitorIcon({ className, size }: IconProps) {
+export function MonitorIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <rect width="20" height="14" x="2" y="3" rx="2" ry="2" />
@@ -329,16 +358,18 @@ export function MonitorIcon({ className, size }: IconProps) {
   );
 }
 
-export function WorkflowIcon({ className, size }: IconProps) {
+export function WorkflowIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <rect x="3" y="3" width="7" height="7" rx="1" ry="1" />
@@ -350,16 +381,18 @@ export function WorkflowIcon({ className, size }: IconProps) {
   );
 }
 
-export function FilterIcon({ className, size }: IconProps) {
+export function FilterIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <polyline points="4 18 14 6 24 18" />
@@ -369,16 +402,18 @@ export function FilterIcon({ className, size }: IconProps) {
   );
 }
 
-export function ChevronDownIcon({ className, size }: IconProps) {
+export function ChevronDownIcon({ className, size = 14 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <path d="M6 9l6 6 6-6" />
@@ -386,16 +421,54 @@ export function ChevronDownIcon({ className, size }: IconProps) {
   );
 }
 
-export function CalendarIcon({ className, size }: IconProps) {
+export function Cube3DIcon({ className, size = 110 }: IconProps) {
   return (
     <svg
+      width={size}
+      height={size}
+      viewBox="0 0 110 110"
+      fill="none"
+      className={className ?? ""}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C7D2FE" />
+          <stop offset="100%" stopColor="#6366F1" />
+        </linearGradient>
+      </defs>
+      <polygon
+        points="55,10 95,40 55,70 15,40"
+        fill="url(#cubeGrad)"
+        opacity="0.85"
+      />
+      <polygon
+        points="95,40 95,80 55,70"
+        fill="#93C5FD"
+        opacity="0.9"
+      />
+      <polygon
+        points="15,40 15,80 55,70"
+        fill="#A5B4FC"
+        opacity="0.9"
+      />
+      <line x1="55" y1="10" x2="55" y2="70" stroke="#4F46E5" strokeWidth="1" opacity="0.6" />
+    </svg>
+  );
+}
+
+export function CalendarIcon({ className, size = 16 }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`${applySize(size)} ${className ?? ""}`}
+      className={className ?? ""}
       aria-hidden="true"
     >
       <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />

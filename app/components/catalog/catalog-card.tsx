@@ -24,7 +24,7 @@ export default function CatalogCard({
           className="absolute top-[16px] right-[16px] w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-slate-600 hover:bg-white hover:text-slate-900 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           aria-label="Bookmark"
         >
-          <BookmarkIcon size={14} />
+          <BookmarkIcon size={12} />
         </button>
       </div>
 
@@ -44,7 +44,7 @@ export default function CatalogCard({
             className="text-[13px] font-medium text-blue-600 hover:text-blue-700 transition-colors duration-150 focus-visible:underline"
           >
             View Details
-            <ArrowRightIcon size={12} className="ml-1" />
+            <ArrowRightIcon size={10} className="ml-1" />
           </a>
         </div>
       </div>

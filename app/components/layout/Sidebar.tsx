@@ -1,6 +1,21 @@
+import type { ReactElement } from "react";
+import {
+  HouseIcon,
+  LayoutGridIcon,
+  Layers3Icon,
+  Code2Icon,
+  LightbulbIcon,
+  UserRoundIcon,
+  StarIcon,
+  ZapIcon,
+  BookmarkIcon,
+  ArrowRightIcon,
+  CubeIcon,
+} from "@/lib/icons";
+
 interface NavItem {
-  name: string
-  active?: boolean
+  name: string;
+  active?: boolean;
 }
 
 const PRIMARY_NAV: NavItem[] = [
@@ -10,219 +25,25 @@ const PRIMARY_NAV: NavItem[] = [
   { name: "Technologies" },
   { name: "Solutions" },
   { name: "About" },
-]
+];
 
 const QUICK_ACCESS: NavItem[] = [
   { name: "Popular" },
   { name: "New Releases" },
   { name: "Saved" },
-]
+];
 
-function HouseIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  )
-}
-
-function LayoutGridIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-      <line x1="3" y1="9" x2="21" y2="9" />
-      <line x1="9" y1="21" x2="9" y2="21" />
-    </svg>
-  )
-}
-
-function Layers3Icon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polygon points="12 2 2 7 12 12 22 7 12 2" />
-      <polyline points="2 17 12 22 22 17" />
-      <polyline points="2 12 12 17 22 12" />
-    </svg>
-  )
-}
-
-function Code2Icon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  )
-}
-
-function LightbulbIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M9 12h6a3 3 0 0 1 3 3v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 1 3-3z" />
-      <path d="M9 21v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1" />
-    </svg>
-  )
-}
-
-function UserRoundIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  )
-}
-
-function StarIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  )
-}
-
-function ZapIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polyline points="18 6 12 12 6 18" />
-      <polyline points="12 18 6 6" />
-    </svg>
-  )
-}
-
-function BookmarkIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-    </svg>
-  )
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
-    </svg>
-  )
-}
-
-import type { ReactElement } from "react"
-
-const ICONS: Record<string, () => ReactElement> = {
-  House: HouseIcon,
-  LayoutGrid: LayoutGridIcon,
-  Layers3: Layers3Icon,
-  Code2: Code2Icon,
-  Lightbulb: LightbulbIcon,
-  UserRound: UserRoundIcon,
-  Star: StarIcon,
-  Zap: ZapIcon,
-  Bookmark: BookmarkIcon,
-}
+const ICONS: Record<string, ReactElement> = {
+  House: <HouseIcon size={14} />,
+  LayoutGrid: <LayoutGridIcon size={14} />,
+  Layers3: <Layers3Icon size={14} />,
+  Code2: <Code2Icon size={14} />,
+  Lightbulb: <LightbulbIcon size={14} />,
+  UserRound: <UserRoundIcon size={14} />,
+  Star: <StarIcon size={14} />,
+  Zap: <ZapIcon size={14} />,
+  Bookmark: <BookmarkIcon size={14} />,
+};
 
 const ICON_FOR_ITEM: Record<string, string> = {
   Home: "House",
@@ -234,42 +55,10 @@ const ICON_FOR_ITEM: Record<string, string> = {
   Popular: "Star",
   "New Releases": "Zap",
   Saved: "Bookmark",
-}
-
-function CubeIcon() {
-  return (
-    <svg
-      width="48"
-      height="48"
-      viewBox="0 0 96 96"
-      fill="none"
-      aria-hidden="true"
-    >
-      <polygon
-        points="48,12 84,40 48,68 12,40"
-        fill="#dbeafe"
-        stroke="#3b82f6"
-        strokeWidth="2"
-      />
-      <polygon
-        points="84,40 84,76 48,68"
-        fill="#bfdbfe"
-        stroke="#3b82f6"
-        strokeWidth="2"
-      />
-      <polygon
-        points="12,40 12,76 48,68"
-        fill="#93c5fd"
-        stroke="#3b82f6"
-        strokeWidth="2"
-      />
-      <line x1="48" y1="12" x2="48" y2="68" stroke="#3b82f6" strokeWidth="2" />
-    </svg>
-  )
-}
+};
 
 function NavItem({ name, active }: NavItem) {
-  const Icon = ICONS[ICON_FOR_ITEM[name]]
+  const Icon = ICONS[ICON_FOR_ITEM[name]];
   return (
     <a
       href="#"
@@ -280,10 +69,10 @@ function NavItem({ name, active }: NavItem) {
       `}
       aria-current={active ? "page" : undefined}
     >
-      <Icon />
+      {Icon}
       <span>{name}</span>
     </a>
-  )
+  );
 }
 
 export default function Sidebar() {
@@ -324,7 +113,7 @@ export default function Sidebar() {
             className="w-full bg-slate-900 text-white text-xs font-medium py-2 px-4 rounded-full flex items-center justify-center gap-1.5 hover:bg-slate-800 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
           >
             Contact Us
-            <ArrowRightIcon />
+            <ArrowRightIcon size={12} />
           </button>
         </div>
         <p className="text-[11px] text-slate-400 mt-4">
@@ -332,5 +121,5 @@ export default function Sidebar() {
         </p>
       </div>
     </aside>
-  )
+  );
 }
