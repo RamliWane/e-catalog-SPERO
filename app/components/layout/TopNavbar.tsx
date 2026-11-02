@@ -61,7 +61,7 @@ function ArrowRightIcon({ className }: { className?: string }) {
 export default function TopNavbar() {
   return (
     <nav className="h-[70px] bg-white flex items-center justify-between px-[32px] shrink-0">
-      <div className="flex items-center gap-3 min-w-0 sm:max-w-[440px]">
+      <div className="flex items-center gap-3 min-w-0 w-full max-w-[440px]">
         <SearchIcon className="w-4 h-4 text-slate-400 shrink-0" />
         <input
           type="text"

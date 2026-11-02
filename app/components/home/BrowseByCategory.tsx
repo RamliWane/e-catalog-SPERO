@@ -120,9 +120,9 @@ function CategoryCard({ icon: Icon, title, desc, count, accent, accentText }: {
 export default function BrowseByCategory() {
   return (
     <section className="bg-white py-[40px] px-[32px]">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-[24px] items-start">
-          <div className="lg:w-[280px] shrink-0 min-w-0">
+      <div className="max-w-full">
+        <div className="flex flex-wrap gap-[24px] items-start">
+          <div className="w-full lg:w-[280px] shrink-0 min-w-0">
             <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
               BROWSE BY CATEGORY
             </span>
@@ -144,13 +144,13 @@ export default function BrowseByCategory() {
             </a>
           </div>
 
-          <div className="flex flex-row gap-[10px] shrink-0">
+          <div className="w-full lg:auto flex flex-wrap gap-[10px] shrink-0 min-w-0">
             {CATEGORIES.map((category) => (
               <CategoryCard key={category.title} {...category} />
             ))}
           </div>
 
-          <div className="lg:w-[310px] shrink-0 flex flex-col justify-between h-full min-h-[178px]">
+          <div className="w-full lg:w-[310px] shrink-0 flex flex-col justify-between h-full min-h-[178px]">
             <div className="relative bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
               <div className="relative z-10">
                 <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
@@ -173,8 +173,8 @@ export default function BrowseByCategory() {
                   </svg>
                 </a>
               </div>
-              <div className="absolute right-[-10px] bottom-[-10px] opacity-40 pointer-events-none">
-                <Cube3D className="w-[90px] h-[90px]" />
+              <div className="absolute right-[-8px] bottom-[-8px] opacity-40 pointer-events-none">
+                <Cube3D className="w-[80px] h-[80px]" />
               </div>
             </div>
           </div>
