@@ -47,12 +47,12 @@ export default function CatalogToolbar({
   >[]
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mt-[17px]">
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mt-3">
       <div className="flex flex-wrap gap-3">
         <button
           onClick={() => setActiveCategory("All")}
           aria-pressed={activeCategory === "All"}
-          className={`rounded-full h-8 px-5 text-[12px] font-medium border transition-colors duration-150 ${
+          className={`rounded-full h-7 px-5 text-[11px] font-medium border transition-colors duration-150 ${
             activeCategory === "All"
               ? "bg-slate-900 text-white border-slate-900"
               : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
@@ -67,14 +67,14 @@ export default function CatalogToolbar({
               key={cat}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={activeCategory === cat}
-              className={`flex items-center gap-2 rounded-full h-8 px-4 text-[12px] font-medium border transition-colors duration-150 ${
+              className={`flex items-center gap-2 rounded-full h-7 px-4 text-[11px] font-medium border transition-colors duration-150 ${
                 activeCategory === cat
                   ? "bg-slate-900 text-white border-slate-900"
                   : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
               }`}
             >
               <Icon
-                size={16}
+                size={15}
                 className={activeCategory === cat ? "text-white" : "text-slate-500"}
               />
               {cat}
@@ -86,7 +86,7 @@ export default function CatalogToolbar({
       <div className="relative inline-block w-full lg:w-auto">
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white h-10 px-4 text-sm text-slate-800 w-full lg:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+          className="flex items-center gap-2 rounded-md border border-slate-200 bg-white h-10 px-4 text-sm text-slate-800 w-full lg:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
         >
           <span>Sort by: {sortBy}</span>
           <ChevronDown size={16} className="text-slate-400 ml-1" />
