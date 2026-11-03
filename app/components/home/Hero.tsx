@@ -23,15 +23,62 @@ const STATS = [
 ];
 
 const SERVICE_CARDS = [
-  { icon: Code2Icon, title: "Web Development", desc: "Modern, scalable, and high-performance web solutions.", top: "10%", left: "8%", delay: "0s" },
-  { icon: SmartphoneIcon, title: "Mobile App", desc: "iOS & Android apps that people love to use.", top: "30%", right: "10%", delay: "0.2s" },
-  { icon: ShapesIcon, title: "UI/UX Design", desc: "Designing intuitive experiences for real people.", bottom: "20%", left: "12%", delay: "0.4s" },
-  { icon: CloudIcon, title: "Cloud & DevOps", desc: "Build, deploy, and scale with confidence.", bottom: "8%", right: "12%", delay: "0.6s" },
+  {
+    icon: Code2Icon,
+    title: "Web Development",
+    desc: "Modern, scalable, and high-performance web solutions.",
+    top: "10%",
+    left: "8%",
+    delay: "0s",
+    accent: "#DBEAFE",
+    accentText: "#2563EB",
+  },
+  {
+    icon: SmartphoneIcon,
+    title: "Mobile App",
+    desc: "iOS & Android apps that people love to use.",
+    top: "10%",
+    right: "8%",
+    delay: "0.2s",
+    accent: "#D1FAE5",
+    accentText: "#10B981",
+  },
+  {
+    icon: ShapesIcon,
+    title: "UI/UX Design",
+    desc: "Designing intuitive experiences for real people.",
+    bottom: "10%",
+    left: "8%",
+    delay: "0.4s",
+    accent: "#FEE2E2",
+    accentText: "#EF4444",
+  },
+  {
+    icon: CloudIcon,
+    title: "Cloud & DevOps",
+    desc: "Build, deploy, and scale with confidence.",
+    bottom: "10%",
+    right: "8%",
+    delay: "0.6s",
+    accent: "#EDE9FE",
+    accentText: "#7C3AED",
+  },
 ];
 
 type IconComponent = (props: { className?: string; size?: number }) => ReactElement;
 
-function FloatingCard({ icon: Icon, title, desc, ...position }: {
+function FloatingCard({
+  icon: Icon,
+  title,
+  desc,
+  top,
+  right,
+  bottom,
+  left,
+  delay,
+  accent,
+  accentText,
+}: {
   icon: IconComponent;
   title: string;
   desc: string;
@@ -40,22 +87,35 @@ function FloatingCard({ icon: Icon, title, desc, ...position }: {
   bottom?: string;
   left?: string;
   delay: string;
+  accent: string;
+  accentText: string;
 }) {
+  const accentColorClass =
+    accentText === "#2563EB" ? "text-blue-600" :
+    accentText === "#10B981" ? "text-emerald-600" :
+    accentText === "#EF4444" ? "text-rose-600" :
+    "text-purple-600";
+
   return (
     <div
-      className="absolute bg-white border border-[#E5EAF0] rounded-xl p-4 shadow-sm flex flex-col items-start gap-2 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border border-[#E5EAF0] rounded-[16px] p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${delay ? "animate-float" : ""}`}
       style={{
-        ...position,
-        animationDelay: position.delay ? `${position.delay}` : undefined,
+        ...(top ? { top } : {}),
+        ...(right ? { right } : {}),
+        ...(bottom ? { bottom } : {}),
+        ...(left ? { left } : {}),
+        animationDelay: delay,
       }}
     >
-      <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#DBEAFE] text-[#2563EB] mb-1">
-        <Icon size={12} />
+      <div className="flex items-center justify-center w-9 h-9 rounded-lg mb-2" style={{ backgroundColor: accent }}>
+        <Icon size={12} className={accentColorClass} />
       </div>
-      <h4 className="text-[12px] font-medium text-slate-900 leading-tight">{title}</h4>
-      <p className="text-[10px] text-slate-500 leading-tight">{desc}</p>
+      <h4 className="text-[11px] font-medium text-slate-900 leading-tight group-hover:text-[#183B56] transition-colors duration-200">
+        {title}
+      </h4>
+      <p className="text-[9px] text-slate-500 leading-tight">{desc}</p>
       <div className="mt-auto w-full h-[1px] bg-[#E5EAF0] mt-2 flex items-end">
-        <ArrowRightIcon size={10} className="text-slate-400 ml-auto" />
+        <ArrowRightIcon size={10} className="text-slate-400 group-hover:text-slate-600 transition-all duration-200 group-hover:translate-x-0.5" />
       </div>
     </div>
   );
@@ -117,7 +177,10 @@ export default function Hero() {
       </div>
 
       <div className="flex-1 relative w-full h-full">
-          <img src="/main-home-asset-2.png" alt="Hero Image" className="w-full h-full object-cover" />
+        <img src="/main-home-asset-3.png" alt="Hero Image" className="w-full h-full object-cover" />
+        {SERVICE_CARDS.map((card, i) => (
+          <FloatingCard key={i} {...card} />
+        ))}
       </div>
     </section>
   );
