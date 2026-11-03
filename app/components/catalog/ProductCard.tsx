@@ -1,6 +1,7 @@
+
 "use client"
 
-import { ArrowRight, Bookmark, ImageOff } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 type ProductCardProps = {
   id: string
@@ -17,50 +18,39 @@ export default function ProductCard({
   name,
   category,
   description,
-  image,
-  isSaved,
-  onToggleSave,
 }: ProductCardProps) {
   return (
-    <article
-      className="group relative flex flex-col bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
-    >
-      <div className="relative w-full h-[130px] rounded-t-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
-        {image ? (
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="flex flex-col items-center justify-center w-full h-full text-slate-400">
-            <ImageOff size={24} />
-            <span className="mt-2 text-xs">Gambar belum tersedia</span>
-          </div>
-        )}
+    <article className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+      <div className="relative aspect-[2/1] w-full overflow-hidden bg-slate-100">
+        <img
+          src="/dummy-image-catalog.jpeg"
+          alt={name}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        />
       </div>
 
-      <div className="p-4 flex flex-col">
-        <div className="flex items-center w-27 justify-center bg-blue-100 rounded-full text-blue-600">
-          <span className="inline-flex items-center justify-start py-1 rounded-full text-[9px] font-medium uppercase">
-            {category}
-          </span>
-        </div>
-        <h3 className="mt-[12px] text-md font-semibold text-slate-900 leading-tight">
+      <div className="flex flex-1 flex-col p-4">
+        <span className="w-fit max-w-full truncate rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-medium leading-none text-blue-600">
+          {category}
+        </span>
+
+        <h3 className="mt-1 line-clamp-1 text-[15px] font-semibold leading-5 text-slate-900">
           {name}
         </h3>
-        <p className="mt-[6px] text-[12px] text-slate-500 leading-relaxed line-clamp-2">
+
+        <p className="mt-1 line-clamp-2 text-[12px] leading-[18px] text-slate-500">
           {description}
         </p>
-        <div className="mt-auto flex items-center justify-between pt-4">
+
+        <div className="mt-3">
           <a
             href="#"
-            className="text-[12px] font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-150 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-900 transition-colors duration-150 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             View Details
             <ArrowRight
               size={14}
-              className={`transition-transform duration-150 hover:translate-x-0.5`}
+              className="transition-transform duration-150 group-hover:translate-x-0.5"
             />
           </a>
         </div>
