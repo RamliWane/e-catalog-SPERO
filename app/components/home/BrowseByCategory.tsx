@@ -6,7 +6,6 @@ import {
   WorkflowIcon,
   CloudIcon,
   ArrowRightIcon,
-  Cube3DIcon,
 } from "@/lib/icons";
 
 const CATEGORIES = [
@@ -128,27 +127,32 @@ export default function BrowseByCategory() {
 
         {/* Card Featured */}
         <div className="min-w-0 sm:col-span-2 xl:col-span-1">
-          <div className="relative overflow-hidden bg-[#183B56] text-white rounded-[11px] p-[18px] h-[178px] flex flex-col justify-between">
-            <div className="relative z-10">
-              <span className="inline-block mb-[10px] text-[10px] font-medium text-[#93C5FD] uppercase tracking-widest">
+          <div className="relative overflow-hidden bg-[#162032] text-white rounded-[16px] p-[20px] h-[200px] flex flex-col">
+            <div className="relative z-10 w-[90%]">
+              <span className="inline-block mb-[10px] text-[10px] font-medium text-gray-200">
                 Featured Solution
               </span>
-              <h3 className="text-[16px] font-semibold leading-[1.2] mb-[10px]">
+              <h3 className="text-[17px] font-bold leading-[1.2] mb-[10px]">
                 Modern Web Platform for Growing Business
               </h3>
-              <p className="text-[11px] text-[#CBD5E1] leading-[1.6] mb-[14px]">
+              <p className="text-[11px] text-[#CBD5E1] leading-[1.2]">
                 Scalable, secure, and built for long-term success.
               </p>
               <a
                 href="#"
-                className="text-[11px] font-medium text-white flex items-center gap-1 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
+                className="text-[11px] pt-10 font-medium text-white flex items-center gap-1.5 hover:translate-x-1 transition-transform duration-200 focus-visible:outline-none focus-visible:underline"
               >
                 Explore Project
-                <ArrowRightIcon size={10} />
+                <ArrowRightIcon size={11} />
               </a>
             </div>
-            <div className="absolute right-[-6px] bottom-[-6px] opacity-40 pointer-events-none">
-              <Cube3DIcon className="w-[56px] h-[56px]" />
+            <div className="absolute right-0 h-full w-[55%] flex items-center justify-center overflow-hidden">
+              <img
+                src="/asset-section-3.png"
+                alt="Featured solution glass cube"
+                className="w-full h-full object-contain opacity-90"
+              />
+              
             </div>
           </div>
         </div>
