@@ -116,22 +116,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="flex-1 relative min-h-[400px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-[320px] h-[320px]">
-            <div className="absolute inset-0 border border-[#E5EAF0] rounded-full animate-pulse opacity-50" />
-            <div className="absolute inset-0 border border-[#DBEAFE] rounded-full opacity-80 animate-[spin_20s_linear_infinite]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[120px] h-[120px] rounded-full bg-[#183B56]/10 border border-[#183B56]/20 flex items-center justify-center">
-                <span className="text-[40px] font-bold text-[#183B56]">S</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {SERVICE_CARDS.map((card, i) => (
-          <FloatingCard key={i} {...card} />
-        ))}
+      <div className="flex-1 relative w-full h-full">
+          <img src="/main-home-asset-2.png" alt="Hero Image" className="w-full h-full object-cover" />
       </div>
     </section>
   );
