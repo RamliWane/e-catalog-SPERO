@@ -32,16 +32,8 @@ export default function CatalogHero() {
         </div>
       </div>
 
-      <div className="hidden lg:block absolute top-0 right-0 pointer-events-none w-full h-full">
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-blue-50/40 blur-[128px]" />
-        <div className="absolute -bottom-32 -right-48 w-[360px] h-[360px] rounded-full bg-blue-100/60 blur-[96px]" />
-
-        <div className="absolute top-48 right-48 w-24 h-24 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl shadow-lg rotate-6" />
-        <div className="absolute top-64 right-64 w-20 h-20 bg-white/60 backdrop-blur-sm border border-slate-200/40 rounded-2xl shadow-md rotate-[-6deg]" />
-        <div className="absolute top-80 right-20 w-24 h-24 bg-slate-900 rounded-2xl shadow-2xl rotate-3 flex items-center justify-center">
-          <Code2 size={24} className="text-white" />
-          <div className="absolute top-0 right-0 w-[14px] h-[14px] bg-blue-500 rounded-full border-2 border-white" />
-        </div>
+      <div className="flex-1 relative w-full h-auto">
+        <img src="/main-asset-catalog.png" alt="Hero Image" className="w-full h-auto object-cover" />
       </div>
     </section>
   )

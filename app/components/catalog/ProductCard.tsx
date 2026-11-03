@@ -23,7 +23,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <article
-      className="group relative flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+      className="group relative flex flex-col bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
     >
       <div className="relative w-full h-[130px] rounded-t-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
         {image ? (
@@ -41,21 +41,21 @@ export default function ProductCard({
       </div>
 
       <div className="p-4 flex flex-col">
-        <div className="flex items-center w-30 justify-center bg-blue-100 rounded-full text-blue-600">
-          <span className="inline-flex items-center py-1 rounded-full text-[10px] font-medium uppercase">
+        <div className="flex items-center w-27 justify-center bg-blue-100 rounded-full text-blue-600">
+          <span className="inline-flex items-center justify-start py-1 rounded-full text-[9px] font-medium uppercase">
             {category}
           </span>
         </div>
-        <h3 className="mt-[12px] text-lg font-semibold text-slate-900 leading-tight">
+        <h3 className="mt-[12px] text-md font-semibold text-slate-900 leading-tight">
           {name}
         </h3>
-        <p className="mt-[6px] text-[13px] text-slate-500 leading-relaxed line-clamp-2">
+        <p className="mt-[6px] text-[12px] text-slate-500 leading-relaxed line-clamp-2">
           {description}
         </p>
         <div className="mt-auto flex items-center justify-between pt-4">
           <a
             href="#"
-            className="text-[13px] font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-150 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            className="text-[12px] font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-150 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
           >
             View Details
             <ArrowRight
