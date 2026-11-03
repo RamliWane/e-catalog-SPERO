@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { ServiceFilterCategory } from "@/app/components/services/ServiceCategoryFilter"
+import type { ServiceFilterCategory } from "./ServiceCategoryFilter"
 import { SERVICES } from "@/lib/services-data"
 import ServiceListItem from "@/app/components/services/ServiceListItem"
 import ServiceDetailPanel from "@/app/components/services/ServiceDetailPanel"
@@ -20,8 +20,8 @@ export default function ServiceExplorer({
       : SERVICES.filter((s) => s.category === activeCategory)
 
   return (
-    <section className="bg-white py-[40px] px-[30px]">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-[40px] items-start">
+    <section className="bg-white py-10 px-[30px]">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Left column: service list */}
         <div className="lg:col-span-4 flex flex-col gap-[8px] min-w-0">
           {filteredServices.map((service) => (

@@ -1,5 +1,3 @@
-"use client"
-
 import { ArrowRightIcon } from "@/lib/icons"
 import type { Service } from "@/lib/services-data"
 
@@ -17,7 +15,7 @@ export default function ServiceDetailPanel({
   return (
     <section className="relative overflow-hidden bg-white border border-[#DCE6F5] rounded-[14px] h-full flex">
       {/* Left: text content */}
-      <div className="relative z-10 w-[55%] p-[28px] flex flex-col justify-center">
+      <div className="relative z-10 w-[55%] p-7 flex flex-col justify-center">
         <div className="flex items-center gap-2 mb-[10px]">
           <span className="text-[10px] font-semibold text-[#2463FF] uppercase tracking-widest">
             {service.number}

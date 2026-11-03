@@ -1,5 +1,3 @@
-"use client"
-
 import { ArrowRightIcon } from "@/lib/icons"
 import type { Service } from "@/lib/services-data"
 

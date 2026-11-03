@@ -1,7 +1,6 @@
-
 "use client"
 
-import { ArrowRight } from "lucide-react"
+import { ArrowRightIcon } from "@/lib/icons"
 
 type ProductCardProps = {
   id: string
@@ -14,7 +13,6 @@ type ProductCardProps = {
 }
 
 export default function ProductCard({
-  id,
   name,
   category,
   description,
@@ -48,10 +46,10 @@ export default function ProductCard({
             className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-900 transition-colors duration-150 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             View Details
-            <ArrowRight
-              size={14}
-              className="transition-transform duration-150 group-hover:translate-x-0.5"
-            />
+              <ArrowRightIcon
+                size={14}
+                className="transition-transform duration-150 group-hover:translate-x-0.5"
+              />
           </a>
         </div>
       </div>

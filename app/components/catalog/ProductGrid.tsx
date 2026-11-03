@@ -50,7 +50,7 @@ export default function ProductGrid() {
       />
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-[24px] pb-[40px]"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6 pb-10"
       >
         {filteredAndSorted.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">

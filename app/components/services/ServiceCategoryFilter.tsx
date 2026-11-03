@@ -1,4 +1,3 @@
-"use client"
 import {
   Layers3Icon,
   LayoutGridIcon,

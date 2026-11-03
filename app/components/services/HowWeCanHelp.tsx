@@ -1,5 +1,3 @@
-"use client"
-
 import {
   LayoutGridIcon,
   CloudIcon,
@@ -35,7 +33,7 @@ const HELP_ITEMS: HelpItem[] = [
 
 export default function HowWeCanHelp() {
   return (
-    <section className="bg-white py-[60px] px-[30px]">
+    <section className="bg-white py-15 px-[30px]">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col gap-6 mb-[40px]">
           <span className="inline-block text-[11px] font-medium text-blue-600 uppercase tracking-[0.2em]">

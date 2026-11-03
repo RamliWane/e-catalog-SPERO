@@ -83,8 +83,8 @@ export default function Sidebar() {
   const pathname = usePathname();
   return (
     <aside className="fixed inset-y-0 left-0 z-50 w-[230px] flex flex-col border-r border-slate-200 bg-white shrink-0">
-      <div className="px-[28px] pt-[28px] pb-[32px]">
-        <h2 className="text-[24px] font-semibold text-slate-900">Spero</h2>
+      <div className="px-7 pt-7 pb-8">
+        <h2 className="text-2xl font-semibold text-slate-900">Spero</h2>
       </div>
 
       <nav className="flex-1 px-5 space-y-2" aria-label="Primary navigation">
@@ -94,7 +94,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="px-5">
-        <div className="border-t border-slate-200 my-[20px]" />
+        <div className="border-t border-slate-200 my-5" />
         <h3 className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-3">
           Quick Access
         </h3>
@@ -105,7 +105,7 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      <div className="mt-auto px-5 pb-[28px]">
+      <div className="mt-auto px-5 pb-7">
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
           <div className="mb-4 flex items-center justify-center">
             <CubeIcon />

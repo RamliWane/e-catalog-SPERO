@@ -1,10 +1,9 @@
-"use client"
+import { ArrowRightIcon } from "@/lib/icons"
 
-import { ArrowRight } from "lucide-react"
 
-export default function CatalogHero() {
+export default function ServicesHero() {
   return (
-    <section className="bg-white px-8 pt-8 pb-0">
+    <section className="bg-white px-2 pt-2 pb-0">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-8">
 
         <div className="flex min-w-0 flex-1 flex-col">
@@ -33,7 +32,7 @@ export default function CatalogHero() {
               aria-label="Search catalog"
               className="flex size-11 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white transition-colors hover:bg-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
-              <ArrowRight size={18} />
+              <ArrowRightIcon size={18} />
             </button>
           </form>
         </div>

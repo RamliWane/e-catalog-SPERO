@@ -2,7 +2,7 @@ import { SearchIcon, SunIcon, ArrowRightIcon } from "@/lib/icons";
 
 export default function TopNavbar() {
   return (
-    <nav className="h-[70px] bg-white flex items-center justify-between px-[32px] shrink-0">
+    <nav className="h-[70px] bg-white flex items-center justify-between px-8 shrink-0">
       <div className="flex items-center gap-3 min-w-0 w-full max-w-[440px]">
         <SearchIcon size={12} className="text-slate-400 shrink-0" />
         <input
