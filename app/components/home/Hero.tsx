@@ -27,8 +27,10 @@ const SERVICE_CARDS = [
     icon: Code2Icon,
     title: "Web Development",
     desc: "Modern, scalable, and high-performance web solutions.",
-    top: "10%",
-    left: "8%",
+    top: "8%",
+    left: "12%",
+    rotate: -2,
+    duration: "5s",
     delay: "0s",
     accent: "#DBEAFE",
     accentText: "#2563EB",
@@ -37,8 +39,10 @@ const SERVICE_CARDS = [
     icon: SmartphoneIcon,
     title: "Mobile App",
     desc: "iOS & Android apps that people love to use.",
-    top: "10%",
-    right: "8%",
+    top: "-2%",
+    right: "14%",
+    rotate: 3,
+    duration: "7s",
     delay: "0.2s",
     accent: "#D1FAE5",
     accentText: "#10B981",
@@ -47,8 +51,10 @@ const SERVICE_CARDS = [
     icon: ShapesIcon,
     title: "UI/UX Design",
     desc: "Designing intuitive experiences for real people.",
-    bottom: "10%",
-    left: "8%",
+    bottom: "16%",
+    left: "16%",
+    rotate: -1,
+    duration: "8s",
     delay: "0.4s",
     accent: "#FEE2E2",
     accentText: "#EF4444",
@@ -57,8 +63,10 @@ const SERVICE_CARDS = [
     icon: CloudIcon,
     title: "Cloud & DevOps",
     desc: "Build, deploy, and scale with confidence.",
-    bottom: "10%",
-    right: "8%",
+    bottom: "4%",
+    right: "16%",
+    rotate: 2,
+    duration: "6s",
     delay: "0.6s",
     accent: "#EDE9FE",
     accentText: "#7C3AED",
@@ -75,6 +83,8 @@ function FloatingCard({
   right,
   bottom,
   left,
+  rotate,
+  duration,
   delay,
   accent,
   accentText,
@@ -86,6 +96,8 @@ function FloatingCard({
   right?: string;
   bottom?: string;
   left?: string;
+  rotate?: number;
+  duration?: string;
   delay: string;
   accent: string;
   accentText: string;
@@ -98,13 +110,15 @@ function FloatingCard({
 
   return (
     <div
-      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border border-[#E5EAF0] rounded-[16px] p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${delay ? "animate-float" : ""}`}
+      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border border-[#E5EAF0] rounded-md p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${delay ? "animate-float" : ""}`}
       style={{
         ...(top ? { top } : {}),
         ...(right ? { right } : {}),
         ...(bottom ? { bottom } : {}),
         ...(left ? { left } : {}),
+        ...(rotate !== undefined ? { transform: `rotate(${rotate}deg)` } : {}),
         animationDelay: delay,
+        animationDuration: duration || "6s",
       }}
     >
       <div className="flex items-center justify-center w-9 h-9 rounded-lg mb-2" style={{ backgroundColor: accent }}>
@@ -113,7 +127,9 @@ function FloatingCard({
       <h4 className="text-[11px] font-medium text-slate-900 leading-tight group-hover:text-[#183B56] transition-colors duration-200">
         {title}
       </h4>
-      <p className="text-[9px] text-slate-500 leading-tight">{desc}</p>
+      <p className="text-[9px] text-slate-500 leading-tight line-clamp-2 max-w-[150px]">
+        {desc}
+      </p>
       <div className="mt-auto w-full h-[1px] bg-[#E5EAF0] mt-2 flex items-end">
         <ArrowRightIcon size={10} className="text-slate-400 group-hover:text-slate-600 transition-all duration-200 group-hover:translate-x-0.5" />
       </div>
