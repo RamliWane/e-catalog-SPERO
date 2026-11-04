@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowRightIcon } from "@/lib/icons"
 import type { Service } from "@/lib/services-data"
 
@@ -13,48 +15,52 @@ export default function ServiceDetailPanel({
   }
 
   return (
-    <section className="relative overflow-hidden bg-white border border-[#DCE6F5] rounded-[14px] h-full flex">
-      <div className="relative z-10 w-[55%] p-7 flex flex-col justify-center">
-        <div className="flex items-center gap-2 mb-[10px]">
-          <span className="text-[10px] font-semibold text-[#2463FF] uppercase tracking-widest">
+    <section className="relative isolate grid min-w-0 overflow-hidden rounded-lg border border-[#DCE6F5] bg-gradient-to-br from-white via-[#F1F6FF] to-[#A8D1FF] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.5fr)]">
+      {/* Service information */}
+      <div className="relative z-10 flex min-w-0 flex-col items-start justify-center p-5 sm:p-6">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#2463FF]">
             {service.number}
           </span>
-          <span className="text-[10px] font-medium text-[#526786] uppercase">
+
+          <span className="text-[10px] font-medium uppercase tracking-wide text-[#526786]">
             {service.title}
           </span>
         </div>
-        <h3 className="text-[26px] font-bold leading-tight text-[#14213D] mb-[10px]">
+
+        <h3 className="text-xl font-bold leading-tight text-[#14213D]">
           {service.title}
         </h3>
-        <p className="text-[13px] text-[#526786] leading-relaxed mb-[16px] max-w-[380px]">
+
+        <p className="mt-2 text-[13px] leading-relaxed text-[#526786]">
           {service.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-[16px]">
+
+        <div className="mt-4 flex flex-wrap gap-2">
           {service.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-full border border-[#E2EAF5] bg-white text-[11px] font-medium text-[#526786]"
+              className="rounded-full border border-[#DCE6F5] bg-white/90 px-3 py-1 text-[11px] font-medium text-[#526786]"
             >
               {tag}
             </span>
           ))}
         </div>
-        <div className="flex items-center gap-3">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-full border border-[#101B35] bg-[#101B35] px-5 py-2.5 text-[13px] font-medium text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1"
-          >
-            Explore Service
-            <ArrowRightIcon size={14} className="transition-transform duration-200 hover:translate-x-0.5" />
-          </a>
-        </div>
+
+        <a
+          href="#"
+          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#101B35] px-5 py-2 text-[13px] font-medium text-white transition-colors duration-200 hover:bg-[#2463FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+        >
+          Explore Service
+          <ArrowRightIcon size={14} />
+        </a>
       </div>
 
-      <div className="relative w-full h-auto flex items-center justify-center overflow-hidden">
+      <div className="relative min-w-0 overflow-hidden p-0 md:flex md:items-stretch md:py-0 md:pr-0">
         <img
-          src="/asset-catalog-2.jpeg"
+          src="/asset-catalog-3.png"
           alt={`${service.title} illustration`}
-          className="w-full h-full object-cover object-center opacity-85"
+          className="block h-full w-full object-cover object-center [mask-image:linear-gradient(to_right,transparent,black_35%)]"
         />
       </div>
     </section>

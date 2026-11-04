@@ -20,10 +20,9 @@ export default function ServiceExplorer({
       : SERVICES.filter((s) => s.category === activeCategory)
 
   return (
-    <section className="bg-white py-10 px-[30px]">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {/* Left column: service list */}
-        <div className="lg:col-span-4 flex flex-col gap-[8px] min-w-0">
+    <section className="bg-white py-10 px-2">
+      <div className=" mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <div className="lg:col-span-4 flex flex-col gap-4 min-w-0">
           {filteredServices.map((service) => (
             <ServiceListItem
               key={service.id}
@@ -34,7 +33,6 @@ export default function ServiceExplorer({
           ))}
         </div>
 
-        {/* Right column: detail panel */}
         <div className="lg:col-span-8 flex flex-col h-full">
           <ServiceDetailPanel service={activeService} />
         </div>
