@@ -35,7 +35,7 @@ export default function AboutProcess() {
                 alt="Spero team working together"
                 fill
                 sizes="(max-width: 1024px) 100vw, 28vw"
-                className="object-cover object-center"
+                className="object-cover object-center rounded-l-full"
               />
             </div>
           </div>
