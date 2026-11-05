@@ -14,8 +14,8 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto">
           <Hero />
           <SelectedWork />
-          <AboutProcess />
           <BrowseByCategory />
+          <AboutProcess />
         </main>
       </div>
     </div>

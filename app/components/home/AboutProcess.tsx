@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 
 const ABOUT_METRICS = [
@@ -7,54 +8,69 @@ const ABOUT_METRICS = [
 ];
 
 const PROCESS_STEPS = [
-  { number: "01", title: "Discover" },
-  { number: "02", title: "Plan" },
-  { number: "03", title: "Design" },
-  { number: "04", title: "Develop" },
-  { number: "05", title: "Launch" },
+  { number: "1", title: "Discover" },
+  { number: "2", title: "Plan" },
+  { number: "3", title: "Design" },
+  { number: "4", title: "Develop" },
+  { number: "5", title: "Launch" },
 ];
 
 export default function AboutProcess() {
   return (
-    <section className="bg-white py-[60px] px-[30px]">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-[28%_32%_40%] gap-[40px] items-start">
-          {/* Left: Company Image */}
+    <section className="bg-white px-[30px] py-[60px]">
+      <div className="mx-auto max-w-[1400px]">
+
+        {/* Main Layout */}
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.85fr_1.05fr_1.35fr] lg:gap-8">
+
+          {/* LEFT: COMPANY IMAGE */}
           <div className="relative min-w-0">
-            <div className="absolute -inset-[6px] bg-[#B9D0F5] opacity-60 rounded-[8px] pointer-events-none z-0" />
-            <div className="relative z-10 overflow-hidden rounded-[6px]">
+            {/* Decorative Shape */}
+            <div className="absolute -left-[8px] -top-[8px] h-[48%] w-[48%] bg-[#B9D0F5] opacity-70" />
+
+            {/* Image */}
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[5px]">
               <Image
-                src="/asset-section-3.png"
+                src="/aboutprocess-asset-home.jpeg"
                 alt="Spero team working together"
-                className="w-full h-full object-cover object-center"
                 fill
-                sizes="(max-width: 768px) 100vw, 28vw"
+                sizes="(max-width: 1024px) 100vw, 28vw"
+                className="object-cover object-center"
               />
             </div>
           </div>
 
-          {/* Center: About Spero */}
-          <div className="flex flex-col gap-[24px] min-w-0 border-l border-[#DCE4EF] pl-[32px] py-[8px]">
-            <span className="inline-block text-[11px] font-medium text-[#2878F0] uppercase tracking-[0.2em]">
+          {/* CENTER: ABOUT SPERO */}
+          <div className="flex min-w-0 flex-col justify-center lg:px-2">
+
+            <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
               ABOUT SPERO
             </span>
-            <h2 className="text-[22px] font-bold leading-[1.15] text-[#14213D] tracking-tight mb-[12px] max-w-[340px]">
-              A Technology Partner<br />
-              for Your Next Growth&apos;.
+
+            <h2 className="mb-[12px] text-[22px] font-bold leading-[1.2] tracking-tight text-[#14213D]">
+              A Technology Partner
+              <br />
+              for Your Next Growth.
             </h2>
-            <p className="text-[13px] text-[#64748B] leading-[1.6] mb-[28px] max-w-[340px]">
-              We&apos;re a team of passionate developers, designers, and strategists,
-              committed to turning bold ideas into real-world impact.
+
+            <p className="mb-[20px] max-w-[340px] text-[12px] leading-[1.55] text-[#64748B]">
+              We're a team of passionate developers, designers, and
+              strategists, committed to turning bold ideas into
+              real-world impact.
             </p>
 
-            {/* Trust Statistics */}
-            <div className="flex gap-[24px]">
+            {/* Company Metrics */}
+            <div className="flex flex-wrap items-start gap-x-6 gap-y-4">
               {ABOUT_METRICS.map((metric) => (
-                <div key={metric.value} className="flex flex-col gap-[4px]">
-                  <span className="text-[23px] font-bold text-[#14213D] leading-none">
+                <div
+                  key={metric.value}
+                  className="flex min-w-0 flex-col gap-[5px]"
+                >
+                  <span className="text-[21px] font-bold leading-none text-[#14213D]">
                     {metric.value}
                   </span>
-                  <span className="text-[10px] font-medium text-[#64748B] leading-none">
+
+                  <span className="text-[9px] font-medium leading-tight text-[#64748B]">
                     {metric.label}
                   </span>
                 </div>
@@ -62,49 +78,53 @@ export default function AboutProcess() {
             </div>
           </div>
 
-          {/* Right: Our Process */}
-          <div className="flex flex-col gap-[24px] min-w-0">
-            <span className="inline-block text-[11px] font-medium text-[#2878F0] uppercase tracking-[0.2em]">
+          {/* RIGHT: OUR PROCESS */}
+          <div className="flex min-w-0 flex-col justify-center border-t border-[#DCE4EF] pt-8 lg:h-full lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+
+            <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
               OUR PROCESS
             </span>
-            <h2 className="text-[22px] font-bold leading-[1.15] text-[#14213D] tracking-tight mb-[12px]">
-              A Clear Process,<br />
+
+            <h2 className="mb-[12px] text-[22px] font-bold leading-[1.2] tracking-tight text-[#14213D]">
+              A Clear Process,
+              <br />
               A Better Result.
             </h2>
-            <p className="text-[13px] text-[#64748B] leading-relaxed max-w-[340px] mb-[28px]">
-              Our streamlined process ensures transparency, collaboration,
-              and results.
+
+            <p className="mb-[24px] max-w-[340px] text-[12px] leading-[1.55] text-[#64748B]">
+              Our streamlined process ensures transparency,
+              collaboration, and results.
             </p>
 
-            {/* Process Timeline */}
-            <div className="relative flex flex-col gap-[20px]">
-              {PROCESS_STEPS.map((step, index) => {
-                return (
+            {/* Horizontal Process Timeline */}
+            <div className="relative mt-1">
+
+              {/* Connector Line */}
+              <div className="absolute left-[10%] right-[10%] top-[14px] h-px bg-[#B8CEF2]" />
+
+              {/* Timeline Steps */}
+              <div className="relative z-10 grid grid-cols-5">
+                {PROCESS_STEPS.map((step) => (
                   <div
                     key={step.number}
-                    className="relative flex flex-col items-center"
+                    className="flex min-w-0 flex-col items-center"
                   >
-                    {/* Connector line between steps */}
-                    {index > 0 && (
-                      <div
-                        className="absolute -top-[10px] left-[50%] w-[1px] h-[10px] bg-[#B8CEF2]"
-                        style={{ transform: "translateX(-50%)" }}
-                      />
-                    )}
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-center w-[30px] h-[30px] rounded-full bg-[#EAF2FF] border border-[#B8CEF2]/50">
-                        <span className="text-[11px] font-semibold text-white">
-                          {step.number}
-                        </span>
-                      </div>
+                    {/* Number Circle */}
+                    <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#DCEAFF] bg-[#EAF2FF]">
+                      <span className="flex h-[16px] w-[16px] items-center justify-center rounded-full bg-[#2878F0] text-[9px] font-semibold text-white">
+                        {step.number}
+                      </span>
                     </div>
-                    <span className="mt-[10px] text-[10px] font-medium text-[#526786] text-center leading-none whitespace-nowrap">
+
+                    {/* Step Label */}
+                    <span className="mt-[10px] whitespace-nowrap text-center text-[9px] font-medium text-[#526786]">
                       {step.title}
                     </span>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
+
           </div>
         </div>
       </div>
