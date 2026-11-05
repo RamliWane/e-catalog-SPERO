@@ -23,7 +23,7 @@ const SECONDARY_PROJECTS: SecondaryProject[] = [
 
 export default function SelectedWork() {
   return (
-    <section className="bg-white py-[60px] px-[30px]">
+<section className="bg-white pt-8 pb-[60px] px-[30px]">
       <div className="max-w-[1400px] mx-auto">
         {/* Main Layout */}
         <div className="grid grid-cols-[minmax(220px,0.8fr)_minmax(0,2.5fr)] gap-[56px] items-stretch">

@@ -1,3 +1,4 @@
+
 import type { ReactElement } from "react";
 
 import {
@@ -73,7 +74,10 @@ const SERVICE_CARDS = [
   },
 ];
 
-type IconComponent = (props: { className?: string; size?: number }) => ReactElement;
+type IconComponent = (props: {
+  className?: string;
+  size?: number;
+}) => ReactElement;
 
 function FloatingCard({
   icon: Icon,
@@ -103,14 +107,19 @@ function FloatingCard({
   accentText: string;
 }) {
   const accentColorClass =
-    accentText === "#2563EB" ? "text-blue-600" :
-    accentText === "#10B981" ? "text-emerald-600" :
-    accentText === "#EF4444" ? "text-rose-600" :
-    "text-purple-600";
+    accentText === "#2563EB"
+      ? "text-blue-600"
+      : accentText === "#10B981"
+        ? "text-emerald-600"
+        : accentText === "#EF4444"
+          ? "text-rose-600"
+          : "text-purple-600";
 
   return (
     <div
-      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border border-[#E5EAF0] rounded-md p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${delay ? "animate-float" : ""}`}
+      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border-b border-gray-500 rounded-md p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${
+        delay ? "animate-float" : ""
+      }`}
       style={{
         ...(top ? { top } : {}),
         ...(right ? { right } : {}),
@@ -121,17 +130,23 @@ function FloatingCard({
         animationDuration: duration || "6s",
       }}
     >
-      <div className="flex items-center justify-center w-9 h-9 rounded-lg mb-2" style={{ backgroundColor: accent }}>
+      <div
+        className="flex items-center justify-center w-9 h-9 rounded-lg mb-2"
+        style={{ backgroundColor: accent }}
+      >
         <Icon size={12} className={accentColorClass} />
       </div>
-      <h4 className="text-[11px] font-medium text-slate-900 leading-tight group-hover:text-[#183B56] transition-colors duration-200">
+
+      <h4 className="text-[11px] font-medium text-slate-900 leading-tight">
         {title}
       </h4>
+
       <p className="text-[9px] text-slate-500 leading-tight line-clamp-2 max-w-[150px]">
         {desc}
       </p>
-      <div className="mt-auto w-full h-[1px] bg-[#E5EAF0] mt-2 flex items-end">
-        <ArrowRightIcon size={10} className="text-slate-400 group-hover:text-slate-600 transition-all duration-200 group-hover:translate-x-0.5" />
+
+      <div className="mt-2 w-full h-[1px] bg-[#E5EAF0] flex items-end">
+        <ArrowRightIcon size={10} className="text-slate-400" />
       </div>
     </div>
   );
@@ -139,25 +154,33 @@ function FloatingCard({
 
 export default function Hero() {
   return (
-    <section className="bg-white py-15 px-8 min-h-[520px] flex flex-col lg:flex-row gap-[60px] items-start">
+    <section className="bg-white pt-15 pb-5 px-8 min-h-[520px] flex flex-col lg:flex-row gap-5 items-start">
+      {/* Left Content */}
       <div className="flex-1 min-w-0 max-w-[560px]">
         <span className="inline-block mb-[13px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
           SOFTWARE HOUSE & IT CONSULTANT
         </span>
+
         <h1 className="text-[48px] lg:text-[48px] font-semibold text-slate-900 leading-tight mb-[20px] max-w-[520px]">
           Your Trusted Partner for Digital Solutions
         </h1>
+
         <p className="text-[14px] text-slate-600 leading-relaxed mb-[28px] max-w-[460px]">
-          Explore our curated catalog of software houses and IT consultants ready to build, scale, and transform your ideas into digital solutions.
+          Explore our curated catalog of software houses and IT consultants
+          ready to build, scale, and transform your ideas into digital
+          solutions.
         </p>
 
+        {/* Search */}
         <div className="flex items-center gap-3 bg-white border border-[#E5EAF0] rounded-full h-[52px] max-w-[540px] shrink-0">
           <SearchIcon size={14} className="text-slate-400 ml-3 shrink-0" />
+
           <input
             type="text"
             placeholder="Search services, technologies, or company..."
             className="flex-1 h-full bg-transparent border-none text-sm text-slate-900 placeholder-slate-400 focus:outline-none pr-3 pl-0 min-w-0"
           />
+
           <button
             type="button"
             className="w-[40px] h-[40px] rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#0f2a3e] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 mr-1"
@@ -167,10 +190,12 @@ export default function Hero() {
           </button>
         </div>
 
+        {/* Popular Search */}
         <div className="mt-[20px] items-center flex flex-wrap gap-3">
-          <span className="text-[13px] font-medium text-slate-500  whitespace-nowrap">
+          <span className="text-[13px] font-medium text-slate-500 whitespace-nowrap">
             Popular search:
           </span>
+
           {POPULAR_TAGS.map((tag) => (
             <button
               key={tag}
@@ -182,20 +207,33 @@ export default function Hero() {
           ))}
         </div>
 
+        {/* Statistics */}
+        {/* 
         <div className="mt-[32px] flex gap-[30px]">
           {STATS.map((stat) => (
             <div key={stat.value} className="flex items-center gap-2">
-              <span className="text-[20px] font-semibold text-slate-900 leading-none">{stat.value}</span>
-              <span className="text-[11px] text-slate-500 leading-tight">{stat.label}</span>
+              <span className="text-[20px] font-semibold text-slate-900 leading-none">
+                {stat.value}
+              </span>
+              <span className="text-[11px] text-slate-500 leading-tight">
+                {stat.label}
+              </span>
             </div>
           ))}
         </div>
+        */}
       </div>
 
-      <div className="flex-1 relative w-full h-full">
-        <img src="/main-home-asset-3.png" alt="Hero Image" className="w-full h-full object-cover" />
-        {SERVICE_CARDS.map((card, i) => (
-          <FloatingCard key={i} {...card} />
+      {/* Right Hero Image */}
+      <div className="flex-1 relative w-full h-full min-w-0">
+        <img
+          src="/main-home-asset-3.png"
+          alt="Hero Image"
+          className="w-full h-full object-cover"
+        />
+
+        {SERVICE_CARDS.map((card, index) => (
+          <FloatingCard key={index} {...card} />
         ))}
       </div>
     </section>
