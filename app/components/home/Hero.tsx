@@ -155,7 +155,6 @@ function FloatingCard({
 export default function Hero() {
   return (
     <section className="bg-white pt-15 pb-5 px-8 min-h-[520px] flex flex-col lg:flex-row gap-5 items-start">
-      {/* Left Content */}
       <div className="flex-1 min-w-0 max-w-[560px]">
         <span className="inline-block mb-[13px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">
           SOFTWARE HOUSE & IT CONSULTANT
@@ -171,7 +170,6 @@ export default function Hero() {
           solutions.
         </p>
 
-        {/* Search */}
         <div className="flex items-center gap-3 bg-white border border-[#E5EAF0] rounded-full h-[52px] max-w-[540px] shrink-0">
           <SearchIcon size={14} className="text-slate-400 ml-3 shrink-0" />
 
@@ -190,7 +188,6 @@ export default function Hero() {
           </button>
         </div>
 
-        {/* Popular Search */}
         <div className="mt-[20px] items-center flex flex-wrap gap-3">
           <span className="text-[13px] font-medium text-slate-500 whitespace-nowrap">
             Popular search:
@@ -207,24 +204,8 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Statistics */}
-        {/* 
-        <div className="mt-[32px] flex gap-[30px]">
-          {STATS.map((stat) => (
-            <div key={stat.value} className="flex items-center gap-2">
-              <span className="text-[20px] font-semibold text-slate-900 leading-none">
-                {stat.value}
-              </span>
-              <span className="text-[11px] text-slate-500 leading-tight">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-        */}
       </div>
 
-      {/* Right Hero Image */}
       <div className="flex-1 relative w-full h-full min-w-0">
         <img
           src="/main-home-asset-3.png"

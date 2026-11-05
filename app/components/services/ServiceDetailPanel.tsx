@@ -16,7 +16,6 @@ export default function ServiceDetailPanel({
 
   return (
     <section className="relative isolate grid min-w-0 overflow-hidden rounded-lg border border-[#DCE6F5] bg-gradient-to-br from-white via-[#F1F6FF] to-[#A8D1FF] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.5fr)]">
-      {/* Service information */}
       <div className="relative z-10 flex min-w-0 flex-col items-start justify-center p-5 sm:p-6">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[#2463FF]">
