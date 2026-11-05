@@ -2,6 +2,7 @@ import Sidebar from "./components/layout/Sidebar";
 import TopNavbar from "./components/layout/TopNavbar";
 import Hero from "./components/home/Hero";
 import SelectedWork from "./components/home/SelectedWork";
+import AboutProcess from "./components/home/AboutProcess";
 import BrowseByCategory from "./components/home/BrowseByCategory";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto">
           <Hero />
           <SelectedWork />
+          <AboutProcess />
           <BrowseByCategory />
         </main>
       </div>
