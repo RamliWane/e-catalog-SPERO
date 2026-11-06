@@ -1,3 +1,5 @@
+//component/home/Hero.tsx
+
 
 import type { ReactElement } from "react";
 

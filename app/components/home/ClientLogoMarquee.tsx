@@ -18,26 +18,24 @@ export default function ClientLogoMarquee() {
     <section className="bg-white py-[40px] overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-[30px]">
         <div className="relative w-full overflow-hidden">
-          <div className="flex items-center gap-[32px] animate-[marquee_30s_linear_infinite]">
-            {CLIENT_LOGOS.map((logo) => (
-              <img
-                key={logo.src}
-                src={logo.src}
-                alt={logo.alt}
-                width={100}
-                height="auto"
-                className="object-contain shrink-0"
-              />
-            ))}
-            {CLIENT_LOGOS.map((logo) => (
-              <img
-                key={logo.src + "-dup"}
-                src={logo.src}
-                alt={logo.alt}
-                width={100}
-                height="auto"
-                className="object-contain shrink-0"
-              />
+          {/* w-max: track selebar kontennya, supaya translateX(-50%) pas satu set */}
+          <div className="flex w-max animate-marquee">
+            {[0, 1].map((group) => (
+              <div
+                key={group}
+                aria-hidden={group === 1 || undefined}
+                // pr = gap, supaya lebar satu set persis sama dengan periode loop
+                className="flex shrink-0 items-center gap-[32px] pr-[32px]"
+              >
+                {CLIENT_LOGOS.map((logo) => (
+                  <img
+                    key={`${group}-${logo.src}`}
+                    src={logo.src}
+                    alt={group === 0 ? logo.alt : ""}
+                    className="h-12 w-auto shrink-0 object-contain"
+                  />
+                ))}
+              </div>
             ))}
           </div>
         </div>
