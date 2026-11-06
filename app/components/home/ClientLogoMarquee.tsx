@@ -8,7 +8,7 @@ const CLIENT_LOGOS = [
   { src: "/logo/logo-kamenparekraf.png", alt: "Kamenparekraf" },
   { src: "/logo/logo-kapalapi.png", alt: "Kapal Api" },
   { src: "/logo/logo-one-lito.jpeg", alt: "One Lito" },
-  { src: "/logo/logo-pelni.webp", alt: "Pelni" },
+  { src: "/logo/logo-pelni.png", alt: "Pelni" },
   { src: "/logo/logo-telkom.png", alt: "Telkom" },
   { src: "/logo/logo-win-shop.png", alt: "Win Shop" },
 ]
@@ -18,29 +18,25 @@ export default function ClientLogoMarquee() {
     <section className="bg-white py-[40px] overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-[30px]">
         <div className="relative w-full overflow-hidden">
-          <div className="flex items-center gap-[40px] animate-[marquee_30s_linear_infinite]">
+          <div className="flex items-center gap-[32px] animate-[marquee_30s_linear_infinite]">
             {CLIENT_LOGOS.map((logo) => (
               <img
                 key={logo.src}
                 src={logo.src}
                 alt={logo.alt}
-                width={120}
+                width={100}
                 height="auto"
-                className="object-contain"
+                className="object-contain shrink-0"
               />
             ))}
-          </div>
-        </div>
-        <div className="relative w-full overflow-hidden mt-[-1px]">
-          <div className="flex items-center gap-[40px] animate-[marquee_30s_linear_infinite]">
             {CLIENT_LOGOS.map((logo) => (
               <img
-                key={logo.src + "-2"}
+                key={logo.src + "-dup"}
                 src={logo.src}
                 alt={logo.alt}
-                width={120}
+                width={100}
                 height="auto"
-                className="object-contain"
+                className="object-contain shrink-0"
               />
             ))}
           </div>
