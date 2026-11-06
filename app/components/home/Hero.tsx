@@ -30,9 +30,9 @@ const SERVICE_CARDS = [
     icon: Code2Icon,
     title: "Web Development",
     desc: "Modern, scalable, and high-performance web solutions.",
-    top: "8%",
+    top: "2%",
     left: "12%",
-    rotate: -2,
+    rotate: -4,
     duration: "5s",
     delay: "0s",
     accent: "#DBEAFE",
@@ -119,7 +119,7 @@ function FloatingCard({
 
   return (
     <div
-      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border-b border-gray-500 rounded-md p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${
+      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border-b border-gray-500 rounded-md p-3 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${
         delay ? "animate-float" : ""
       }`}
       style={{
@@ -129,11 +129,11 @@ function FloatingCard({
         ...(left ? { left } : {}),
         ...(rotate !== undefined ? { transform: `rotate(${rotate}deg)` } : {}),
         animationDelay: delay,
-        animationDuration: duration || "6s",
+        animationDuration: duration || "8s",
       }}
     >
       <div
-        className="flex items-center justify-center w-9 h-9 rounded-lg mb-2"
+        className="flex items-center justify-center w-6 h-6 rounded-lg mb-2"
         style={{ backgroundColor: accent }}
       >
         <Icon size={12} className={accentColorClass} />
