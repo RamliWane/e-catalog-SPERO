@@ -25,6 +25,7 @@ export type Product = {
   name: string
   category: Category
   description: string
+  capabilities: string[]
   image?: string
   featuredOrder: number
   createdAt: string
@@ -54,6 +55,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "Spero Dashboard",
     category: "Web Development",
     description: "A modern and scalable dashboard solution for your business needs.",
+    capabilities: ["Web-based", "Scalable", "Business-ready"],
     featuredOrder: 1,
     createdAt: "2025-01-15T00:00:00Z",
   },
@@ -62,6 +64,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "Finora Mobile App",
     category: "Mobile App",
     description: "Personal finance app to help you manage your money better.",
+    capabilities: ["Mobile", "Finance", "Money management"],
     featuredOrder: 2,
     createdAt: "2025-02-10T00:00:00Z",
   },
@@ -70,6 +73,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "Nova Cloud",
     category: "Cloud & DevOps",
     description: "Cloud infrastructure and deployment solution for modern businesses.",
+    capabilities: ["Cloud", "Infrastructure", "Deployment"],
     featuredOrder: 3,
     createdAt: "2025-03-05T00:00:00Z",
   },
@@ -78,6 +82,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "Aurora Design System",
     category: "UI/UX Design",
     description: "A complete design system for building beautiful products.",
+    capabilities: ["Design system", "UI/UX", "Product design"],
     featuredOrder: 4,
     createdAt: "2025-04-01T00:00:00Z",
   },
@@ -86,6 +91,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "Insight Pro",
     category: "Data & Analytics",
     description: "Turn your data into actionable insights with ease.",
+    capabilities: ["Data", "Analytics", "Actionable insights"],
     featuredOrder: 5,
     createdAt: "2025-05-20T00:00:00Z",
   },
@@ -94,6 +100,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "NextGen Website",
     category: "Web Development",
     description: "A high-performance website for your growing business.",
+    capabilities: ["Web-based", "High-performance", "Business-ready"],
     featuredOrder: 6,
     createdAt: "2025-06-10T00:00:00Z",
   },
@@ -102,6 +109,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "API Gateway",
     category: "Others",
     description: "A reliable API gateway for seamless integrations.",
+    capabilities: ["API", "Reliable", "Integrations"],
     featuredOrder: 7,
     createdAt: "2025-07-01T00:00:00Z",
   },
@@ -110,6 +118,7 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     name: "DevOps Toolkit",
     category: "Cloud & DevOps",
     description: "Streamline your development and deployment workflow.",
+    capabilities: ["DevOps", "Development", "Deployment"],
     featuredOrder: 8,
     createdAt: "2025-08-05T00:00:00Z",
   },
