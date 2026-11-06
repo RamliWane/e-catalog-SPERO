@@ -97,7 +97,7 @@ function CategoryCard({
 
 export default function BrowseByCategory() {
   return (
-    <section className="bg-white py-10 px-8">
+    <section className="bg-white py-10 -mt-5 px-8">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-[280px_repeat(4,minmax(130px,1fr))_250px] xl:gap-4 min-w-0">
         <div className="flex flex-col justify-center items-start min-w-0 sm:col-span-2 xl:col-span-1">
           <span className="inline-block mb-[12px] text-[11px] font-medium text-slate-500 uppercase tracking-widest">

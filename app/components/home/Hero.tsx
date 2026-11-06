@@ -81,6 +81,7 @@ type IconComponent = (props: {
   size?: number;
 }) => ReactElement;
 
+
 function FloatingCard({
   icon: Icon,
   title,
@@ -89,9 +90,9 @@ function FloatingCard({
   right,
   bottom,
   left,
-  rotate,
-  duration,
-  delay,
+  rotate = 0,
+  duration = "6s",
+  delay = "0s",
   accent,
   accentText,
 }: {
@@ -119,40 +120,49 @@ function FloatingCard({
 
   return (
     <div
-      className={`absolute flex flex-col bg-white/90 backdrop-blur-sm border-b border-gray-500 rounded-md p-3 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-[4px] hover:border-[#2563EA]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#183B56] focus-visible:ring-offset-1 ${
-        delay ? "animate-float" : ""
-      }`}
+      className="absolute z-10 w-[150px] sm:w-[175px]"
       style={{
         ...(top ? { top } : {}),
         ...(right ? { right } : {}),
         ...(bottom ? { bottom } : {}),
         ...(left ? { left } : {}),
-        ...(rotate !== undefined ? { transform: `rotate(${rotate}deg)` } : {}),
-        animationDelay: delay,
-        animationDuration: duration || "8s",
+        transform: `rotate(${rotate}deg)`,
       }}
     >
       <div
-        className="flex items-center justify-center w-6 h-6 rounded-lg mb-2"
-        style={{ backgroundColor: accent }}
+        className="animate-float rounded-lg border border-white/80
+          border-b-slate-300/80 bg-white/90 p-3
+          shadow-[0_8px_24px_rgba(30,64,175,0.10)]
+          backdrop-blur-xl transition-shadow duration-300
+          hover:shadow-[0_12px_30px_rgba(30,64,175,0.18)]"
+        style={{
+          animationDuration: duration,
+          animationDelay: delay,
+        }}
       >
-        <Icon size={12} className={accentColorClass} />
-      </div>
+        <div
+          className="mb-2 flex h-4 w-8 items-center justify-center rounded-lg"
+          style={{ backgroundColor: accent }}
+        >
+          <Icon size={15} className={accentColorClass} />
+        </div>
 
-      <h4 className="text-[11px] font-medium text-slate-900 leading-tight">
-        {title}
-      </h4>
+        <h4 className="text-[11px] font-semibold leading-tight text-slate-900">
+          {title}
+        </h4>
 
-      <p className="text-[9px] text-slate-500 leading-tight line-clamp-2 max-w-[150px]">
-        {desc}
-      </p>
+        <p className="mt-1 line-clamp-2 text-[9px] leading-[1.4] text-slate-500">
+          {desc}
+        </p>
 
-      <div className="mt-2 w-full h-[1px] bg-[#E5EAF0] flex items-end">
-        <ArrowRightIcon size={10} className="text-slate-400" />
+        <div className="mt-2 flex items-center border-t border-slate-200 pt-1 text-slate-400">
+          <ArrowRightIcon size={11} />
+        </div>
       </div>
     </div>
   );
 }
+
 
 export default function Hero() {
   return (
@@ -208,17 +218,23 @@ export default function Hero() {
 
       </div>
 
-      <div className="flex-1 relative w-full h-full min-w-0">
-        <img
-          src="/new-hero-asset-2.png"
-          alt="Hero Image"
-          className="w-full h-full object-cover"
-        />
 
-        {SERVICE_CARDS.map((card, index) => (
-          <FloatingCard key={index} {...card} />
-        ))}
+      <div className="relative flex-1 min-w-0 w-full">
+        <div className="relative mx-auto w-full max-w-[620px] h-[420px] lg:h-[460px] -mt-5">
+          {/* Background 3D utama */}
+          <img
+            src="/new-hero-asset-2.png"
+            alt="Spero digital solutions"
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+          />
+
+          {/* Floating cards */}
+          {SERVICE_CARDS.map((card) => (
+            <FloatingCard key={card.title} {...card} />
+          ))}
+        </div>
       </div>
+
     </section>
   );
 }
