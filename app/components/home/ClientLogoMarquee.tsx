@@ -7,10 +7,11 @@ const CLIENT_LOGOS = [
   { src: "/logo/logo-blu-speed.png", alt: "Blu Speed" },
   { src: "/logo/logo-kamenparekraf.png", alt: "Kamenparekraf" },
   { src: "/logo/logo-kapalapi.png", alt: "Kapal Api" },
-  { src: "/logo/logo-one-lito.jpeg", alt: "One Lito" },
+  { src: "/logo/logo-one-lito.png", alt: "One Lito" },
   { src: "/logo/logo-pelni.png", alt: "Pelni" },
   { src: "/logo/logo-telkom.png", alt: "Telkom" },
   { src: "/logo/logo-win-shop.png", alt: "Win Shop" },
+  { src: "/logo/logo-waskita.png", alt: "Waskita" },
 ]
 
 export default function ClientLogoMarquee() {
@@ -32,7 +33,7 @@ export default function ClientLogoMarquee() {
                     key={`${group}-${logo.src}`}
                     src={logo.src}
                     alt={group === 0 ? logo.alt : ""}
-                    className="h-12 w-auto shrink-0 object-contain"
+                    className="h-17 w-auto shrink-0 object-contain"
                   />
                 ))}
               </div>
