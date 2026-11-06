@@ -1,6 +1,7 @@
 import Sidebar from "./components/layout/Sidebar";
 import TopNavbar from "./components/layout/TopNavbar";
 import Hero from "./components/home/Hero";
+import ClientLogoMarquee from "./components/home/ClientLogoMarquee";
 import SelectedWork from "./components/home/SelectedWork";
 import AboutProcess from "./components/home/AboutProcess";
 import BottomCTA from "./components/home/BottomCTA";
@@ -14,10 +15,11 @@ export default function Home() {
         <TopNavbar />
         <main className="flex-1 overflow-y-auto">
           <Hero />
-          <BrowseByCategory />
+          <ClientLogoMarquee />
           <SelectedWork />
           <AboutProcess />
           <BottomCTA />
+          <BrowseByCategory />
         </main>
       </div>
     </div>
