@@ -210,7 +210,7 @@ export default function Hero() {
 
       <div className="flex-1 relative w-full h-full min-w-0">
         <img
-          src="/main-home-asset-3.png"
+          src="/new-hero-asset-2.png"
           alt="Hero Image"
           className="w-full h-full object-cover"
         />
