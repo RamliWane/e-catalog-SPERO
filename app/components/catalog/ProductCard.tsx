@@ -1,9 +1,11 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRightIcon } from "@/lib/icons"
 
 type ProductCardProps = {
   id: string
+  slug: string
   name: string
   category: string
   description: string
@@ -13,12 +15,16 @@ type ProductCardProps = {
 }
 
 export default function ProductCard({
+  slug,
   name,
   category,
   description,
 }: ProductCardProps) {
   return (
-    <article className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+    <Link
+      href={`/catalog/${slug}`}
+      className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+    >
       <div className="relative aspect-[2/1] w-full overflow-hidden bg-slate-100">
         <img
           src="/dummy-image-catalog.jpeg"
@@ -41,18 +47,15 @@ export default function ProductCard({
         </p>
 
         <div className="mt-3">
-          <a
-            href="#"
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-900 transition-colors duration-150 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-          >
+          <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-900 transition-colors duration-150 group-hover:text-blue-600">
             View Details
-              <ArrowRightIcon
-                size={14}
-                className="transition-transform duration-150 group-hover:translate-x-0.5"
-              />
-          </a>
+            <ArrowRightIcon
+              size={14}
+              className="transition-transform duration-150 group-hover:translate-x-0.5"
+            />
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }

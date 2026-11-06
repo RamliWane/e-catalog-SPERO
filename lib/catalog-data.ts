@@ -21,12 +21,21 @@ export type SortOption = "Featured" | "Newest" | "Name (A-Z)"
 
 export type Product = {
   id: string
+  slug: string
   name: string
   category: Category
   description: string
   image?: string
   featuredOrder: number
   createdAt: string
+}
+
+export function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
 }
 
 export const CATEGORIES: Category[] = [
@@ -39,7 +48,7 @@ export const CATEGORIES: Category[] = [
   "Others",
 ]
 
-export const PRODUCTS: Product[] = [
+const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
   {
     id: "1",
     name: "Spero Dashboard",
@@ -105,6 +114,15 @@ export const PRODUCTS: Product[] = [
     createdAt: "2025-08-05T00:00:00Z",
   },
 ]
+
+export const PRODUCTS: Product[] = PRODUCT_RECORDS.map((product) => ({
+  ...product,
+  slug: slugify(product.name),
+}))
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return PRODUCTS.find((product) => product.slug === slug)
+}
 
 export const CATEGORY_ICONS: Record<Exclude<Category, "All">, ComponentType<{ className?: string; size?: number }>> = {
   "Web Development": Globe,
