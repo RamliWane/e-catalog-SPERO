@@ -15,11 +15,11 @@ export default function Home() {
         <TopNavbar />
         <main className="flex-1 overflow-y-auto">
           <Hero />
-          <ClientLogoMarquee />
+          <BrowseByCategory />
           <SelectedWork />
           <AboutProcess />
+          <ClientLogoMarquee />
           <BottomCTA />
-          <BrowseByCategory />
         </main>
       </div>
     </div>
