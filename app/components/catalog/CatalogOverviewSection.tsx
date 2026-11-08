@@ -1,13 +1,15 @@
-import Image from "next/image"
+
 import {
-  CalendarCheck,
   ChartColumn,
-  Layers3,
-  Monitor,
   Users,
   Zap,
 } from "lucide-react"
-import type { Product } from "@/lib/catalog-data"
+import {
+  getProductGallery,
+  type Product,
+} from "@/lib/catalog-data"
+import KeyHighlights from "@/app/components/catalog/KeyHighlights"
+import ProductGallery from "@/app/components/catalog/ProductGallery"
 
 type HighlightIcon = "analytics" | "automation" | "collaboration"
 
@@ -21,8 +23,6 @@ type OverviewContent = {
   headline: string
   description: string
   highlights: OverviewHighlight[]
-  platform: string
-  availability: string
 }
 
 const HIGHLIGHT_ICONS = {
@@ -36,15 +36,6 @@ const HIGHLIGHT_ICON_ORDER: HighlightIcon[] = [
   "automation",
   "collaboration",
 ]
-
-const PLATFORM_BY_CATEGORY: Record<string, string> = {
-  "Web Development": "Web App",
-  "Mobile App": "Mobile App",
-  "Cloud & DevOps": "Cloud Platform",
-  "UI/UX Design": "Design System",
-  "Data & Analytics": "Analytics Platform",
-  Others: "Custom Platform",
-}
 
 const REFERENCE_OVERVIEW: OverviewContent = {
   headline: "Built for better workflows",
@@ -67,8 +58,6 @@ const REFERENCE_OVERVIEW: OverviewContent = {
       icon: "collaboration",
     },
   ],
-  platform: "Web App",
-  availability: "Custom deployment",
 }
 
 function getOverviewContent(product: Product): OverviewContent {
@@ -90,14 +79,17 @@ function getOverviewContent(product: Product): OverviewContent {
       .join(", ")
       .toLowerCase()} together in one focused ${product.category.toLowerCase()} experience.`,
     highlights,
-    platform: PLATFORM_BY_CATEGORY[product.category] ?? "Custom Platform",
-    availability: "Custom deployment",
   }
 }
 
 const TABS = ["Overview", "Features", "Gallery", "Tech Stack"]
 
-export default function CatalogOverviewSection({ product }: { product: Product }) {
+export default function CatalogOverviewSection({
+  product,
+}: {
+  product: Product
+}) {
+  const gallery = getProductGallery(product)
   const overview = getOverviewContent(product)
 
   return (
@@ -143,110 +135,59 @@ export default function CatalogOverviewSection({ product }: { product: Product }
         aria-labelledby="overview-tab"
         className="pt-6"
       >
-        <h2
-          id="overview-heading"
-          className="text-[21px] font-bold leading-tight tracking-[-0.01em] text-[#14264A] sm:text-[23px]"
-        >
-          {overview.headline}
-        </h2>
+        {/* Overview introduction */}
+        <div>
+          <h2
+            id="overview-heading"
+            className="text-[21px] font-bold leading-tight tracking-[-0.01em] text-[#14264A] sm:text-[23px]"
+          >
+            {overview.headline}
+          </h2>
 
-        <p className="mt-2 max-w-[560px] text-[12px] leading-[1.65] text-[#526786] sm:text-[12.5px]">
-          {overview.description}
-        </p>
+          <p className="mt-2 max-w-[700px] text-[12px] leading-[1.65] text-[#526786] sm:text-[13px]">
+            {overview.description}
+          </p>
 
-        <div className="mt-6 grid max-w-[780px] grid-cols-1 gap-x-7 gap-y-4 sm:grid-cols-3">
-          {overview.highlights.map((highlight) => {
-            const Icon = HIGHLIGHT_ICONS[highlight.icon]
+          <div className="mt-6 grid max-w-[780px] grid-cols-1 gap-x-7 gap-y-4 sm:grid-cols-3">
+            {overview.highlights.map((highlight) => {
+              const Icon = HIGHLIGHT_ICONS[highlight.icon]
 
-            return (
-              <div key={highlight.title} className="flex min-w-0 items-start gap-3">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-[#E8F0FF] text-[#3978FF]">
-                  <Icon size={16} strokeWidth={1.8} aria-hidden="true" />
-                </span>
+              return (
+                <div
+                  key={highlight.title}
+                  className="flex min-w-0 items-start gap-3"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-[#E8F0FF] text-[#3978FF]">
+                    <Icon
+                      size={18}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </span>
 
-                <div className="min-w-0">
-                  <h3 className="text-[11px] font-semibold leading-tight text-[#14264A]">
-                    {highlight.title}
-                  </h3>
-                  <p className="mt-1 text-[10px] leading-[1.55] text-[#5F7392] sm:text-[10.5px]">
-                    {highlight.description}
-                  </p>
+                  <div className="min-w-0">
+                    <h3 className="text-[12px] font-semibold leading-tight text-[#14264A]">
+                      {highlight.title}
+                    </h3>
+
+                    <p className="mt-1 text-[11px] leading-[1.55] text-[#5F7392]">
+                      {highlight.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
 
-        <div className="mt-8 grid min-w-0 gap-5 xl:grid-cols-[minmax(0,2.75fr)_minmax(0,1fr)]">
-          <div className="min-w-0 overflow-hidden rounded-[11px] border border-[#DDE7F8] bg-white">
-            <Image
-              src="/asset-catalog-3.png"
-              alt={`${product.name} dashboard preview`}
-              width={1672}
-              height={941}
-              sizes="(min-width: 1024px) 72vw, 100vw"
-              className="block h-auto w-full object-cover object-center"
-            />
-          </div>
+        {/* Product Gallery + Key Highlights */}
+        <div className="mt-8 grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(280px,0.92fr)]">
+          <ProductGallery
+            productName={product.name}
+            images={gallery}
+          />
 
-          <aside className="flex h-full min-w-0 flex-col rounded-[11px] border border-[#DDE7F8] bg-[#FAFBFF] p-5">
-            <h3 className="text-[15px] font-semibold leading-tight text-[#14264A]">
-              Project details
-            </h3>
-
-            <dl className="mt-7 flex flex-1 flex-col gap-6 xl:justify-evenly">
-              <div className="flex items-start gap-3">
-                <Monitor
-                  size={16}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#526786]"
-                />
-                <div className="min-w-0">
-                  <dt className="text-[10.5px] font-medium leading-tight text-[#4F6386]">
-                    Platform
-                  </dt>
-                  <dd className="mt-1 text-[10.5px] leading-tight text-[#6A7E9C]">
-                    {overview.platform}
-                  </dd>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Layers3
-                  size={16}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#526786]"
-                />
-                <div className="min-w-0">
-                  <dt className="text-[10.5px] font-medium leading-tight text-[#4F6386]">
-                    Category
-                  </dt>
-                  <dd className="mt-1 text-[10.5px] leading-tight text-[#6A7E9C]">
-                    {product.category}
-                  </dd>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <CalendarCheck
-                  size={16}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#526786]"
-                />
-                <div className="min-w-0">
-                  <dt className="text-[10.5px] font-medium leading-tight text-[#4F6386]">
-                    Availability
-                  </dt>
-                  <dd className="mt-1 text-[10.5px] leading-tight text-[#6A7E9C]">
-                    {overview.availability}
-                  </dd>
-                </div>
-              </div>
-            </dl>
-          </aside>
+          <KeyHighlights product={product} />
         </div>
       </div>
     </section>

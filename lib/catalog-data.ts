@@ -19,6 +19,19 @@ export type Category =
 
 export type SortOption = "Featured" | "Newest" | "Name (A-Z)"
 
+export type ProductHighlight = {
+  title: string
+  description: string
+  icon: "analytics" | "automation" | "collaboration" | "security"
+}
+
+export type ProductGalleryImage = {
+  src: string
+  alt: string
+  title: string
+  description: string
+}
+
 export type Product = {
   id: string
   slug: string
@@ -27,6 +40,8 @@ export type Product = {
   description: string
   capabilities: string[]
   image?: string
+  gallery?: ProductGalleryImage[]
+  highlights?: ProductHighlight[]
   featuredOrder: number
   createdAt: string
 }
@@ -56,6 +71,62 @@ const PRODUCT_RECORDS: Omit<Product, "slug">[] = [
     category: "Web Development",
     description: "A modern and scalable dashboard solution for your business needs.",
     capabilities: ["Web-based", "Scalable", "Business-ready"],
+    gallery: [
+      {
+        src: "/detail-catalog-image.webp",
+        alt: "Spero Dashboard workspace overview",
+        title: "Dashboard Overview",
+        description:
+          "A focused view of the Spero Dashboard workspace and its primary navigation.",
+      },
+      {
+        src: "/asset-catalog-3.png",
+        alt: "Spero website experience preview",
+        title: "Website Experience",
+        description:
+          "A responsive marketing page shaped by the Spero visual system.",
+      },
+      {
+        src: "/asset-catalog-2.jpeg",
+        alt: "Spero brand experience preview",
+        title: "Brand Experience",
+        description:
+          "A polished agency layout that carries the catalog's design language.",
+      },
+      {
+        src: "/dummy-image-catalog.jpeg",
+        alt: "Spero automation workspace preview",
+        title: "Automation Workspace",
+        description:
+          "A workflow-focused interface for organizing sales automation.",
+      },
+    ],
+    highlights: [
+      {
+        title: "Real-time Analytics",
+        description:
+          "Monitor performance and turn live data into clear, actionable insights.",
+        icon: "analytics",
+      },
+      {
+        title: "Workflow Automation",
+        description:
+          "Automate repetitive tasks so your team can focus on higher-value work.",
+        icon: "automation",
+      },
+      {
+        title: "Team Collaboration",
+        description:
+          "Keep projects, updates, and conversations connected in one shared space.",
+        icon: "collaboration",
+      },
+      {
+        title: "Enterprise-Ready",
+        description:
+          "Built to stay reliable, secure, and scalable as your business grows.",
+        icon: "security",
+      },
+    ],
     featuredOrder: 1,
     createdAt: "2025-01-15T00:00:00Z",
   },
@@ -131,6 +202,72 @@ export const PRODUCTS: Product[] = PRODUCT_RECORDS.map((product) => ({
 
 export function getProductBySlug(slug: string): Product | undefined {
   return PRODUCTS.find((product) => product.slug === slug)
+}
+
+export function getProductGallery(product: Product): ProductGalleryImage[] {
+  if (product.gallery?.length) {
+    return product.gallery
+  }
+
+  return [
+    {
+      src: "/detail-catalog-image.webp",
+      alt: `${product.name} interface preview`,
+      title: "Interface Overview",
+      description: `A closer look at the ${product.name} interface and its key workspaces.`,
+    },
+  ]
+}
+
+function inferHighlightIcon(title: string): ProductHighlight["icon"] {
+  const value = title.toLowerCase()
+
+  if (
+    value.includes("analytic") ||
+    value.includes("data") ||
+    value.includes("insight") ||
+    value.includes("chart")
+  ) {
+    return "analytics"
+  }
+
+  if (
+    value.includes("automat") ||
+    value.includes("workflow") ||
+    value.includes("devops")
+  ) {
+    return "automation"
+  }
+
+  if (
+    value.includes("collab") ||
+    value.includes("team") ||
+    value.includes("user")
+  ) {
+    return "collaboration"
+  }
+
+  if (
+    value.includes("security") ||
+    value.includes("scalable") ||
+    value.includes("enterprise")
+  ) {
+    return "security"
+  }
+
+  return "analytics"
+}
+
+export function getProductHighlights(product: Product): ProductHighlight[] {
+  if (product.highlights?.length) {
+    return product.highlights
+  }
+
+  return product.capabilities.slice(0, 4).map((capability) => ({
+    title: capability,
+    description: `${capability} is built into ${product.name} to support a smoother ${product.category.toLowerCase()} workflow.`,
+    icon: inferHighlightIcon(capability),
+  }))
 }
 
 export const CATEGORY_ICONS: Record<Exclude<Category, "All">, ComponentType<{ className?: string; size?: number }>> = {
