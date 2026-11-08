@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import Sidebar from "@/app/components/layout/Sidebar"
 import TopNavbar from "@/app/components/layout/TopNavbar"
 import CatalogDetailHero from "@/app/components/catalog/CatalogDetailHero"
+import CatalogOverviewSection from "@/app/components/catalog/CatalogOverviewSection"
 import { getProductBySlug, PRODUCTS } from "@/lib/catalog-data"
 
 export function generateStaticParams() {
@@ -19,7 +20,12 @@ async function CatalogItemDetail({
     notFound()
   }
 
-  return <CatalogDetailHero product={product} />
+  return (
+    <>
+      <CatalogDetailHero product={product} />
+      <CatalogOverviewSection product={product} />
+    </>
+  )
 }
 
 export default function CatalogItemPage({
