@@ -105,15 +105,6 @@ export default function ProductGallery({
         />
       </div>
 
-      <div aria-live="polite" className="mt-3 min-w-0">
-        <h3 className="text-[13px] font-semibold leading-tight text-[#14213D] sm:text-[14px]">
-          {activeImage.title}
-        </h3>
-        <p className="mt-1 text-[11.5px] leading-[1.55] text-[#526786] sm:text-[12px]">
-          {activeImage.description}
-        </p>
-      </div>
-
       <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {images.map((image, index) => {
           const isActive = index === activeIndex
