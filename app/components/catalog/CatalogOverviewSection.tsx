@@ -8,6 +8,7 @@ import {
   getProductGallery,
   type Product,
 } from "@/lib/catalog-data"
+import AboutProductSection from "@/app/components/catalog/AboutProductSection"
 import KeyHighlights from "@/app/components/catalog/KeyHighlights"
 import ProductGallery from "@/app/components/catalog/ProductGallery"
 
@@ -82,7 +83,7 @@ function getOverviewContent(product: Product): OverviewContent {
   }
 }
 
-const TABS = ["Overview", "Features", "Gallery", "Tech Stack"]
+const TABS = ["Overview"]
 
 export default function CatalogOverviewSection({
   product,
@@ -148,36 +149,6 @@ export default function CatalogOverviewSection({
             {overview.description}
           </p>
 
-          <div className="mt-6 grid max-w-[780px] grid-cols-1 gap-x-7 gap-y-4 sm:grid-cols-3">
-            {overview.highlights.map((highlight) => {
-              const Icon = HIGHLIGHT_ICONS[highlight.icon]
-
-              return (
-                <div
-                  key={highlight.title}
-                  className="flex min-w-0 items-start gap-3"
-                >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-[#E8F0FF] text-[#3978FF]">
-                    <Icon
-                      size={18}
-                      strokeWidth={1.8}
-                      aria-hidden="true"
-                    />
-                  </span>
-
-                  <div className="min-w-0">
-                    <h3 className="text-[12px] font-semibold leading-tight text-[#14264A]">
-                      {highlight.title}
-                    </h3>
-
-                    <p className="mt-1 text-[11px] leading-[1.55] text-[#5F7392]">
-                      {highlight.description}
-                    </p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
         </div>
 
         {/* Product Gallery + Key Highlights */}
@@ -189,6 +160,8 @@ export default function CatalogOverviewSection({
 
           <KeyHighlights product={product} />
         </div>
+
+        <AboutProductSection product={product} />
       </div>
     </section>
   )

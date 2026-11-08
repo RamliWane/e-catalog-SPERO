@@ -132,7 +132,7 @@ export default function CatalogDetailHero({
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_70%_at_52%_50%,rgba(96,165,250,0.32)_0%,rgba(147,197,253,0.24)_30%,rgba(191,219,254,0.16)_52%,rgba(219,234,254,0.08)_68%,transparent_82%)] blur-[55px]" />
 
             {/* Stronger blue light behind the laptop */}
-            <div className="absolute left-[20%] top-[8%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
+            <div className="absolute left-[20%] top-[18%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
 
             {/* Soft blue spread toward the left */}
             <div className="absolute left-0 top-[25%] h-[45%] w-[55%] rounded-full bg-sky-200 blur-[90px]" />

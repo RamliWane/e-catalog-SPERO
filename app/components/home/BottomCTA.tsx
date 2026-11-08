@@ -34,10 +34,7 @@ export default function BottomCTA() {
           <div className="relative z-10 flex flex-col gap-7 sm:gap-8 lg:flex-row lg:items-center lg:justify-between">
 
             <div className="max-w-xl">
-              <span className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-300">
-                <span className="inline-block aspect-square w-1.5 rounded-full bg-blue-400" />
-                Let&apos;s work together
-              </span>
+
 
               <h2 className="max-w-lg text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl lg:text-[32px]">
                 Let&apos;s Build Something

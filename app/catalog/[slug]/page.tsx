@@ -5,6 +5,7 @@ import TopNavbar from "@/app/components/layout/TopNavbar"
 import CatalogDetailHero from "@/app/components/catalog/CatalogDetailHero"
 import CatalogOverviewSection from "@/app/components/catalog/CatalogOverviewSection"
 import { getProductBySlug, PRODUCTS } from "@/lib/catalog-data"
+import BottomCTA from "@/app/components/home/BottomCTA"
 
 export function generateStaticParams() {
   return PRODUCTS.map((product) => ({ slug: product.slug }))
