@@ -120,15 +120,27 @@ export default function CatalogDetailHero({
         </div>
 
         {/* Product Image */}
+
         <div className="relative isolate flex items-center justify-center lg:justify-end">
+          {/* Soft blue glow behind the product image */}
+
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+            className="pointer-events-none absolute -inset-x-[18%] -inset-y-[12%] -z-10 overflow-visible"
           >
-            <div className="absolute left-1/2 top-1/2 h-[82%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(191,219,254,0.55),rgba(239,246,255,0.2)_48%,transparent_72%)] blur-2xl" />
+            {/* Main blue ambient glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_70%_at_52%_50%,rgba(96,165,250,0.32)_0%,rgba(147,197,253,0.24)_30%,rgba(191,219,254,0.16)_52%,rgba(219,234,254,0.08)_68%,transparent_82%)] blur-[55px]" />
 
-            <div className="absolute right-[8%] top-[6%] size-24 rounded-full bg-blue-300/20 blur-3xl" />
+            {/* Stronger blue light behind the laptop */}
+            <div className="absolute left-[20%] top-[8%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
+
+            {/* Soft blue spread toward the left */}
+            <div className="absolute left-0 top-[25%] h-[45%] w-[55%] rounded-full bg-sky-200 blur-[90px]" />
+
+            {/* Additional light around the lower-right area */}
+            <div className="absolute bottom-[-5%] right-[5%] h-[50%] w-[50%] rounded-full bg-blue-200/25 blur-[90px]" />
           </div>
+
 
           <Image
             src="/detail-catalog-image.webp"
@@ -140,6 +152,7 @@ export default function CatalogDetailHero({
             className="h-auto w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(20,45,86,0.1)] lg:max-w-[640px]"
           />
         </div>
+
       </div>
     </section>
   )
