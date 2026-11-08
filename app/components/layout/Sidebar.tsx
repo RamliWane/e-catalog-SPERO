@@ -25,15 +25,7 @@ const PRIMARY_NAV: NavItem[] = [
   { name: "Home", href: "/" },
   { name: "Catalog", href: "/catalog" },
   { name: "Services", href: "/services" },
-  { name: "Technologies", href: "/technologies" },
-  { name: "Solutions", href: "/solutions" },
-  { name: "About", href: "/about" },
-];
-
-const QUICK_ACCESS: NavItem[] = [
-  { name: "Popular", href: "/catalog?filter=popular" },
-  { name: "New Releases", href: "/catalog?filter=new" },
-  { name: "Saved", href: "/saved" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 const ICONS: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
@@ -52,12 +44,7 @@ const ICON_FOR_ITEM: Record<string, string> = {
   Home: "House",
   Catalog: "LayoutGrid",
   Services: "Layers3",
-  Technologies: "Code2",
-  Solutions: "Lightbulb",
-  About: "UserRound",
-  Popular: "Star",
-  "New Releases": "Zap",
-  Saved: "Bookmark",
+  "Contact Us": "UserRound",
 };
 
 function NavItem({ item, pathname }: { item: NavItem; pathname: string }) {
@@ -92,19 +79,6 @@ export default function Sidebar() {
           <NavItem key={item.name} item={item} pathname={pathname} />
         ))}
       </nav>
-
-      <div className="px-5">
-        <div className="border-t border-slate-200 my-5" />
-        <h3 className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-3">
-          Quick Access
-        </h3>
-        <nav className="space-y-2" aria-label="Quick access">
-          {QUICK_ACCESS.map((item) => (
-            <NavItem key={item.name} item={item} pathname={pathname} />
-          ))}
-        </nav>
-      </div>
-
       <div className="mt-auto px-5 pb-7">
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
           <div className="mb-4 flex items-center justify-center">

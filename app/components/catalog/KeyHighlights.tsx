@@ -44,7 +44,7 @@ export default function KeyHighlights({ product }: { product: Product }) {
 
           return (
             <li key={highlight.title} className="flex min-w-0 items-start gap-3.5">
-              <span className="flex size-[52px] shrink-0 items-center justify-center rounded-[15px] bg-[#EAF1FF] text-[#3978FF] sm:size-[56px]">
+              <span className="flex size-[52px] shrink-0 items-center justify-center rounded-[15px] bg-white border border-gray-200 text-[#3978FF] sm:size-[56px]">
                 <Icon size={24} strokeWidth={1.8} aria-hidden="true" />
               </span>
 

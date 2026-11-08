@@ -126,19 +126,21 @@ export default function CatalogDetailHero({
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-[18%] -inset-y-[12%] -z-10 overflow-visible"
+            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
           >
-            {/* Main blue ambient glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_70%_at_52%_50%,rgba(96,165,250,0.32)_0%,rgba(147,197,253,0.24)_30%,rgba(191,219,254,0.16)_52%,rgba(219,234,254,0.08)_68%,transparent_82%)] blur-[55px]" />
+            <div className="absolute -inset-x-[18%] -inset-y-[12%]">
+              {/* Main blue ambient glow */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_70%_at_52%_50%,rgba(96,165,250,0.32)_0%,rgba(147,197,253,0.24)_30%,rgba(191,219,254,0.16)_52%,rgba(219,234,254,0.08)_68%,transparent_82%)] blur-[55px]" />
 
-            {/* Stronger blue light behind the laptop */}
-            <div className="absolute left-[20%] top-[18%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
+              {/* Stronger blue light behind the laptop */}
+              <div className="absolute left-[20%] top-[18%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
 
-            {/* Soft blue spread toward the left */}
-            <div className="absolute left-0 top-[25%] h-[45%] w-[55%] rounded-full bg-sky-200 blur-[90px]" />
+              {/* Soft blue spread toward the left */}
+              <div className="absolute left-0 top-[25%] h-[45%] w-[55%] rounded-full bg-sky-200 blur-[90px]" />
 
-            {/* Additional light around the lower-right area */}
-            <div className="absolute bottom-[-5%] right-[5%] h-[50%] w-[50%] rounded-full bg-blue-200/25 blur-[90px]" />
+              {/* Additional light around the lower-right area */}
+              <div className="absolute bottom-[-5%] right-[5%] h-[50%] w-[50%] rounded-full bg-blue-200/25 blur-[90px]" />
+            </div>
           </div>
 
 

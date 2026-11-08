@@ -35,8 +35,8 @@ export default function HowWeCanHelp() {
   return (
     <section className="bg-white py-15 px-[30px]">
       <div className="max-w-[1400px] mx-auto">
-        <div className="flex flex-col gap-6 mb-[40px]">
-          <span className="inline-block text-[11px] font-medium text-blue-600 uppercase tracking-[0.2em]">
+        <div className="flex flex-col gap-6 mb-[25px]">
+          <span className="inline-block text-[11px] font-medium text-slate-500 uppercase tracking-widest">
             HOW WE CAN HELP
           </span>
           <h2 className="text-[40px] font-bold leading-tight text-[#14213D] tracking-tight">

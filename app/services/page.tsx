@@ -8,6 +8,9 @@ import ServiceCategoryFilter from "@/app/components/services/ServiceCategoryFilt
 import ServiceExplorer from "@/app/components/services/ServiceExplorer"
 import HowWeCanHelp from "@/app/components/services/HowWeCanHelp"
 import type { ServiceFilterCategory } from "@/app/components/services/ServiceCategoryFilter"
+import FeaturedServices from "../components/services/FeaturedServices"
+import BottomCTA from "../components/home/BottomCTA"
+
 
 export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState<ServiceFilterCategory>(
@@ -21,14 +24,16 @@ export default function ServicesPage() {
         <TopNavbar />
         <main className="flex-1 overflow-y-auto px-[30px]">
           <ServicesHero />
-          <ServiceCategoryFilter
+          {/* <ServiceCategoryFilter
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}
-          />
+          /> */}
           <ServiceExplorer
             activeCategory={activeCategory}
           />
+          <FeaturedServices />
           <HowWeCanHelp />
+          <BottomCTA />
         </main>
       </div>
     </div>
