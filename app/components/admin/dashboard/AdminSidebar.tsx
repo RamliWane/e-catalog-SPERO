@@ -5,13 +5,12 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   Boxes,
-  Cpu,
-  Info,
+  ChevronDown,
   Layers3,
   LayoutDashboard,
-  Lightbulb,
   LogOut,
   Menu,
+  PanelsTopLeft,
   Users,
   X,
   type LucideIcon,
@@ -23,11 +22,21 @@ type NavItem = {
   icon: LucideIcon
 }
 
-const NAV_ITEMS: NavItem[] = [
+const PRIMARY_NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Catalog", href: "/admin/catalog", icon: Boxes },
+]
+
+const SECONDARY_NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/admin/services", icon: Layers3 },
   { label: "Users", href: "/admin/user", icon: Users },
+]
+
+const MANAGE_UI_ITEMS = [
+  { label: "Homepage", href: "/admin/manage-ui/homepage" },
+  { label: "Services", href: "/admin/manage-ui/services" },
+  { label: "Catalog", href: "/admin/manage-ui/catalog" },
+  { label: "Contact Us", href: "/admin/manage-ui/contact" },
 ]
 
 function SperoLogo() {
@@ -85,6 +94,142 @@ function NavItemLink({
   )
 }
 
+function ManageUIMenu({
+  pathname,
+  isOpen,
+  submenuId,
+  onToggle,
+  onNavigate,
+}: {
+  pathname: string
+  isOpen: boolean
+  submenuId: string
+  onToggle: () => void
+  onNavigate?: () => void
+}) {
+  const isParentActive = pathname.startsWith("/admin/manage-ui")
+
+  return (
+    <li>
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={submenuId}
+        onClick={onToggle}
+        className={`group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 ${
+          isOpen
+            ? "bg-[#F8FAFC] text-[#14213D]"
+            : isParentActive
+              ? "text-[#14213D] hover:bg-[#F8FAFC]"
+              : "text-[#526786] hover:bg-[#F8FAFC] hover:text-[#14213D]"
+        }`}
+      >
+        <PanelsTopLeft
+          size={17}
+          strokeWidth={1.9}
+          aria-hidden="true"
+          className={
+            isParentActive
+              ? "shrink-0 text-[#3978FF]"
+              : "shrink-0 text-[#7A8CA8] group-hover:text-[#183B56]"
+          }
+        />
+        <span className="flex-1">Manage UI</span>
+        <ChevronDown
+          size={14}
+          strokeWidth={2}
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-200 ${
+            isOpen
+              ? "rotate-180 text-[#3978FF]"
+              : "text-[#7A8CA8] group-hover:text-[#183B56]"
+          }`}
+        />
+      </button>
+
+      {isOpen ? (
+        <div
+          id={submenuId}
+          className="ml-[26px] mt-1 space-y-0.5 border-l border-[#DDE7F8] pl-2.5"
+        >
+          {MANAGE_UI_ITEMS.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`)
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                onClick={onNavigate}
+                className={`flex items-center gap-2 rounded-md px-3 py-2 text-[12px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 ${
+                  active
+                    ? "bg-[#EFF6FF] text-[#183B56]"
+                    : "text-[#526786] hover:bg-[#F8FAFC] hover:text-[#14213D]"
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                    active ? "bg-[#3978FF]" : "bg-[#CBD5E1]"
+                  }`}
+                />
+                <span>{item.label}</span>
+              </Link>
+            )
+          })}
+        </div>
+      ) : null}
+    </li>
+  )
+}
+
+function SidebarNavigation({
+  pathname,
+  manageUIOpen,
+  submenuId,
+  onToggleManageUI,
+  onNavigate,
+}: {
+  pathname: string
+  manageUIOpen: boolean
+  submenuId: string
+  onToggleManageUI: () => void
+  onNavigate?: () => void
+}) {
+  return (
+    <ul className="space-y-1">
+      {PRIMARY_NAV_ITEMS.map((item) => (
+        <li key={item.label}>
+          <NavItemLink
+            item={item}
+            active={isItemActive(pathname, item.href)}
+            onClick={onNavigate}
+          />
+        </li>
+      ))}
+
+      <ManageUIMenu
+        pathname={pathname}
+        isOpen={manageUIOpen}
+        submenuId={submenuId}
+        onToggle={onToggleManageUI}
+        onNavigate={onNavigate}
+      />
+
+      {SECONDARY_NAV_ITEMS.map((item) => (
+        <li key={item.label}>
+          <NavItemLink
+            item={item}
+            active={isItemActive(pathname, item.href)}
+            onClick={onNavigate}
+          />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function LogoutLink({ onClick }: { onClick?: () => void }) {
   return (
     <Link
@@ -109,7 +254,23 @@ function isItemActive(pathname: string, href: string) {
 
 export default function AdminSidebar() {
   const pathname = usePathname()
+  const isManageUIActive = pathname.startsWith("/admin/manage-ui")
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [manageUIOverride, setManageUIOverride] = useState<{
+    pathname: string
+    open: boolean
+  } | null>(null)
+  const manageUIOpen =
+    manageUIOverride?.pathname === pathname
+      ? manageUIOverride.open
+      : isManageUIActive
+
+  function toggleManageUI() {
+    setManageUIOverride({
+      pathname,
+      open: !manageUIOpen,
+    })
+  }
 
   return (
     <>
@@ -122,16 +283,12 @@ export default function AdminSidebar() {
           aria-label="Admin navigation"
           className="flex-1 overflow-y-auto px-3 py-5"
         >
-          <ul className="space-y-1">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label}>
-                <NavItemLink
-                  item={item}
-                  active={isItemActive(pathname, item.href)}
-                />
-              </li>
-            ))}
-          </ul>
+          <SidebarNavigation
+            pathname={pathname}
+            manageUIOpen={manageUIOpen}
+            submenuId="admin-manage-ui-desktop"
+            onToggleManageUI={toggleManageUI}
+          />
         </nav>
 
         <div className="border-t border-[#DDE7F8] p-3">
@@ -165,17 +322,13 @@ export default function AdminSidebar() {
             className="absolute inset-x-0 top-full max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-[#DDE7F8] bg-white px-3 pb-4 pt-2 shadow-[0_12px_24px_rgba(20,33,61,0.08)]"
           >
             <nav aria-label="Admin mobile navigation">
-              <ul className="space-y-1">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.label}>
-                    <NavItemLink
-                      item={item}
-                      active={isItemActive(pathname, item.href)}
-                      onClick={() => setMobileOpen(false)}
-                    />
-                  </li>
-                ))}
-              </ul>
+              <SidebarNavigation
+                pathname={pathname}
+                manageUIOpen={manageUIOpen}
+                submenuId="admin-manage-ui-mobile"
+                onToggleManageUI={toggleManageUI}
+                onNavigate={() => setMobileOpen(false)}
+              />
             </nav>
 
             <div className="mt-3 border-t border-[#DDE7F8] pt-3">
