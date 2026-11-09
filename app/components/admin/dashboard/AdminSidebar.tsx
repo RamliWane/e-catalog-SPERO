@@ -12,6 +12,7 @@ import {
   Lightbulb,
   LogOut,
   Menu,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react"
@@ -26,9 +27,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Catalog", href: "/admin/catalog", icon: Boxes },
   { label: "Services", href: "/admin/services", icon: Layers3 },
-  { label: "Technologies", href: "/admin/technologies", icon: Cpu },
-  { label: "Solutions", href: "/admin/solutions", icon: Lightbulb },
-  { label: "About", href: "/admin/about", icon: Info },
+  { label: "Users", href: "/admin/user", icon: Users },
 ]
 
 function SperoLogo() {
