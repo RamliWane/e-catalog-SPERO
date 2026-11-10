@@ -1,4 +1,4 @@
-import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, unique, bigint, varchar, text, int, timestamp, index, foreignKey, longtext, mysqlEnum, json } from "drizzle-orm/mysql-core"
+import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, unique, bigint, varchar, text, int, timestamp, index, foreignKey, longtext, mysqlEnum, json, tinyint } from "drizzle-orm/mysql-core"
 import { sql } from "drizzle-orm"
 
 export const catalogCategories = mysqlTable("catalog_categories", {

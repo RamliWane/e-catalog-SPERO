@@ -1,7 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CheckCircle2, Info, RotateCcw, X } from "lucide-react"
+import {
+  CheckCircle2,
+  CircleAlert,
+  Info,
+  RotateCcw,
+  X,
+} from "lucide-react"
+import { saveHomepageHero } from "@/app/admin/manage-ui/homepage/actions"
+import { cloneHeroContent, type HeroContent } from "@/lib/home-hero-data"
 import HomepageSectionEditor from "./HomepageSectionEditor"
 import HomepageSectionList from "./HomepageSectionList"
 import ManageUIConfirmDialog from "./ManageUIConfirmDialog"
@@ -15,11 +23,28 @@ import {
 } from "./manage-ui-data"
 
 type Feedback = {
-  tone: "success" | "info"
+  tone: "success" | "info" | "error"
   message: string
 }
 
+type HomepageEditorProps = {
+  initialHero: HeroContent
+  initialHeroVisible: boolean
+}
+
 const DEFAULT_STATE_SERIALIZED = JSON.stringify(DEFAULT_HOMEPAGE_STATE)
+
+function createEditorState(
+  hero: HeroContent,
+  heroVisible: boolean,
+): HomepageEditorState {
+  const state = createInitialHomepageState()
+
+  state.content.hero = cloneHeroContent(hero)
+  state.visibility.hero = heroVisible ? "Visible" : "Hidden"
+
+  return state
+}
 
 function FeedbackBanner({
   feedback,
@@ -29,18 +54,23 @@ function FeedbackBanner({
   onDismiss: () => void
 }) {
   const isSuccess = feedback.tone === "success"
+  const isError = feedback.tone === "error"
 
   return (
     <div
-      role="status"
+      role={isError ? "alert" : "status"}
       className={`flex items-start gap-2.5 rounded-lg border px-3.5 py-2.5 text-[11px] leading-5 ${
         isSuccess
           ? "border-[#BBF7D0] bg-[#F0FDF4] text-[#166534]"
-          : "border-[#DDE7F8] bg-[#F8FAFC] text-[#526786]"
+          : isError
+            ? "border-[#FECACA] bg-[#FEF2F2] text-[#B91C1C]"
+            : "border-[#DDE7F8] bg-[#F8FAFC] text-[#526786]"
       }`}
     >
       {isSuccess ? (
         <CheckCircle2 size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
+      ) : isError ? (
+        <CircleAlert size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
       ) : (
         <Info size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
       )}
@@ -57,15 +87,19 @@ function FeedbackBanner({
   )
 }
 
-export default function HomepageEditor() {
+export default function HomepageEditor({
+  initialHero,
+  initialHeroVisible,
+}: HomepageEditorProps) {
   const [state, setState] = useState<HomepageEditorState>(() =>
-    createInitialHomepageState(),
+    createEditorState(initialHero, initialHeroVisible),
   )
   const [baseline, setBaseline] = useState<HomepageEditorState>(() =>
-    createInitialHomepageState(),
+    createEditorState(initialHero, initialHeroVisible),
   )
   const [selectedId, setSelectedId] = useState<HomepageSectionId>("hero")
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
 
   useEffect(() => {
@@ -146,16 +180,91 @@ export default function HomepageEditor() {
     })
   }
 
-  function handleSave() {
-    if (!isDirty) {
+  async function handleSave() {
+    if (!isSectionDirty || isSaving) {
       return
     }
 
-    setBaseline(cloneHomepageState(state))
+    if (selectedId === "hero") {
+      setIsSaving(true)
+      setFeedback(null)
+
+      try {
+        const result = await saveHomepageHero({
+          content: state.content.hero,
+          isVisible: state.visibility.hero === "Visible",
+        })
+
+        if (!result.ok) {
+          const detail =
+            result.errors.length > 0 ? ` ${result.errors.join(" ")}` : ""
+
+          setFeedback({
+            tone: "error",
+            message: `${result.message}${detail}`,
+          })
+          return
+        }
+
+        const savedHero = cloneHeroContent(result.content)
+        const savedVisibility = result.isVisible ? "Visible" : "Hidden"
+
+        setState((currentState) => ({
+          ...currentState,
+          content: {
+            ...currentState.content,
+            hero: savedHero,
+          },
+          visibility: {
+            ...currentState.visibility,
+            hero: savedVisibility,
+          },
+        }))
+        setBaseline((currentBaseline) => ({
+          ...currentBaseline,
+          content: {
+            ...currentBaseline.content,
+            hero: cloneHeroContent(savedHero),
+          },
+          visibility: {
+            ...currentBaseline.visibility,
+            hero: savedVisibility,
+          },
+        }))
+        setFeedback({
+          tone: "success",
+          message:
+            "Hero section saved to the database. The public homepage will use the new content.",
+        })
+      } catch {
+        setFeedback({
+          tone: "error",
+          message:
+            "The Hero section could not be saved. Check the connection and try again.",
+        })
+      } finally {
+        setIsSaving(false)
+      }
+
+      return
+    }
+
+    setBaseline((currentBaseline) => ({
+      ...currentBaseline,
+      content: {
+        ...currentBaseline.content,
+        [selectedId]: JSON.parse(
+          JSON.stringify(state.content[selectedId]),
+        ) as HomepageEditorState["content"][HomepageSectionId],
+      },
+      visibility: {
+        ...currentBaseline.visibility,
+        [selectedId]: state.visibility[selectedId],
+      },
+    }))
     setFeedback({
       tone: "success",
-      message:
-        "Homepage changes saved to this local browser session. No data was sent to a server.",
+      message: `${selectedMeta?.name ?? "Section"} saved to this browser session.`,
     })
   }
 
@@ -166,7 +275,7 @@ export default function HomepageEditor() {
     setFeedback({
       tone: "info",
       message:
-        "Homepage reset to the default data. Select Save Changes to keep it in this session.",
+        "Homepage reset to the default data. Save the Hero section to write the defaults to the database.",
     })
   }
 
@@ -192,12 +301,12 @@ export default function HomepageEditor() {
                     isDirty ? "bg-[#F97316]" : "bg-[#10B981]"
                   }`}
                 />
-                {isDirty ? "Unsaved changes" : "Saved locally"}
+                {isDirty ? "Unsaved changes" : "All changes saved"}
               </span>
             </div>
             <p className="mt-1 text-[11px] leading-4 text-[#526786]">
-              Select a section and edit its content. Changes stay in this
-              browser session.
+              Hero content is saved to the database. Other sections stay in
+              this browser session.
             </p>
           </div>
 
@@ -205,7 +314,7 @@ export default function HomepageEditor() {
             <button
               type="button"
               onClick={() => setIsResetDialogOpen(true)}
-              disabled={isAtDefault}
+              disabled={isAtDefault || isSaving}
               className="inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-[#DDE7F8] bg-white px-3 text-[12px] font-medium text-[#526786] transition-colors hover:border-[#3978FF]/40 hover:text-[#14213D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <RotateCcw size={14} aria-hidden="true" />
@@ -239,8 +348,8 @@ export default function HomepageEditor() {
           <HomepageSectionEditor
             sectionId={selectedId}
             state={state}
-            isDirty={isDirty}
             isSectionDirty={isSectionDirty}
+            isSaving={isSaving}
             onStateChange={setState}
             onDiscardSection={handleDiscardSection}
             onSave={handleSave}

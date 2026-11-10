@@ -1,3 +1,13 @@
+import { DEFAULT_HERO_CONTENT, type HeroContent } from "@/lib/home-hero-data"
+
+export { HERO_VISUAL_OPTIONS } from "@/lib/home-hero-data"
+export type {
+  HeroContent,
+  HeroFloatingCard,
+  HeroIconKey,
+  HeroTag,
+} from "@/lib/home-hero-data"
+
 export type HomepageSectionId =
   | "hero"
   | "browse"
@@ -59,15 +69,6 @@ export type AssetOption = {
   value: string
 }
 
-export const HERO_VISUAL_OPTIONS: AssetOption[] = [
-  { label: "Hero visual 2 (current)", value: "/new-hero-asset-2.png" },
-  { label: "Hero visual 1", value: "/new-hero-asset.png" },
-  { label: "Home visual 1", value: "/main-home-asset.png" },
-  { label: "Home visual 2", value: "/main-home-asset-2.png" },
-  { label: "Home visual 3", value: "/main-home-asset-3.png" },
-  { label: "Featured solution visual", value: "/asset-section-3.png" },
-]
-
 export const PROJECT_IMAGE_OPTIONS: AssetOption[] = [
   { label: "Enterprise dashboard", value: "/asset-catalog-3.png" },
   { label: "Catalog preview", value: "/dummy-image-catalog.jpeg" },
@@ -97,16 +98,6 @@ export const CLIENT_LOGO_OPTIONS: AssetOption[] = [
   { label: "Win Shop", value: "/logo/logo-win-shop.png" },
   { label: "Waskita", value: "/logo/logo-waskita.png" },
 ]
-
-export type HeroContent = {
-  eyebrow: string
-  heading: string
-  description: string
-  searchPlaceholder: string
-  searchButtonLabel: string
-  visualImage: string
-  popularTags: string[]
-}
 
 export type BrowseCategoryContent = {
   id: string
@@ -232,21 +223,7 @@ export const DEFAULT_HOMEPAGE_STATE: HomepageEditorState = {
     cta: "Visible",
   },
   content: {
-    hero: {
-      eyebrow: "SOFTWARE HOUSE & IT CONSULTANT",
-      heading: "Your Trusted Partner for Digital Solutions",
-      description:
-        "Explore our curated catalog of software houses and IT consultants ready to build, scale, and transform your ideas into digital solutions.",
-      searchPlaceholder: "Search services, technologies, or company...",
-      searchButtonLabel: "Search",
-      visualImage: "/new-hero-asset-2.png",
-      popularTags: [
-        "Web Development",
-        "Mobile App",
-        "UI/UX Design",
-        "Cloud Solutions",
-      ],
-    },
+    hero: DEFAULT_HERO_CONTENT,
     browse: {
       eyebrow: "BROWSE BY CATEGORY",
       heading: "Find the Right Solution for Your Business",

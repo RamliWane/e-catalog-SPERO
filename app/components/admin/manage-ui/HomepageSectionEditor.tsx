@@ -1,48 +1,39 @@
 "use client"
 
 import Image from "next/image"
-import {
-  ChevronDown,
-  CircleAlert,
-  Info,
-  RotateCcw,
-  Save,
-  type LucideIcon,
-} from "lucide-react"
-import type { ReactNode } from "react"
+import { CircleAlert, Loader2, RotateCcw, Save } from "lucide-react"
 import {
   ABOUT_IMAGE_OPTIONS,
   CLIENT_LOGO_OPTIONS,
-  HERO_VISUAL_OPTIONS,
   HOMEPAGE_SECTION_META,
   PROJECT_IMAGE_OPTIONS,
   type AboutContent,
-  type AssetOption,
   type BrowseContent,
   type ClientsContent,
   type CtaContent,
-  type HeroContent,
   type HomepageContentMap,
   type HomepageEditorState,
   type HomepageSectionId,
   type SelectedWorkContent,
 } from "./manage-ui-data"
+import {
+  ContextNote,
+  EditorGroup,
+  SelectField,
+  TextAreaField,
+  TextField,
+} from "./ManageUIFormFields"
+import HeroSectionEditor from "./homepage/hero/HeroSectionEditor"
 
 type HomepageSectionEditorProps = {
   sectionId: HomepageSectionId
   state: HomepageEditorState
-  isDirty: boolean
   isSectionDirty: boolean
+  isSaving: boolean
   onStateChange: (state: HomepageEditorState) => void
   onDiscardSection: () => void
   onSave: () => void
 }
-
-const inputClassName =
-  "h-10 w-full rounded-lg border border-[#DDE7F8] bg-white px-3 text-[12px] text-[#14213D] transition-colors placeholder:text-[#8A9AB5] focus:border-[#3978FF] focus:outline-none focus:ring-2 focus:ring-[#3978FF]/20"
-
-const textAreaClassName =
-  "w-full rounded-lg border border-[#DDE7F8] bg-white px-3 py-2.5 text-[12px] leading-5 text-[#14213D] transition-colors placeholder:text-[#8A9AB5] focus:border-[#3978FF] focus:outline-none focus:ring-2 focus:ring-[#3978FF]/20"
 
 function updateItem<Item extends object>(
   items: Item[],
@@ -54,183 +45,11 @@ function updateItem<Item extends object>(
   )
 }
 
-function TextField({
-  id,
-  label,
-  value,
-  onChange,
-  placeholder,
-  hint,
-}: {
-  id: string
-  label: string
-  value: string
-  onChange: (value: string) => void
-  placeholder?: string
-  hint?: string
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-[11px] font-medium text-[#183B56]"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type="text"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder}
-        autoComplete="off"
-        className={inputClassName}
-      />
-      {hint ? (
-        <p className="mt-1 text-[10px] leading-4 text-[#7A8CA8]">{hint}</p>
-      ) : null}
-    </div>
-  )
-}
-
-function TextAreaField({
-  id,
-  label,
-  value,
-  onChange,
-  rows = 3,
-  hint,
-}: {
-  id: string
-  label: string
-  value: string
-  onChange: (value: string) => void
-  rows?: number
-  hint?: string
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-[11px] font-medium text-[#183B56]"
-      >
-        {label}
-      </label>
-      <textarea
-        id={id}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        rows={rows}
-        className={textAreaClassName}
-      />
-      {hint ? (
-        <p className="mt-1 text-[10px] leading-4 text-[#7A8CA8]">{hint}</p>
-      ) : null}
-    </div>
-  )
-}
-
-function SelectField({
-  id,
-  label,
-  value,
-  options,
-  onChange,
-  hint,
-}: {
-  id: string
-  label: string
-  value: string
-  options: AssetOption[]
-  onChange: (value: string) => void
-  hint?: string
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-[11px] font-medium text-[#183B56]"
-      >
-        {label}
-      </label>
-      <div className="relative">
-        <select
-          id={id}
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className={`${inputClassName} appearance-none pr-9`}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          size={14}
-          aria-hidden="true"
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8CA8]"
-        />
-      </div>
-      {hint ? (
-        <p className="mt-1 text-[10px] leading-4 text-[#7A8CA8]">{hint}</p>
-      ) : null}
-    </div>
-  )
-}
-
-function EditorGroup({
-  title,
-  description,
-  icon: Icon,
-  children,
-}: {
-  title: string
-  description?: string
-  icon?: LucideIcon
-  children: ReactNode
-}) {
-  return (
-    <section className="rounded-lg border border-[#DDE7F8] bg-[#F8FAFC]/70 p-4">
-      <div className="flex items-start gap-2">
-        {Icon ? (
-          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white text-[#3978FF] ring-1 ring-[#DDE7F8]">
-            <Icon size={12} aria-hidden="true" />
-          </span>
-        ) : null}
-        <div>
-          <h3 className="text-[12px] font-semibold text-[#14213D]">{title}</h3>
-          {description ? (
-            <p className="mt-0.5 text-[10px] leading-4 text-[#526786]">
-              {description}
-            </p>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="mt-4 space-y-4">{children}</div>
-    </section>
-  )
-}
-
-function ContextNote({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex items-start gap-2 rounded-lg border border-[#DDE7F8] bg-white px-3 py-2.5 text-[10px] leading-4 text-[#526786]">
-      <Info
-        size={13}
-        aria-hidden="true"
-        className="mt-0.5 shrink-0 text-[#3978FF]"
-      />
-      <p>{children}</p>
-    </div>
-  )
-}
-
 export default function HomepageSectionEditor({
   sectionId,
   state,
-  isDirty,
   isSectionDirty,
+  isSaving,
   onStateChange,
   onDiscardSection,
   onSave,
@@ -256,10 +75,6 @@ export default function HomepageSectionEditor({
     })
   }
 
-  function updateHero(patch: Partial<HeroContent>) {
-    updateContent("hero", patch)
-  }
-
   function updateBrowse(patch: Partial<BrowseContent>) {
     updateContent("browse", patch)
   }
@@ -281,90 +96,11 @@ export default function HomepageSectionEditor({
   }
 
   function renderHeroEditor() {
-    const content = state.content.hero
-
     return (
-      <div className="space-y-5">
-        <EditorGroup title="Hero Copy">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              id="hero-eyebrow"
-              label="Eyebrow Text"
-              value={content.eyebrow}
-              onChange={(value) => updateHero({ eyebrow: value })}
-            />
-            <TextField
-              id="hero-search-button-label"
-              label="Search Button Label"
-              value={content.searchButtonLabel}
-              onChange={(value) =>
-                updateHero({ searchButtonLabel: value })
-              }
-              hint="Used as the accessible label for the round search button."
-            />
-          </div>
-
-          <TextAreaField
-            id="hero-heading"
-            label="Main Heading"
-            value={content.heading}
-            onChange={(value) => updateHero({ heading: value })}
-            rows={2}
-          />
-          <TextAreaField
-            id="hero-description"
-            label="Description"
-            value={content.description}
-            onChange={(value) => updateHero({ description: value })}
-          />
-        </EditorGroup>
-
-        <EditorGroup title="Search & Visual">
-          <TextField
-            id="hero-search-placeholder"
-            label="Search Placeholder"
-            value={content.searchPlaceholder}
-            onChange={(value) =>
-              updateHero({ searchPlaceholder: value })
-            }
-          />
-          <SelectField
-            id="hero-visual-image"
-            label="Hero Visual Asset"
-            value={content.visualImage}
-            options={HERO_VISUAL_OPTIONS}
-            onChange={(value) => updateHero({ visualImage: value })}
-            hint="Local assets from the public folder are used on the homepage."
-          />
-          <ContextNote>
-            The current Hero component uses an inline search action instead of
-            a separate CTA button, so no button destination field is shown.
-          </ContextNote>
-        </EditorGroup>
-
-        <EditorGroup
-          title="Popular Search Tags"
-          description="These tags appear below the hero search bar."
-        >
-          <div className="grid gap-3 sm:grid-cols-2">
-            {content.popularTags.map((tag, index) => (
-              <TextField
-                key={index}
-                id={`hero-tag-${index}`}
-                label={`Tag ${index + 1}`}
-                value={tag}
-                onChange={(value) =>
-                  updateHero({
-                    popularTags: content.popularTags.map((item, itemIndex) =>
-                      itemIndex === index ? value : item,
-                    ),
-                  })
-                }
-              />
-            ))}
-          </div>
-        </EditorGroup>
-      </div>
+      <HeroSectionEditor
+        content={state.content.hero}
+        onChange={(hero) => updateContent("hero", hero)}
+      />
     )
   }
 
@@ -1034,7 +770,9 @@ export default function HomepageSectionEditor({
             {meta?.name ?? "Section"}
           </h2>
           <p className="mt-1 text-[11px] text-[#526786]">
-            Edit the content below for this homepage section.
+            {sectionId === "hero"
+              ? "Hero changes are saved to the database and reflected on the public homepage."
+              : "This section's changes are saved to this browser session."}
           </p>
         </div>
 
@@ -1071,11 +809,20 @@ export default function HomepageSectionEditor({
         <button
           type="button"
           onClick={onSave}
-          disabled={!isDirty}
+          disabled={!isSectionDirty || isSaving}
+          aria-busy={isSaving}
           className="inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-[#14213D] px-4 text-[12px] font-semibold text-white transition-colors hover:bg-[#183B56] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <Save size={14} aria-hidden="true" />
-          Save Changes
+          {isSaving ? (
+            <Loader2 size={14} aria-hidden="true" className="animate-spin" />
+          ) : (
+            <Save size={14} aria-hidden="true" />
+          )}
+          {isSaving
+            ? "Saving..."
+            : sectionId === "hero"
+              ? "Save Hero"
+              : "Save Section"}
         </button>
       </div>
     </section>
