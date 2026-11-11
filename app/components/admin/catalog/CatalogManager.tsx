@@ -5,10 +5,11 @@ import { Boxes, ChevronLeft, ChevronRight } from "lucide-react"
 import CatalogTable from "./CatalogTable"
 import CatalogToolbar from "./CatalogToolbar"
 import {
-  CATALOG_ITEMS,
-  type CatalogCategoryFilter,
+  getCatalogStatusLabel,
+  type CatalogAdminCategory,
+  type CatalogAdminItem,
   type CatalogStatusFilter,
-} from "./catalog-data"
+} from "@/lib/catalog-admin"
 
 const PAGE_SIZE = 8
 
@@ -84,34 +85,42 @@ function CatalogPagination({
   )
 }
 
-export default function CatalogManager() {
+export default function CatalogManager({
+  items,
+  categories,
+  onEdit,
+  onDelete,
+}: {
+  items: CatalogAdminItem[]
+  categories: CatalogAdminCategory[]
+  onEdit: (item: CatalogAdminItem) => void
+  onDelete: (item: CatalogAdminItem) => void
+}) {
   const [search, setSearch] = useState("")
-  const [category, setCategory] =
-    useState<CatalogCategoryFilter>("All Categories")
+  const [category, setCategory] = useState<number | "all">("all")
   const [status, setStatus] = useState<CatalogStatusFilter>("All Status")
   const [page, setPage] = useState(1)
 
   const hasActiveFilters =
-    search.trim() !== "" ||
-    category !== "All Categories" ||
-    status !== "All Status"
+    search.trim() !== "" || category !== "all" || status !== "All Status"
 
   const filteredItems = useMemo(() => {
     const query = search.trim().toLowerCase()
 
-    return CATALOG_ITEMS.filter((item) => {
-      const matchesCategory =
-        category === "All Categories" || item.category === category
-      const matchesStatus = status === "All Status" || item.status === status
+    return items.filter((item) => {
+      const matchesCategory = category === "all" || item.categoryId === category
+      const matchesStatus =
+        status === "All Status" ||
+        getCatalogStatusLabel(item.status) === status
       const matchesSearch =
         query === "" ||
-        [item.name, item.description, item.category].some((value) =>
+        [item.name, item.shortDescription, item.category].some((value) =>
           value.toLowerCase().includes(query),
         )
 
       return matchesCategory && matchesStatus && matchesSearch
     })
-  }, [category, search, status])
+  }, [category, items, search, status])
 
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / PAGE_SIZE))
   const currentPage = Math.min(page, totalPages)
@@ -128,7 +137,7 @@ export default function CatalogManager() {
     setPage(1)
   }
 
-  function handleCategoryChange(value: CatalogCategoryFilter) {
+  function handleCategoryChange(value: number | "all") {
     setCategory(value)
     setPage(1)
   }
@@ -140,7 +149,7 @@ export default function CatalogManager() {
 
   function handleReset() {
     setSearch("")
-    setCategory("All Categories")
+    setCategory("all")
     setStatus("All Status")
     setPage(1)
   }
@@ -151,6 +160,7 @@ export default function CatalogManager() {
         search={search}
         category={category}
         status={status}
+        categories={categories}
         hasActiveFilters={hasActiveFilters}
         onSearchChange={handleSearchChange}
         onCategoryChange={handleCategoryChange}
@@ -187,7 +197,11 @@ export default function CatalogManager() {
             </p>
           </div>
         ) : (
-          <CatalogTable items={visibleItems} />
+          <CatalogTable
+            items={visibleItems}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
         )}
 
         <CatalogPagination

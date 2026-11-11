@@ -23,8 +23,8 @@ interface NavItem {
 
 const PRIMARY_NAV: NavItem[] = [
   { name: "Home", href: "/" },
-  { name: "Catalog", href: "/catalog" },
   { name: "Services", href: "/services" },
+  { name: "Catalog", href: "/catalog" },
   { name: "Contact Us", href: "/contact" },
 ];
 
@@ -80,21 +80,6 @@ export default function Sidebar() {
         ))}
       </nav>
       <div className="mt-auto px-5 pb-7">
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
-          <div className="mb-4 flex items-center justify-center">
-            <CubeIcon />
-          </div>
-          <h3 className="text-sm font-medium text-slate-900 mb-2">
-            Need a custom solution?
-          </h3>
-          <p className="text-xs text-slate-500 mb-4">{`Let's build something together.`}</p>
-          <button
-            className="w-full bg-slate-900 text-white text-xs font-medium py-2 px-4 rounded-full flex items-center justify-center gap-1.5 hover:bg-slate-800 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
-          >
-            Contact Us
-            <ArrowRightIcon size={12} />
-          </button>
-        </div>
         <p className="text-[11px] text-slate-400 mt-4">
           {"\u00A9"} 2025 Spero. All rights reserved.
         </p>

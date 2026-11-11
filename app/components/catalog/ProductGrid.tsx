@@ -1,21 +1,20 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import type { Category } from "@/lib/catalog-data"
-import { PRODUCTS } from "@/lib/catalog-data"
+import type { Category, Product } from "@/lib/catalog-data"
 import CatalogToolbar from "@/app/components/catalog/CatalogToolbar"
 import ProductCard from "@/app/components/catalog/ProductCard"
 
 type SortValue = "Featured" | "Newest" | "Name (A-Z)"
 
-export default function ProductGrid() {
+export default function ProductGrid({ products }: { products: Product[] }) {
   const [activeCategory, setActiveCategory] = useState<Category>("All")
   const [sortBy, setSortBy] = useState<SortValue>("Featured")
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set())
 
   const filteredAndSorted = useMemo(() => {
-    let result = PRODUCTS.filter(
-      (p) => activeCategory === "All" || p.category === activeCategory
+    let result = products.filter(
+      (p) => activeCategory === "All" || p.category === activeCategory,
     )
 
     result = [...result].sort((a, b) => {
@@ -29,7 +28,7 @@ export default function ProductGrid() {
     })
 
     return result
-  }, [activeCategory, sortBy])
+  }, [activeCategory, products, sortBy])
 
   const toggleSave = (id: string) => {
     setSavedIds((prev) => {
@@ -49,9 +48,7 @@ export default function ProductGrid() {
         setSortBy={setSortBy}
       />
 
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6 pb-10"
-      >
+      <div className="mt-6 grid grid-cols-1 gap-5 pb-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredAndSorted.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
             <p className="text-sm text-slate-500">
@@ -66,7 +63,7 @@ export default function ProductGrid() {
               slug={product.slug}
               name={product.name}
               category={product.category}
-              description={product.description}
+              description={product.shortDescription ?? product.description}
               image={product.image}
               isSaved={savedIds.has(product.id)}
               onToggleSave={toggleSave}

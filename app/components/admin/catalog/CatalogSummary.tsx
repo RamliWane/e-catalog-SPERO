@@ -1,5 +1,5 @@
 import { Boxes, CircleCheck, FileText, type LucideIcon } from "lucide-react"
-import { CATALOG_ITEMS } from "./catalog-data"
+import type { CatalogAdminItem } from "@/lib/catalog-admin"
 
 type CatalogSummaryItem = {
   label: string
@@ -8,36 +8,32 @@ type CatalogSummaryItem = {
   iconClassName: string
 }
 
-const totalCatalogs = CATALOG_ITEMS.length
-const publishedCatalogs = CATALOG_ITEMS.filter(
-  (item) => item.status === "Published",
-).length
-const draftCatalogs = CATALOG_ITEMS.filter(
-  (item) => item.status === "Draft",
-).length
+export default function CatalogSummary({
+  items,
+}: {
+  items: CatalogAdminItem[]
+}) {
+  const summaryItems: CatalogSummaryItem[] = [
+    {
+      label: "Total Catalog",
+      value: items.length,
+      icon: Boxes,
+      iconClassName: "bg-[#F5F8FF] text-[#3978FF]",
+    },
+    {
+      label: "Published",
+      value: items.filter((item) => item.status === "published").length,
+      icon: CircleCheck,
+      iconClassName: "bg-[#EFF6FF] text-[#183B56]",
+    },
+    {
+      label: "Draft",
+      value: items.filter((item) => item.status === "draft").length,
+      icon: FileText,
+      iconClassName: "bg-[#F1F5F9] text-[#526786]",
+    },
+  ]
 
-const SUMMARY_ITEMS: CatalogSummaryItem[] = [
-  {
-    label: "Total Catalog",
-    value: totalCatalogs,
-    icon: Boxes,
-    iconClassName: "bg-[#F5F8FF] text-[#3978FF]",
-  },
-  {
-    label: "Published",
-    value: publishedCatalogs,
-    icon: CircleCheck,
-    iconClassName: "bg-[#EFF6FF] text-[#183B56]",
-  },
-  {
-    label: "Draft",
-    value: draftCatalogs,
-    icon: FileText,
-    iconClassName: "bg-[#F1F5F9] text-[#526786]",
-  },
-]
-
-export default function CatalogSummary() {
   return (
     <section aria-labelledby="catalog-summary-heading">
       <h2 id="catalog-summary-heading" className="sr-only">
@@ -45,7 +41,7 @@ export default function CatalogSummary() {
       </h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {SUMMARY_ITEMS.map((item) => {
+        {summaryItems.map((item) => {
           const Icon = item.icon
 
           return (

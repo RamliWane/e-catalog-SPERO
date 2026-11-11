@@ -10,9 +10,6 @@ export default function TopNavbar() {
           placeholder="Search for services, solutions, or technologies..."
           className="flex-1 h-10 bg-white border border-[#E5EAF0] rounded-full px-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none min-w-0"
         />
-        <div className="text-[11px] font-medium text-slate-400 ml-2 shrink-0">
-          ⌘ K
-        </div>
       </div>
 
       <div className="flex items-center gap-2 shrink-0">

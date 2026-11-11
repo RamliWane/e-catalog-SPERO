@@ -55,7 +55,7 @@ export default function CatalogDetailHero({
             </ol>
           </nav>
 
-          <span className="mt-5 inline-flex w-fit items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-600">
+          <span className="mt-5 inline-flex w-fit items-center rounded-md bg-blue-50 px-3 py-1 text-[10px] font-semibold uppercase text-[#142D56]">
             {product.category}
           </span>
 
@@ -121,28 +121,25 @@ export default function CatalogDetailHero({
 
         {/* Product Image */}
 
-        <div className="relative isolate flex items-center justify-center lg:justify-end">
-          {/* Soft blue glow behind the product image */}
 
+
+        <div className="relative isolate flex items-center justify-center lg:justify-end">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+            className="pointer-events-none absolute inset-0 -z-10 overflow-visible"
           >
-            <div className="absolute -inset-x-[18%] -inset-y-[12%]">
-              {/* Main blue ambient glow */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_70%_at_52%_50%,rgba(96,165,250,0.32)_0%,rgba(147,197,253,0.24)_30%,rgba(191,219,254,0.16)_52%,rgba(219,234,254,0.08)_68%,transparent_82%)] blur-[55px]" />
+            {/* Wide blue ambient glow */}
+            <div className="absolute inset-[-25%] bg-[radial-gradient(ellipse_at_55%_50%,rgba(96,165,250,0.30)_0%,rgba(147,197,253,0.22)_35%,rgba(191,219,254,0.12)_55%,transparent_75%)] blur-[45px]" />
 
-              {/* Stronger blue light behind the laptop */}
-              <div className="absolute left-[20%] top-[18%] h-[60%] w-[75%] rounded-full bg-blue-400 blur-[80px]" />
+            {/* Strong blue glow behind the laptop */}
+            <div className="absolute left-[5%] top-[5%] h-[85%] w-[95%] rounded-full bg-blue-400/25 blur-[90px]" />
 
-              {/* Soft blue spread toward the left */}
-              <div className="absolute left-0 top-[25%] h-[45%] w-[55%] rounded-full bg-sky-200 blur-[90px]" />
+            {/* Additional blue light on the left */}
+            <div className="absolute left-[-10%] top-[15%] h-[70%] w-[65%] rounded-full bg-sky-300/25 blur-[85px]" />
 
-              {/* Additional light around the lower-right area */}
-              <div className="absolute bottom-[-5%] right-[5%] h-[50%] w-[50%] rounded-full bg-blue-200/25 blur-[90px]" />
-            </div>
+            {/* Soft blue light underneath */}
+            <div className="absolute bottom-[-15%] right-[-5%] h-[55%] w-[80%] rounded-full bg-blue-300/25 blur-[80px]" />
           </div>
-
 
           <Image
             src="/detail-catalog-image.webp"
@@ -151,9 +148,11 @@ export default function CatalogDetailHero({
             height={1242}
             sizes="(min-width: 1024px) 50vw, 100vw"
             priority
-            className="h-auto w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(20,45,86,0.1)] lg:max-w-[640px]"
+            className="relative h-auto w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(20,45,86,0.1)] lg:max-w-[640px]"
           />
         </div>
+
+
 
       </div>
     </section>

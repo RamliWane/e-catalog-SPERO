@@ -1,18 +1,18 @@
 import { ChevronDown, RotateCcw, Search } from "lucide-react"
 import {
-  CATALOG_CATEGORIES,
-  CATALOG_STATUSES,
-  type CatalogCategoryFilter,
+  CATALOG_STATUS_FILTERS,
+  type CatalogAdminCategory,
   type CatalogStatusFilter,
-} from "./catalog-data"
+} from "@/lib/catalog-admin"
 
 type CatalogToolbarProps = {
   search: string
-  category: CatalogCategoryFilter
+  category: number | "all"
   status: CatalogStatusFilter
+  categories: CatalogAdminCategory[]
   hasActiveFilters: boolean
   onSearchChange: (value: string) => void
-  onCategoryChange: (value: CatalogCategoryFilter) => void
+  onCategoryChange: (value: number | "all") => void
   onStatusChange: (value: CatalogStatusFilter) => void
   onReset: () => void
 }
@@ -24,6 +24,7 @@ export default function CatalogToolbar({
   search,
   category,
   status,
+  categories,
   hasActiveFilters,
   onSearchChange,
   onCategoryChange,
@@ -61,15 +62,20 @@ export default function CatalogToolbar({
           </label>
           <select
             id="catalog-category"
-            value={category}
+            value={category === "all" ? "all" : String(category)}
             onChange={(event) =>
-              onCategoryChange(event.target.value as CatalogCategoryFilter)
+              onCategoryChange(
+                event.target.value === "all"
+                  ? "all"
+                  : Number(event.target.value),
+              )
             }
             className={`${fieldClassName} appearance-none px-3 pr-9`}
           >
-            {CATALOG_CATEGORIES.map((option) => (
-              <option key={option} value={option}>
-                {option}
+            <option value="all">All Categories</option>
+            {categories.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
               </option>
             ))}
           </select>
@@ -92,7 +98,7 @@ export default function CatalogToolbar({
             }
             className={`${fieldClassName} appearance-none px-3 pr-9`}
           >
-            {CATALOG_STATUSES.map((option) => (
+            {CATALOG_STATUS_FILTERS.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>

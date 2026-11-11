@@ -5,6 +5,7 @@ import TopNavbar from "@/app/components/layout/TopNavbar"
 import CatalogDetailHero from "@/app/components/catalog/CatalogDetailHero"
 import CatalogOverviewSection from "@/app/components/catalog/CatalogOverviewSection"
 import { getProductBySlug, PRODUCTS } from "@/lib/catalog-data"
+import { getPublishedCatalogProductBySlug } from "@/lib/catalog-db"
 import BottomCTA from "@/app/components/home/BottomCTA"
 
 export function generateStaticParams() {
@@ -15,7 +16,8 @@ async function CatalogItemDetail({
   params,
 }: Pick<PageProps<"/catalog/[slug]">, "params">) {
   const { slug } = await params
-  const product = getProductBySlug(slug)
+  const databaseProduct = await getPublishedCatalogProductBySlug(slug)
+  const product = databaseProduct ?? getProductBySlug(slug)
 
   if (!product) {
     notFound()

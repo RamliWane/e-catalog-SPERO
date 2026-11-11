@@ -19,6 +19,7 @@ export default function ProductCard({
   name,
   category,
   description,
+  image,
 }: ProductCardProps) {
   return (
     <Link
@@ -27,7 +28,7 @@ export default function ProductCard({
     >
       <div className="relative aspect-[2/1] w-full overflow-hidden bg-slate-100">
         <img
-          src="/dummy-image-catalog.jpeg"
+          src={image ?? "/dummy-image-catalog.jpeg"}
           alt={name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         />

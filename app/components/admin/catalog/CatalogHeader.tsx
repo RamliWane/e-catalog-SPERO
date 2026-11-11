@@ -1,7 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import { Plus } from "lucide-react"
 
-export default function CatalogHeader() {
+export default function CatalogHeader({ onAdd }: { onAdd: () => void }) {
   return (
     <header className="border-b border-[#DDE7F8] bg-white">
       <div className="mx-auto w-full max-w-[1440px] px-4 py-5 sm:px-6 lg:px-8">
@@ -38,6 +40,7 @@ export default function CatalogHeader() {
 
           <button
             type="button"
+            onClick={onAdd}
             className="inline-flex h-10 shrink-0 items-center justify-center gap-2 self-start rounded-lg bg-[#14213D] px-4 text-[12px] font-semibold text-white transition-colors hover:bg-[#183B56] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 sm:self-auto"
           >
             <Plus size={16} aria-hidden="true" />

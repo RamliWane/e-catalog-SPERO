@@ -38,6 +38,7 @@ export type Product = {
   name: string
   category: Category
   description: string
+  shortDescription?: string
   capabilities: string[]
   image?: string
   gallery?: ProductGalleryImage[]
@@ -211,7 +212,7 @@ export function getProductGallery(product: Product): ProductGalleryImage[] {
 
   return [
     {
-      src: "/detail-catalog-image.webp",
+      src: product.image ?? "/detail-catalog-image.webp",
       alt: `${product.name} interface preview`,
       title: "Interface Overview",
       description: `A closer look at the ${product.name} interface and its key workspaces.`,

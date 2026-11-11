@@ -1,25 +1,36 @@
 import Image from "next/image"
 import { Pencil, Trash2, type LucideIcon } from "lucide-react"
-import type { CatalogItem, CatalogStatus } from "./catalog-data"
+import {
+  getCatalogStatusLabel,
+  type CatalogAdminItem,
+  type CatalogStatusValue,
+} from "@/lib/catalog-admin"
 
-function StatusBadge({ status }: { status: CatalogStatus }) {
-  const isPublished = status === "Published"
+function StatusBadge({ status }: { status: CatalogStatusValue }) {
+  const isPublished = status === "published"
+  const isArchived = status === "archived"
 
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
         isPublished
           ? "bg-[#EFF6FF] text-[#183B56]"
-          : "bg-[#F1F5F9] text-[#526786]"
+          : isArchived
+            ? "bg-[#FFF7ED] text-[#9A3412]"
+            : "bg-[#F1F5F9] text-[#526786]"
       }`}
     >
       <span
         aria-hidden="true"
         className={`h-1.5 w-1.5 rounded-full ${
-          isPublished ? "bg-[#3978FF]" : "bg-[#94A3B8]"
+          isPublished
+            ? "bg-[#3978FF]"
+            : isArchived
+              ? "bg-[#F59E0B]"
+              : "bg-[#94A3B8]"
         }`}
       />
-      {status}
+      {getCatalogStatusLabel(status)}
     </span>
   )
 }
@@ -28,16 +39,19 @@ function ActionButton({
   label,
   icon: Icon,
   itemName,
+  onClick,
   danger = false,
 }: {
   label: string
   icon: LucideIcon
   itemName: string
+  onClick: () => void
   danger?: boolean
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       aria-label={`${label} ${itemName}`}
       title={label}
       className={`inline-flex h-8 w-8 items-center justify-center rounded-lg border border-transparent text-[#7A8CA8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF] focus-visible:ring-offset-2 ${
@@ -51,16 +65,43 @@ function ActionButton({
   )
 }
 
-function CatalogActions({ item }: { item: CatalogItem }) {
+function CatalogActions({
+  item,
+  onEdit,
+  onDelete,
+}: {
+  item: CatalogAdminItem
+  onEdit: (item: CatalogAdminItem) => void
+  onDelete: (item: CatalogAdminItem) => void
+}) {
   return (
     <div className="flex items-center justify-end gap-0.5">
-      <ActionButton label="Edit" icon={Pencil} itemName={item.name} />
-      <ActionButton label="Delete" icon={Trash2} itemName={item.name} danger />
+      <ActionButton
+        label="Edit"
+        icon={Pencil}
+        itemName={item.name}
+        onClick={() => onEdit(item)}
+      />
+      <ActionButton
+        label="Delete"
+        icon={Trash2}
+        itemName={item.name}
+        onClick={() => onDelete(item)}
+        danger
+      />
     </div>
   )
 }
 
-export default function CatalogTable({ items }: { items: CatalogItem[] }) {
+export default function CatalogTable({
+  items,
+  onEdit,
+  onDelete,
+}: {
+  items: CatalogAdminItem[]
+  onEdit: (item: CatalogAdminItem) => void
+  onDelete: (item: CatalogAdminItem) => void
+}) {
   return (
     <>
       <div className="hidden overflow-x-auto md:block">
@@ -109,7 +150,7 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
                 <td className="px-4 py-4 xl:px-5">
                   <div className="flex items-center gap-3">
                     <Image
-                      src={item.thumbnail}
+                      src={item.imageUrl}
                       alt=""
                       width={48}
                       height={48}
@@ -123,10 +164,10 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
                         {item.name}
                       </p>
                       <p
-                        title={item.description}
+                        title={item.shortDescription}
                         className="mt-0.5 truncate text-[11px] text-[#526786]"
                       >
-                        {item.description}
+                        {item.shortDescription}
                       </p>
                     </div>
                   </div>
@@ -141,7 +182,11 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
                   <StatusBadge status={item.status} />
                 </td>
                 <td className="whitespace-nowrap px-4 py-4 xl:px-5">
-                  <CatalogActions item={item} />
+                  <CatalogActions
+                    item={item}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                  />
                 </td>
               </tr>
             ))}
@@ -154,7 +199,7 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
           <li key={item.id} className="px-4 py-4 sm:px-5">
             <div className="flex items-start gap-3">
               <Image
-                src={item.thumbnail}
+                src={item.imageUrl}
                 alt=""
                 width={48}
                 height={48}
@@ -166,7 +211,7 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
                   {item.name}
                 </p>
                 <p className="mt-0.5 line-clamp-2 text-[11px] leading-4 text-[#526786]">
-                  {item.description}
+                  {item.shortDescription}
                 </p>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <span className="rounded-full bg-[#F5F8FF] px-2.5 py-1 text-[10px] font-medium text-[#183B56]">
@@ -181,7 +226,11 @@ export default function CatalogTable({ items }: { items: CatalogItem[] }) {
               <p className="text-[11px] text-[#526786]">
                 Updated {item.updatedAt}
               </p>
-              <CatalogActions item={item} />
+              <CatalogActions
+                item={item}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
             </div>
           </li>
         ))}
