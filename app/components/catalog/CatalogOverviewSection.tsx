@@ -8,7 +8,6 @@ import {
   getProductGallery,
   type Product,
 } from "@/lib/catalog-data"
-import AboutProductSection from "@/app/components/catalog/AboutProductSection"
 import KeyHighlights from "@/app/components/catalog/KeyHighlights"
 import ProductGallery from "@/app/components/catalog/ProductGallery"
 
@@ -161,7 +160,6 @@ export default function CatalogOverviewSection({
           <KeyHighlights product={product} />
         </div>
 
-        <AboutProductSection product={product} />
       </div>
     </section>
   )

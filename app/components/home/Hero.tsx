@@ -75,9 +75,6 @@ function FloatingCard({ card }: { card: HeroFloatingCard }) {
           {card.description}
         </p>
 
-        <div className="mt-2 flex items-center border-t border-slate-200 pt-1 text-slate-400">
-          <ArrowRightIcon size={11} />
-        </div>
       </div>
     </div>
   )

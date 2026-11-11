@@ -82,11 +82,6 @@ export default function SelectedWork() {
                     A powerful analytics dashboard for modern businesses.
                   </p>
                 </div>
-
-                <ArrowRightIcon
-                  size={17}
-                  className="shrink-0 text-white transition-transform duration-200 group-hover:translate-x-1"
-                />
               </div>
             </div>
 
@@ -115,12 +110,6 @@ export default function SelectedWork() {
                       {project.description}
                     </p>
 
-                    <div className="absolute bottom-4 right-3 text-[#64748B] transition-colors duration-200 group-hover:text-[#2463FF]">
-                      <ArrowRightIcon
-                        size={13}
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                      />
-                    </div>
                   </div>
                 </div>
               ))}

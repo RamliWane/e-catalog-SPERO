@@ -46,7 +46,6 @@ export default function CatalogItemPage({
             fallback={<p className="text-sm text-slate-500">Loading...</p>}
           >
             <CatalogItemDetail params={params} />
-            <BottomCTA />
           </Suspense>
         </main>
       </div>

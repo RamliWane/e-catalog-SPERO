@@ -37,7 +37,7 @@ export const BROWSE_FEATURED_IMAGE_OPTIONS: BrowseAssetOption[] = [
   { label: "Featured solution (current)", value: "/asset-section-3.png" },
   { label: "Section visual 2", value: "/asset-section-2.png" },
   { label: "Home visual 2", value: "/main-home-asset-2.png" },
-  { label: "Home visual 3", value: "/main-home-asset-3.png" },
+  { label: "Fix Asset Home", value: "/main-home-asset-3.png" },
   { label: "Services visual", value: "/services-asset-1.png" },
 ]
 

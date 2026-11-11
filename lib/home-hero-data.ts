@@ -43,11 +43,7 @@ export type HeroVisualOption = {
 }
 
 export const HERO_VISUAL_OPTIONS: HeroVisualOption[] = [
-  { label: "Hero visual 2 (current)", value: "/new-hero-asset-2.png" },
-  { label: "Hero visual 1", value: "/new-hero-asset.png" },
-  { label: "Home visual 1", value: "/main-home-asset.png" },
-  { label: "Home visual 2", value: "/main-home-asset-2.png" },
-  { label: "Home visual 3", value: "/main-home-asset-3.png" },
+  { label: "Fix Asset Home", value: "/fix-asset-hero-home.png" },
   { label: "Featured solution visual", value: "/asset-section-3.png" },
 ]
 
@@ -124,7 +120,7 @@ export const DEFAULT_HERO_CONTENT: HeroContent = {
     "Explore our curated catalog of software houses and IT consultants ready to build, scale, and transform your ideas into digital solutions.",
   searchPlaceholder: "Search services, technologies, or company...",
   searchButtonLabel: "Search",
-  visualImage: "/new-hero-asset-2.png",
+  visualImage: "/fix-asset-hero-home.png",
   visualImageAlt: "Spero digital solutions",
   showVisual: true,
   showPopularTags: true,
