@@ -2,7 +2,13 @@
 
 import { useRef, useState, type FormEvent } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowRight, CircleAlert, Eye, EyeOff, LoaderCircle } from "lucide-react"
+import {
+  ArrowRight,
+  CircleAlert,
+  Eye,
+  EyeOff,
+  LoaderCircle,
+} from "lucide-react"
 
 export type AdminLoginCredentials = {
   email: string
@@ -29,20 +35,20 @@ const AUTH_UNAVAILABLE_MESSAGE =
   "Admin sign-in is not configured yet. Please contact the system administrator."
 
 const GENERIC_AUTH_ERROR =
-  "We couldn't sign you in. Please check your email and password and try again."
+  "Email atau kata sandi salah. Silakan periksa kembali."
 
 function validate(values: AdminLoginCredentials): FieldErrors {
   const errors: FieldErrors = {}
   const email = values.email.trim()
 
   if (!email) {
-    errors.email = "Email is required."
+    errors.email = "Email wajib diisi."
   } else if (!EMAIL_PATTERN.test(email)) {
-    errors.email = "Enter a valid email address."
+    errors.email = "Masukkan alamat email yang valid."
   }
 
   if (!values.password) {
-    errors.password = "Password is required."
+    errors.password = "Kata sandi wajib diisi."
   }
 
   return errors
@@ -64,31 +70,25 @@ export default function AdminLoginForm({
   const [authError, setAuthError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+  
   function handleChange(field: FieldName, value: string) {
     setValues((current) => ({ ...current, [field]: value }))
 
     setErrors((current) => {
-      if (!current[field]) {
-        return current
-      }
+      if (!current[field]) return current
 
       const next = { ...current }
       delete next[field]
       return next
     })
 
-    if (authError) {
-      setAuthError(null)
-    }
+    if (authError) setAuthError(null)
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (isSubmitting) {
-      return
-    }
+    if (isSubmitting) return
 
     const nextErrors = validate(values)
 
@@ -129,7 +129,7 @@ export default function AdminLoginForm({
 
       if (!redirectTo) {
         setAuthError(
-          "Sign-in succeeded, but the admin dashboard is not available yet. Please contact the system administrator.",
+          "Login berhasil, tetapi halaman dashboard admin belum tersedia.",
         )
         setIsSubmitting(false)
         return
@@ -144,176 +144,195 @@ export default function AdminLoginForm({
   }
 
   function fieldClasses(field: FieldName) {
-    return `h-11 w-full rounded-lg border bg-white px-3.5 text-[13px] text-[#14213D] outline-none transition-colors duration-150 placeholder:text-[#526786]/60 focus:ring-[3px] ${
+    return `w-full rounded-xl border bg-white px-4 py-3 text-sm text-[#1A2E4C] outline-none transition-all duration-200 placeholder:text-slate-400 focus:ring-2 ${
       errors[field]
-        ? "border-[#B42318]/30 focus:border-[#B42318] focus:ring-[#B42318]/10"
-        : "border-[#DDE7F8] focus:border-[#14213D] focus:ring-[#14213D]/10"
+        ? "border-red-300 focus:border-red-500 focus:ring-red-100"
+        : "border-slate-300 focus:border-[#1A2E4C] focus:ring-[#1A2E4C]/10"
     }`
   }
 
   return (
-    <section
-      aria-labelledby="admin-login-heading"
-      className="w-full rounded-xl border border-[#DDE7F8] bg-white p-6 shadow-[0_18px_50px_rgba(20,33,61,0.08)] sm:p-8"
-    >
-      <h1
-        id="admin-login-heading"
-        className="text-[26px] font-bold leading-tight tracking-[-0.02em] text-[#14213D] sm:text-[30px]"
-      >
-        Admin Login
-      </h1>
-
-      <p className="mt-2 text-[13px] leading-[1.6] text-[#526786]">
-        Sign in to manage your website
-      </p>
-
-      <form
-        noValidate
-        onSubmit={handleSubmit}
-        className="mt-6 flex flex-col gap-4"
-      >
-        {authError ? (
-          <div
-            role="alert"
-            className="flex gap-2.5 rounded-lg border border-[#B42318]/20 bg-[#FFF5F4] px-3.5 py-3 text-[12px] leading-[1.55] text-[#B42318]"
+    <main className="flex min-h-screen items-center justify-center bg-white px-4 py-10">
+      <div className="w-full max-w-md">
+        <header className="mb-5 text-center">
+          <a
+            href="/"
+            aria-label="Kembali ke halaman utama"
+            className="inline-flex items-center justify-center"
           >
-            <CircleAlert
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-              className="mt-0.5 shrink-0"
+            <img
+              src="/spero_logo.png"
+              alt="Spero"
+              className="h-12 w-auto object-contain"
             />
-            <p>{authError}</p>
-          </div>
-        ) : null}
+          </a>
+        </header>
 
-        <div className="min-w-0">
-          <label
-            htmlFor="admin-email"
-            className="text-[12px] font-semibold text-[#14213D]"
+        <section
+          aria-labelledby="admin-login-heading"
+          className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-10"
+        >
+          <h1
+            id="admin-login-heading"
+            className="font-heading text-2xl font-extrabold tracking-tight text-[#1A2E4C] sm:text-3xl"
           >
-            Email
-          </label>
+            Welcome Back!
+          </h1>
 
-          <input
-            ref={emailRef}
-            id="admin-email"
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            autoCapitalize="none"
-            spellCheck={false}
-            maxLength={254}
-            required
-            aria-required="true"
-            aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? "admin-email-error" : undefined}
-            value={values.email}
-            onChange={(event) => handleChange("email", event.target.value)}
-            placeholder="admin@spero.com"
-            className={`${fieldClasses("email")} mt-2`}
-          />
+          <p className="mt-3 text-sm leading-relaxed text-slate-500 sm:text-base">
+            Masuk ke akun admin Anda untuk melanjutkan.
+          </p>
 
-          {errors.email ? (
-            <p
-              id="admin-email-error"
-              role="alert"
-              className="mt-1.5 text-[11px] font-medium text-[#B42318]"
-            >
-              {errors.email}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="min-w-0">
-          <label
-            htmlFor="admin-password"
-            className="text-[12px] font-semibold text-[#14213D]"
+          <form
+            noValidate
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-5"
           >
-            Password
-          </label>
+            {authError && (
+              <div
+                role="alert"
+                className="flex gap-2.5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+              >
+                <CircleAlert
+                  size={18}
+                  className="mt-0.5 shrink-0"
+                  aria-hidden="true"
+                />
+                <p>{authError}</p>
+              </div>
+            )}
 
-          <div className="relative mt-2">
-            <input
-              ref={passwordRef}
-              id="admin-password"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              autoComplete="current-password"
-              maxLength={256}
-              required
-              aria-required="true"
-              aria-invalid={Boolean(errors.password)}
-              aria-describedby={
-                errors.password ? "admin-password-error" : undefined
-              }
-              value={values.password}
-              onChange={(event) => handleChange("password", event.target.value)}
-              placeholder="Enter your password"
-              className={`${fieldClasses("password")} pr-11`}
-            />
+            <div>
+              <label
+                htmlFor="admin-email"
+                className="mb-2 block text-sm font-medium text-slate-700"
+              >
+                Email
+              </label>
+
+              <input
+                ref={emailRef}
+                id="admin-email"
+                name="email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                spellCheck={false}
+                maxLength={254}
+                required
+                disabled={isSubmitting}
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={
+                  errors.email ? "admin-email-error" : undefined
+                }
+                value={values.email}
+                onChange={(event) =>
+                  handleChange("email", event.target.value)
+                }
+                placeholder="Alamat email"
+                className={fieldClasses("email")}
+              />
+
+              {errors.email && (
+                <p
+                  id="admin-email-error"
+                  role="alert"
+                  className="mt-2 text-xs font-medium text-red-600"
+                >
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label
+                htmlFor="admin-password"
+                className="mb-2 block text-sm font-medium text-slate-700"
+              >
+                Kata sandi
+              </label>
+
+              <div className="relative">
+                <input
+                  ref={passwordRef}
+                  id="admin-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  maxLength={256}
+                  required
+                  disabled={isSubmitting}
+                  aria-invalid={Boolean(errors.password)}
+                  aria-describedby={
+                    errors.password ? "admin-password-error" : undefined
+                  }
+                  value={values.password}
+                  onChange={(event) =>
+                    handleChange("password", event.target.value)
+                  }
+                  placeholder="Masukkan kata sandi"
+                  className={`${fieldClasses("password")} pr-24`}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((current) => !current)}
+                  aria-label={
+                    showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"
+                  }
+                  aria-pressed={showPassword}
+                  aria-controls="admin-password"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2 py-2 text-xs font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#1A2E4C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A2E4C]"
+                >
+                  {showPassword ? "Sembunyikan" : "Tampilkan"}
+                </button>
+              </div>
+
+              {errors.password && (
+                <p
+                  id="admin-password-error"
+                  role="alert"
+                  className="mt-2 text-xs font-medium text-red-600"
+                >
+                  {errors.password}
+                </p>
+              )}
+            </div>
 
             <button
-              type="button"
-              onClick={() => setShowPassword((current) => !current)}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              aria-pressed={showPassword}
-              aria-controls="admin-password"
-              className="absolute right-1 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-[#526786] transition-colors duration-150 hover:bg-[#F5F8FF] hover:text-[#14213D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#14213D] focus-visible:ring-offset-1"
+              type="submit"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-[#1A2E4C] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#1A2E4C]/10 transition-colors duration-200 hover:border-[#1A2E4C] hover:bg-white hover:text-[#1A2E4C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A2E4C] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {showPassword ? (
-                <EyeOff size={16} strokeWidth={1.8} aria-hidden="true" />
+              {isSubmitting ? (
+                <>
+                  <LoaderCircle
+                    size={17}
+                    className="animate-spin"
+                    aria-hidden="true"
+                  />
+                  Memproses...
+                </>
               ) : (
-                <Eye size={16} strokeWidth={1.8} aria-hidden="true" />
+                <>
+                  Masuk
+                  <ArrowRight
+                    size={17}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </>
               )}
             </button>
-          </div>
 
-          {errors.password ? (
-            <p
-              id="admin-password-error"
-              role="alert"
-              className="mt-1.5 text-[11px] font-medium text-[#B42318]"
-            >
-              {errors.password}
-            </p>
-          ) : null}
-        </div>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          aria-busy={isSubmitting}
-          className="group mt-1 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#14213D] px-5 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#183B56] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#14213D] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {isSubmitting ? (
-            <>
-              <LoaderCircle
-                size={16}
-                strokeWidth={2}
-                aria-hidden="true"
-                className="animate-spin"
-              />
-              Signing In...
-            </>
-          ) : (
-            <>
-              Sign In
-              <ArrowRight
-                size={16}
-                strokeWidth={2}
-                aria-hidden="true"
-                className="transition-transform duration-200 group-hover:translate-x-0.5"
-              />
-            </>
-          )}
-        </button>
-
-        <span className="sr-only" aria-live="polite">
-          {isSubmitting ? "Signing in" : ""}
-        </span>
-      </form>
-    </section>
+            <span className="sr-only" aria-live="polite">
+              {isSubmitting ? "Sedang memproses login" : ""}
+            </span>
+          </form>
+        </section>
+      </div>
+    </main>
   )
 }
