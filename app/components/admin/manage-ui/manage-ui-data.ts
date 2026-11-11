@@ -1,3 +1,7 @@
+import {
+  DEFAULT_BROWSE_CONTENT,
+  type BrowseContent,
+} from "@/lib/home-browse-data"
 import { DEFAULT_HERO_CONTENT, type HeroContent } from "@/lib/home-hero-data"
 
 export { HERO_VISUAL_OPTIONS } from "@/lib/home-hero-data"
@@ -99,31 +103,6 @@ export const CLIENT_LOGO_OPTIONS: AssetOption[] = [
   { label: "Waskita", value: "/logo/logo-waskita.png" },
 ]
 
-export type BrowseCategoryContent = {
-  id: string
-  iconKey: "web" | "mobile" | "design" | "cloud"
-  title: string
-  description: string
-  count: string
-}
-
-export type FeaturedSolutionContent = {
-  label: string
-  title: string
-  description: string
-  buttonLabel: string
-  image: string
-}
-
-export type BrowseContent = {
-  eyebrow: string
-  heading: string
-  description: string
-  linkLabel: string
-  categories: BrowseCategoryContent[]
-  featuredSolution: FeaturedSolutionContent
-}
-
 export type SelectedProjectContent = {
   id: string
   title: string
@@ -224,52 +203,7 @@ export const DEFAULT_HOMEPAGE_STATE: HomepageEditorState = {
   },
   content: {
     hero: DEFAULT_HERO_CONTENT,
-    browse: {
-      eyebrow: "BROWSE BY CATEGORY",
-      heading: "Find the Right Solution for Your Business",
-      description:
-        "Explore our catalog by category and discover the right expertise for your project.",
-      linkLabel: "View All Services",
-      categories: [
-        {
-          id: "web-development",
-          iconKey: "web",
-          title: "Web Development",
-          description:
-            "Custom websites, web apps, and e-commerce solutions.",
-          count: "12+ companies",
-        },
-        {
-          id: "mobile-app",
-          iconKey: "mobile",
-          title: "Mobile App",
-          description: "iOS and Android apps, from MVP to enterprise.",
-          count: "10+ companies",
-        },
-        {
-          id: "ui-ux-design",
-          iconKey: "design",
-          title: "UI/UX Design",
-          description: "User-centered design for better experiences.",
-          count: "8+ companies",
-        },
-        {
-          id: "cloud-devops",
-          iconKey: "cloud",
-          title: "Cloud & DevOps",
-          description:
-            "Infrastructure, deployment, and system optimization.",
-          count: "6+ companies",
-        },
-      ],
-      featuredSolution: {
-        label: "Featured Solution",
-        title: "Modern Web Platform for Growing Business",
-        description: "Scalable, secure, and built for long-term success.",
-        buttonLabel: "Explore Project",
-        image: "/asset-section-3.png",
-      },
-    },
+    browse: DEFAULT_BROWSE_CONTENT,
     "selected-work": {
       eyebrow: "SELECTED WORK",
       headingLine1: "Real Projects.",

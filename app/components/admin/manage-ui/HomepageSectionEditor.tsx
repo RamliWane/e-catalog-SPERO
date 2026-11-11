@@ -8,7 +8,6 @@ import {
   HOMEPAGE_SECTION_META,
   PROJECT_IMAGE_OPTIONS,
   type AboutContent,
-  type BrowseContent,
   type ClientsContent,
   type CtaContent,
   type HomepageContentMap,
@@ -23,6 +22,7 @@ import {
   TextAreaField,
   TextField,
 } from "./ManageUIFormFields"
+import BrowseSectionEditor from "./homepage/browse/BrowseSectionEditor"
 import HeroSectionEditor from "./homepage/hero/HeroSectionEditor"
 
 type HomepageSectionEditorProps = {
@@ -56,6 +56,8 @@ export default function HomepageSectionEditor({
 }: HomepageSectionEditorProps) {
   const meta = HOMEPAGE_SECTION_META.find((section) => section.id === sectionId)
   const visibility = state.visibility[sectionId]
+  const isPersisted = sectionId === "hero" || sectionId === "browse"
+  const sectionName = sectionId === "browse" ? "Browse by Category" : "Hero"
 
   function updateContent<Key extends keyof HomepageContentMap>(
     key: Key,
@@ -73,10 +75,6 @@ export default function HomepageSectionEditor({
         [key]: nextSectionContent,
       },
     })
-  }
-
-  function updateBrowse(patch: Partial<BrowseContent>) {
-    updateContent("browse", patch)
   }
 
   function updateSelectedWork(patch: Partial<SelectedWorkContent>) {
@@ -101,179 +99,6 @@ export default function HomepageSectionEditor({
         content={state.content.hero}
         onChange={(hero) => updateContent("hero", hero)}
       />
-    )
-  }
-
-  function renderBrowseEditor() {
-    const content = state.content.browse
-
-    return (
-      <div className="space-y-5">
-        <EditorGroup title="Section Copy">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              id="browse-eyebrow"
-              label="Eyebrow Text"
-              value={content.eyebrow}
-              onChange={(value) => updateBrowse({ eyebrow: value })}
-            />
-            <TextField
-              id="browse-link-label"
-              label="Link Label"
-              value={content.linkLabel}
-              onChange={(value) => updateBrowse({ linkLabel: value })}
-            />
-          </div>
-          <TextAreaField
-            id="browse-heading"
-            label="Section Heading"
-            value={content.heading}
-            onChange={(value) => updateBrowse({ heading: value })}
-            rows={2}
-          />
-          <TextAreaField
-            id="browse-description"
-            label="Section Description"
-            value={content.description}
-            onChange={(value) => updateBrowse({ description: value })}
-          />
-        </EditorGroup>
-
-        <EditorGroup
-          title="Category Cards"
-          description="Only the category copy is editable. The catalog data source stays unchanged."
-        >
-          <div className="space-y-3">
-            {content.categories.map((category, index) => (
-              <div
-                key={category.id}
-                className="rounded-lg border border-[#DDE7F8] bg-white p-3.5"
-              >
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#7A8CA8]">
-                  Category {index + 1}
-                </p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <TextField
-                    id={`browse-category-${index}-title`}
-                    label="Category Title"
-                    value={category.title}
-                    onChange={(value) =>
-                      updateBrowse({
-                        categories: updateItem(content.categories, index, {
-                          title: value,
-                        }),
-                      })
-                    }
-                  />
-                  <TextField
-                    id={`browse-category-${index}-count`}
-                    label="Supporting Label"
-                    value={category.count}
-                    onChange={(value) =>
-                      updateBrowse({
-                        categories: updateItem(content.categories, index, {
-                          count: value,
-                        }),
-                      })
-                    }
-                  />
-                </div>
-                <div className="mt-3">
-                  <TextAreaField
-                    id={`browse-category-${index}-description`}
-                    label="Category Description"
-                    value={category.description}
-                    onChange={(value) =>
-                      updateBrowse({
-                        categories: updateItem(content.categories, index, {
-                          description: value,
-                        }),
-                      })
-                    }
-                    rows={2}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </EditorGroup>
-
-        <EditorGroup
-          title="Featured Solution"
-          description="This card is embedded inside the Browse by Category section."
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              id="browse-featured-label"
-              label="Eyebrow Label"
-              value={content.featuredSolution.label}
-              onChange={(value) =>
-                updateBrowse({
-                  featuredSolution: {
-                    ...content.featuredSolution,
-                    label: value,
-                  },
-                })
-              }
-            />
-            <TextField
-              id="browse-featured-button"
-              label="Button Label"
-              value={content.featuredSolution.buttonLabel}
-              onChange={(value) =>
-                updateBrowse({
-                  featuredSolution: {
-                    ...content.featuredSolution,
-                    buttonLabel: value,
-                  },
-                })
-              }
-            />
-          </div>
-          <TextAreaField
-            id="browse-featured-title"
-            label="Solution Title"
-            value={content.featuredSolution.title}
-            onChange={(value) =>
-              updateBrowse({
-                featuredSolution: {
-                  ...content.featuredSolution,
-                  title: value,
-                },
-              })
-            }
-            rows={2}
-          />
-          <TextAreaField
-            id="browse-featured-description"
-            label="Solution Description"
-            value={content.featuredSolution.description}
-            onChange={(value) =>
-              updateBrowse({
-                featuredSolution: {
-                  ...content.featuredSolution,
-                  description: value,
-                },
-              })
-            }
-            rows={2}
-          />
-          <SelectField
-            id="browse-featured-image"
-            label="Featured Solution Asset"
-            value={content.featuredSolution.image}
-            options={PROJECT_IMAGE_OPTIONS}
-            onChange={(value) =>
-              updateBrowse({
-                featuredSolution: {
-                  ...content.featuredSolution,
-                  image: value,
-                },
-              })
-            }
-          />
-        </EditorGroup>
-      </div>
     )
   }
 
@@ -740,7 +565,12 @@ export default function HomepageSectionEditor({
       case "hero":
         return renderHeroEditor()
       case "browse":
-        return renderBrowseEditor()
+        return (
+          <BrowseSectionEditor
+            content={state.content.browse}
+            onChange={(browse) => updateContent("browse", browse)}
+          />
+        )
       case "selected-work":
         return renderSelectedWorkEditor()
       case "about":
@@ -770,8 +600,8 @@ export default function HomepageSectionEditor({
             {meta?.name ?? "Section"}
           </h2>
           <p className="mt-1 text-[11px] text-[#526786]">
-            {sectionId === "hero"
-              ? "Hero changes are saved to the database and reflected on the public homepage."
+            {isPersisted
+              ? `${sectionName} changes are saved to the database and reflected on the public homepage.`
               : "This section's changes are saved to this browser session."}
           </p>
         </div>
@@ -820,8 +650,8 @@ export default function HomepageSectionEditor({
           )}
           {isSaving
             ? "Saving..."
-            : sectionId === "hero"
-              ? "Save Hero"
+            : isPersisted
+              ? `Save ${sectionName}`
               : "Save Section"}
         </button>
       </div>

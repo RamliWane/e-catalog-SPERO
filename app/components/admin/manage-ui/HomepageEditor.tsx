@@ -1,15 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { RotateCcw } from "lucide-react"
 import {
-  CheckCircle2,
-  CircleAlert,
-  Info,
-  RotateCcw,
-  X,
-} from "lucide-react"
-import { saveHomepageHero } from "@/app/admin/manage-ui/homepage/actions"
+  cloneBrowseContent,
+  type BrowseContent,
+} from "@/lib/home-browse-data"
 import { cloneHeroContent, type HeroContent } from "@/lib/home-hero-data"
+import HomepageEditorFeedback, {
+  type HomepageFeedback,
+} from "./homepage/HomepageEditorFeedback"
+import { savePersistedHomepageSection } from "./homepage/savePersistedHomepageSection"
 import HomepageSectionEditor from "./HomepageSectionEditor"
 import HomepageSectionList from "./HomepageSectionList"
 import ManageUIConfirmDialog from "./ManageUIConfirmDialog"
@@ -18,99 +19,62 @@ import {
   createInitialHomepageState,
   DEFAULT_HOMEPAGE_STATE,
   HOMEPAGE_SECTION_META,
+  type HomepageContentMap,
   type HomepageEditorState,
   type HomepageSectionId,
 } from "./manage-ui-data"
 
-type Feedback = {
-  tone: "success" | "info" | "error"
-  message: string
-}
-
 type HomepageEditorProps = {
   initialHero: HeroContent
   initialHeroVisible: boolean
+  initialBrowse: BrowseContent
+  initialBrowseVisible: boolean
 }
 
 const DEFAULT_STATE_SERIALIZED = JSON.stringify(DEFAULT_HOMEPAGE_STATE)
 
-function createEditorState(
-  hero: HeroContent,
-  heroVisible: boolean,
-): HomepageEditorState {
+function createEditorState({
+  hero,
+  heroVisible,
+  browse,
+  browseVisible,
+}: {
+  hero: HeroContent
+  heroVisible: boolean
+  browse: BrowseContent
+  browseVisible: boolean
+}): HomepageEditorState {
   const state = createInitialHomepageState()
 
   state.content.hero = cloneHeroContent(hero)
   state.visibility.hero = heroVisible ? "Visible" : "Hidden"
+  state.content.browse = cloneBrowseContent(browse)
+  state.visibility.browse = browseVisible ? "Visible" : "Hidden"
 
   return state
-}
-
-function FeedbackBanner({
-  feedback,
-  onDismiss,
-}: {
-  feedback: Feedback
-  onDismiss: () => void
-}) {
-  const isSuccess = feedback.tone === "success"
-  const isError = feedback.tone === "error"
-
-  return (
-    <div
-      role={isError ? "alert" : "status"}
-      className={`flex items-start gap-2.5 rounded-lg border px-3.5 py-2.5 text-[11px] leading-5 ${
-        isSuccess
-          ? "border-[#BBF7D0] bg-[#F0FDF4] text-[#166534]"
-          : isError
-            ? "border-[#FECACA] bg-[#FEF2F2] text-[#B91C1C]"
-            : "border-[#DDE7F8] bg-[#F8FAFC] text-[#526786]"
-      }`}
-    >
-      {isSuccess ? (
-        <CheckCircle2 size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
-      ) : isError ? (
-        <CircleAlert size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
-      ) : (
-        <Info size={15} aria-hidden="true" className="mt-0.5 shrink-0" />
-      )}
-      <p className="flex-1">{feedback.message}</p>
-      <button
-        type="button"
-        onClick={onDismiss}
-        aria-label="Dismiss message"
-        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3978FF]"
-      >
-        <X size={13} aria-hidden="true" />
-      </button>
-    </div>
-  )
 }
 
 export default function HomepageEditor({
   initialHero,
   initialHeroVisible,
+  initialBrowse,
+  initialBrowseVisible,
 }: HomepageEditorProps) {
-  const [state, setState] = useState<HomepageEditorState>(() =>
-    createEditorState(initialHero, initialHeroVisible),
-  )
-  const [baseline, setBaseline] = useState<HomepageEditorState>(() =>
-    createEditorState(initialHero, initialHeroVisible),
-  )
+  const buildInitialState = () =>
+    createEditorState({
+      hero: initialHero, heroVisible: initialHeroVisible,
+      browse: initialBrowse, browseVisible: initialBrowseVisible,
+    })
+  const [state, setState] = useState<HomepageEditorState>(buildInitialState)
+  const [baseline, setBaseline] = useState<HomepageEditorState>(buildInitialState)
   const [selectedId, setSelectedId] = useState<HomepageSectionId>("hero")
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
-  const [feedback, setFeedback] = useState<Feedback | null>(null)
+  const [feedback, setFeedback] = useState<HomepageFeedback | null>(null)
 
   useEffect(() => {
-    if (!feedback) {
-      return
-    }
-
-    const timeout = window.setTimeout(() => {
-      setFeedback(null)
-    }, 4500)
-
+    if (!feedback) return
+    const timeout = window.setTimeout(() => setFeedback(null), 4500)
     return () => window.clearTimeout(timeout)
   }, [feedback])
 
@@ -119,16 +83,11 @@ export default function HomepageEditor({
   const selectedMeta = HOMEPAGE_SECTION_META.find(
     (section) => section.id === selectedId,
   )
-  const isSectionDirty =
-    JSON.stringify(state.content[selectedId]) !==
-      JSON.stringify(baseline.content[selectedId]) ||
-    state.visibility[selectedId] !== baseline.visibility[selectedId]
-  const modifiedSectionIds = state.order.filter(
-    (id) =>
-      JSON.stringify(state.content[id]) !==
-        JSON.stringify(baseline.content[id]) ||
-      state.visibility[id] !== baseline.visibility[id],
-  )
+  const sectionChanged = (id: HomepageSectionId) =>
+    JSON.stringify(state.content[id]) !== JSON.stringify(baseline.content[id]) ||
+    state.visibility[id] !== baseline.visibility[id]
+  const isSectionDirty = sectionChanged(selectedId)
+  const modifiedSectionIds = state.order.filter(sectionChanged)
 
   function handleMove(id: HomepageSectionId, direction: -1 | 1) {
     const currentIndex = state.order.indexOf(id)
@@ -180,72 +139,43 @@ export default function HomepageEditor({
     })
   }
 
+  function applyPersistedSection(
+    id: "hero" | "browse",
+    content: HeroContent | BrowseContent,
+    isVisible: boolean,
+  ) {
+    const nextVisibility = isVisible ? "Visible" : "Hidden"
+    const update = (current: HomepageEditorState): HomepageEditorState => ({
+      ...current,
+      content: {
+        ...current.content,
+        [id]: content,
+      } as HomepageContentMap,
+      visibility: {
+        ...current.visibility,
+        [id]: nextVisibility,
+      },
+    })
+
+    setState(update)
+    setBaseline(update)
+  }
+
   async function handleSave() {
     if (!isSectionDirty || isSaving) {
       return
     }
 
-    if (selectedId === "hero") {
-      setIsSaving(true)
-      setFeedback(null)
-
-      try {
-        const result = await saveHomepageHero({
-          content: state.content.hero,
-          isVisible: state.visibility.hero === "Visible",
-        })
-
-        if (!result.ok) {
-          const detail =
-            result.errors.length > 0 ? ` ${result.errors.join(" ")}` : ""
-
-          setFeedback({
-            tone: "error",
-            message: `${result.message}${detail}`,
-          })
-          return
-        }
-
-        const savedHero = cloneHeroContent(result.content)
-        const savedVisibility = result.isVisible ? "Visible" : "Hidden"
-
-        setState((currentState) => ({
-          ...currentState,
-          content: {
-            ...currentState.content,
-            hero: savedHero,
-          },
-          visibility: {
-            ...currentState.visibility,
-            hero: savedVisibility,
-          },
-        }))
-        setBaseline((currentBaseline) => ({
-          ...currentBaseline,
-          content: {
-            ...currentBaseline.content,
-            hero: cloneHeroContent(savedHero),
-          },
-          visibility: {
-            ...currentBaseline.visibility,
-            hero: savedVisibility,
-          },
-        }))
-        setFeedback({
-          tone: "success",
-          message:
-            "Hero section saved to the database. The public homepage will use the new content.",
-        })
-      } catch {
-        setFeedback({
-          tone: "error",
-          message:
-            "The Hero section could not be saved. Check the connection and try again.",
-        })
-      } finally {
-        setIsSaving(false)
-      }
-
+    if (selectedId === "hero" || selectedId === "browse") {
+      await savePersistedHomepageSection({
+        sectionId: selectedId,
+        state,
+        isSectionDirty,
+        isSaving,
+        onSavingChange: setIsSaving,
+        onFeedback: setFeedback,
+        onSaved: applyPersistedSection,
+      })
       return
     }
 
@@ -275,7 +205,7 @@ export default function HomepageEditor({
     setFeedback({
       tone: "info",
       message:
-        "Homepage reset to the default data. Save the Hero section to write the defaults to the database.",
+        "Homepage reset to the default data. Save Hero or Browse by Category to write the defaults to the database.",
     })
   }
 
@@ -305,8 +235,8 @@ export default function HomepageEditor({
               </span>
             </div>
             <p className="mt-1 text-[11px] leading-4 text-[#526786]">
-              Hero content is saved to the database. Other sections stay in
-              this browser session.
+              Hero and Browse by Category are saved to the database. Other
+              sections stay in this browser session.
             </p>
           </div>
 
@@ -325,7 +255,7 @@ export default function HomepageEditor({
 
         {feedback ? (
           <div className="border-t border-[#DDE7F8] px-4 py-3 sm:px-5">
-            <FeedbackBanner
+            <HomepageEditorFeedback
               feedback={feedback}
               onDismiss={() => setFeedback(null)}
             />
